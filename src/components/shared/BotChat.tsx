@@ -86,7 +86,7 @@ export default function BotChat({ apiRoute, placeholder, emptyTitle, emptyDescri
 	}
 
 	return (
-		<div className="max-w-4xl mx-auto mt-6 p-6 relative size-full rounded-lg border h-[90vh]">
+		<div className="max-w-4xl mx-auto mt-6 p-6 relative size-full rounded-lg border h-[85vh]">
 			<div className="flex flex-col h-full">
 				<Conversation>
 					<ConversationContent>
