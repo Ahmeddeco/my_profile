@@ -3,7 +3,7 @@ import FrontNavigation from "./FrontNavigation"
 import LanguageButton from "./LanguageButton"
 import Logo from "./Logo"
 import MobileMenu from "./MobileMenu"
-import UserButton from "@/auth/UserButton"
+import UserButton from "@/components/auth/UserButton"
 
 export default function Header() {
 	return (

@@ -9,7 +9,7 @@ import {
 import Logo from "./Logo"
 import { ThemeButton } from "../theme/ThemeButton"
 import ServerNavigation from "./ServerNavigation"
-import UserButton from "@/auth/UserButton"
+import UserButton from "@/components/auth/UserButton"
 import LanguageButton from "./LanguageButton"
 
 type Props = {

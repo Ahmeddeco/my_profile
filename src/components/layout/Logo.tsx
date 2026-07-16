@@ -2,14 +2,15 @@
 
 import { useCurrentLocale } from "@/locales/client.locale"
 import Link from "next/link"
-import { TbBrandDolbyDigital } from "react-icons/tb"
+import { RiCharacterRecognitionFill } from "react-icons/ri"
+
 export default function Logo() {
 	const locale = useCurrentLocale()
 
 	return (
-		<Link href={"/"} className="flex items-center gap-1 ">
-			<TbBrandDolbyDigital size={52} className="text-primary size-full" />
-			<h2 className="capitalize! hidden lg:block"> {locale === "en" ? "digital" : "ديجيتال"}</h2>
+		<Link href={"/"} className="flex items-end gap-0.5 ">
+			<RiCharacterRecognitionFill size={40} className="text-primary " />
+			<h3 className="capitalize! hidden lg:block"> {locale === "en" ? "Ahmed" : "أحمد"}</h3>
 		</Link>
 	)
 }

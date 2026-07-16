@@ -22,13 +22,18 @@ export default async function UserButton() {
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button className=" relative " variant={"ghost"} size={"icon-sm"}>
-							<Image src={user.image ?? "/icons/noImage.svg"} alt={"user"} fill className="rounded-none object-cover" />
+							<Image src={user.image ?? "/icons/noImage.svg"} alt={"user"} fill className="rounded-full object-cover" />
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="start" className="w-fit p-4">
 						<DropdownMenuLabel>
 							<div className="w-full aspect-square relative rounded-xl">
-								<Image src={user.image ?? "/icons/noImage.svg"} alt={"user"} fill className="rounded-xl object-cover" />
+								<Image
+									src={user.image ?? "/icons/noImage.svg"}
+									alt={"user"}
+									fill
+									className="rounded-full object-cover"
+								/>
 							</div>
 						</DropdownMenuLabel>
 						<DropdownMenuSeparator />

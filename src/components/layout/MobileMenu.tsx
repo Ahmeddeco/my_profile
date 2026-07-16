@@ -2,7 +2,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetFooter
 import { Menu } from "lucide-react"
 import Logo from "./Logo"
 import { ThemeButton } from "../theme/ThemeButton"
-import UserButton from "@/auth/UserButton"
+import UserButton from "@/components/auth/UserButton"
 import FrontNavigation from "./FrontNavigation"
 import LanguageButton from "./LanguageButton"
 
