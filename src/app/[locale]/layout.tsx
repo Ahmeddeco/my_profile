@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import "./globals.css"
+import "../globals.css"
 import { ThemeProvider } from "@/components/theme/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 import { CircleAlert, CircleCheckBig, CircleX } from "lucide-react"
