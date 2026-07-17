@@ -23,15 +23,15 @@ export default async function Services({ locale }: Props) {
 			</CardHeader>
 			<CardContent className="flex flex-wrap items-center justify-center gap-6">
 				{myServices.map(({ href, image, titleAr, titleEn }, index) => (
-					<Card className={` min-w-sm max-w-md w-full`} key={index}>
+					<Card className={` min-w-3xs max-w-md w-full`} key={index}>
 						<CardHeader>
 							<CardTitle>{locale === "en" ? titleEn : titleAr}</CardTitle>
 						</CardHeader>
 						<CardContent>
 							<Image src={image} alt={"services"} width={1600} height={900} className="object-cover rounded-lg" />
 						</CardContent>
-						<CardFooter>
-							<Button asChild size={"full"}>
+						<CardFooter className="justify-center">
+							<Button asChild size={"sm"}>
 								<Link href={href}>
 									<ExternalLink />
 									{locale === "en" ? `go to ${titleEn}` : `اذهب الى ${titleAr}`}
