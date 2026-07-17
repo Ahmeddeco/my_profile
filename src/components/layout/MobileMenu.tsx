@@ -5,6 +5,7 @@ import { ThemeButton } from "../theme/ThemeButton"
 import UserButton from "@/components/auth/UserButton"
 import FrontNavigation from "./FrontNavigation"
 import LanguageButton from "./LanguageButton"
+import { Separator } from "../ui/separator"
 
 export default function MobileMenu() {
 	return (
@@ -14,12 +15,13 @@ export default function MobileMenu() {
 					<Menu />
 				</SheetTrigger>
 				<SheetContent>
-					<SheetHeader className="border-b shadow-md">
-						<SheetTitle className="flex items-center justify-center ">
+					<SheetHeader>
+						<SheetTitle>
 							<Logo />
 						</SheetTitle>
+						<Separator />
 					</SheetHeader>
-					<nav className="flex flex-col items-center gap-8 p-4 h-fit ">
+					<nav className="flex flex-col items-center gap-8 p-4 h-fit w-full  ">
 						<FrontNavigation />
 					</nav>
 					<SheetFooter className="flex-row items-center justify-between border-t shadow-md">

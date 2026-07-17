@@ -1,3 +1,6 @@
+import { SiMastodon, SiMongodb, SiNextdotjs, SiPrisma, SiReact, SiShadcnui, SiTailwindcss } from "react-icons/si"
+import { BiLogoPostgresql } from "react-icons/bi"
+
 export const myServices = [
   {
     titleAr: "تطوير مواقع ويب",
@@ -17,5 +20,39 @@ export const myServices = [
     image: "/images/mobileDevelop.webp",
     href: "/projects?category=mobile-development",
   },
+]
 
+export const technologies = [
+  {
+    title: "next-js",
+    icon: SiNextdotjs,
+  },
+  {
+    title: "react-js",
+    icon: SiReact,
+  },
+  {
+    title: "tailwind-css",
+    icon: SiTailwindcss,
+  },
+  {
+    title: "shadcn",
+    icon: SiShadcnui,
+  },
+  {
+    title: "prisma-db",
+    icon: SiPrisma,
+  },
+  {
+    title: "Postgres",
+    icon: BiLogoPostgresql,
+  },
+  {
+    title: "Mongodb",
+    icon: SiMongodb,
+  },
+  {
+    title: "mastra-ai",
+    icon: SiMastodon,
+  },
 ]

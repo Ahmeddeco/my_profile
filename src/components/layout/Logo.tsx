@@ -10,7 +10,7 @@ export default function Logo() {
 	return (
 		<Link href={"/"} className="flex items-end gap-0.5 ">
 			<RiCharacterRecognitionFill size={40} className="text-primary " />
-			<h3 className="capitalize! hidden lg:block"> {locale === "en" ? "Ahmed" : "أحمد"}</h3>
+			<h2 className="uppercase"> {locale === "en" ? "hmed" : "أحمد"}</h2>
 		</Link>
 	)
 }

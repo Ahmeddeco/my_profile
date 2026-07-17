@@ -33,5 +33,9 @@ export const enDic = {
         }
       ],
     },
+    technologies: {
+      title: "our Technologies",
+      subTitle: "The technologies I rely on build fast, secure, and scalable digital solutions. I integrate the latest web development tools and artificial intelligence applications to ensure the highest levels of performance.",
+    },
   }
 }

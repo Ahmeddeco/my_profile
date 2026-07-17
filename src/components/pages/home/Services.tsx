@@ -21,9 +21,9 @@ export default async function Services({ locale }: Props) {
 				<CardDescription className="text-primary-foreground">{dic.homePage.services.description}</CardDescription>
 				<Separator />
 			</CardHeader>
-			<CardContent className="flex flex-wrap gap-6">
+			<CardContent className="flex flex-wrap items-center justify-center gap-6">
 				{myServices.map(({ href, image, titleAr, titleEn }, index) => (
-					<Card className={`min-w-sm flex-1 `} key={index}>
+					<Card className={` min-w-sm max-w-md w-full`} key={index}>
 						<CardHeader>
 							<CardTitle>{locale === "en" ? titleEn : titleAr}</CardTitle>
 						</CardHeader>

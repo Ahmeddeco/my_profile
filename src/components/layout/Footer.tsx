@@ -1,73 +1,37 @@
+"use client"
+
 import Link from "next/link"
 import Logo from "./Logo"
 import { Separator } from "../ui/separator"
-import { Copyright, ExternalLink } from "lucide-react"
+import { Copyright } from "lucide-react"
 import Socials from "./Socials"
 import { Button } from "../ui/button"
-import { ourProducts, speedLinks } from "@/constants/footer"
 import { Badge } from "../ui/badge"
+import { useCurrentLocale } from "@/locales/client.locale"
 
 export default function Footer() {
+	const locale = useCurrentLocale()
+
 	return (
 		<footer className="bg-card border-t border-foreground py-16 px-6">
 			<div className="container mx-auto">
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12  mb-12 text-right" dir="rtl">
-					{/* --------------------------- 1. قسم من نحن --------------------------- */}
-					<div className="flex flex-col gap-6 items-center lg:items-start">
-						<Logo />
-						<h6>
-							نحن في انتريور اسم موثوق في عالم الأثاث عالي الجودة منذ عام 1994، نقدم قطعاً مصنوعة بعناية لتضفي الراحة
-							والأناقة على منزلك.
-						</h6>
-						<Socials />
-					</div>
-
-					<div className="col-span-1 lg:col-span-2 flex justify-evenly">
-						{/* -------------------------- 2. قسم منتجاتنا ------------------------- */}
-						<div className="flex flex-col items-center gap-4">
-							<h4>منتجاتنا</h4>
-							<nav className="flex flex-col gap-2 ">
-								{ourProducts.map(({ href, title }, index) => (
-									<Button asChild variant={"ghost"} className="justify-start  " key={index} size={"sm"}>
-										<Link href={href}>{title}</Link>
-									</Button>
-								))}
-							</nav>
-						</div>
-
-						{/* -------------------------- 3. روابط سريعة -------------------------- */}
-						<div className="flex flex-col items-center gap-4">
-							<h4>روابط سريعة</h4>
-							<nav className="flex flex-col gap-2 ">
-								{speedLinks.map(({ href, title }, index) => (
-									<Button asChild variant={"ghost"} className="justify-start  " key={index} size={"sm"}>
-										<Link href={href}>{title}</Link>
-									</Button>
-								))}
-							</nav>
-						</div>
-					</div>
-
-					{/* ----------------- 4. انضم لعائلتنا مع Button asChild ---------------- */}
-					<div className="flex flex-col items-center lg:items-start gap-6" dir="ltr">
-						<h4>انضم لعائلتنا</h4>
-						<h6>تابعنا للحصول على إلهام يومي لتصميم منزلك وأحدث العروض الحصرية.</h6>
-						<Button asChild variant="default" size={"sm"}>
-							<Link href="/information">
-								تعرف علينا أكثر
-								<ExternalLink />
-							</Link>
-						</Button>
-					</div>
+				{/* --------------------------- 1. قسم من نحن --------------------------- */}
+				<div className="flex flex-col gap-6 items-center justify-center">
+					<Logo />
+					<h6 className="max-w-lg text-center text-balance">
+						{locale === "en"
+							? "A full-stack web developer specializing in building smart and customized digital solutions. Combine the power of Next.js with the flexibility of Mastra AI to deliver exceptional user experiences and intelligent systems that efficiently serve your business."
+							: "مطور ويب متكامل ومتخصص في بناء حلول رقمية ذكية ومخصصة. أدمج بين قوة Next.js ومرونة Mastra AI لتقديم تجارب مستخدم استثنائية وأنظمة ذكية تخدم عملك بكفاءة."}
+					</h6>
+					<Socials />
+					<Separator className="my-6" />
 				</div>
-
-				<Separator className="bg-background/20 my-8" />
 
 				{/* حقوق النشر */}
 				<div className="flex flex-col md:flex-row justify-between items-center gap-4">
 					<Badge>
 						<Copyright />
-						2026 Ahmed Elgazzar. All rights reserved.
+						{locale === "en" ? "Built with Next.js & Mastra AI 2026" : "تم تطويره باستخدام Next.js و Mastra AI 2026"}
 					</Badge>
 					<div className="flex items-center justify-center gap-8">
 						<Button asChild variant={"link"}>
