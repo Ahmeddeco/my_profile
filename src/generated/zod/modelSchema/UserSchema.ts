@@ -14,6 +14,12 @@ export const UserSchema = z.object({
   email: z.string(),
   emailVerified: z.boolean(),
   image: z.string().nullish(),
+  lat: z.string().nullish(),
+  lng: z.string().nullish(),
+  mobile: z.string().nullish(),
+  city: z.string().nullish(),
+  state: z.string().nullish(),
+  country: z.string().nullish(),
 })
 
 export type User = z.infer<typeof UserSchema>

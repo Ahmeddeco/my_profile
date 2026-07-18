@@ -79,18 +79,48 @@ model User {
   name          String
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  email         String
+  email         String    @unique
   emailVerified Boolean   @default(false)
   image         String?
-  role          Role      @default(user)
   sessions      Session[]
   accounts      Account[]
+  role          Role      @default(user)
+  lat           String?
+  lng           String?
+  mobile        String?   @unique
+  city          String?
+  state         String?
+  country       String?
+  projects      Project[]
 
-  @@unique([email])
+  @@unique([email, mobile])
+  @@index([email])
+  @@index([name])
   @@map("user")
 }
 
 enum Role {
   user
   admin
+  client
+}
+
+enum ProductType {
+  web
+  mobile
+  ai
+}
+
+model Project {
+  id              String      @id @default(cuid())
+  title           String
+  miniDescription String
+  description     String      @db.Text
+  mainImage       String
+  images          String[]
+  type            ProductType @default(web)
+  client          User        @relation(fields: [userId], references: [id])
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  userId          String
 }

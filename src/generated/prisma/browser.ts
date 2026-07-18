@@ -37,3 +37,8 @@ export type Verification = Prisma.VerificationModel
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model Project
+ * 
+ */
+export type Project = Prisma.ProjectModel

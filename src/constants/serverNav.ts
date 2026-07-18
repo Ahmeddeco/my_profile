@@ -1,4 +1,5 @@
-import { ChartNoAxesCombined, Factory, Palette, Server, Shapes, Sofa, SwatchBook, Users } from "lucide-react"
+import { ChartNoAxesCombined, Server, Users } from "lucide-react"
+import { GrProjects } from "react-icons/gr"
 
 export const serverNav = [
   {
@@ -12,29 +13,9 @@ export const serverNav = [
     icon: Users
   },
   {
-    title: { ar: "المصانع", en: "factories" },
-    href: "/server/factories",
-    icon: Factory
-  },
-  {
-    title: { ar: "الألوان", en: "colors" },
-    href: "/server/colors",
-    icon: SwatchBook
-  },
-  {
-    title: { ar: "الفئات", en: "classes" },
-    href: "/server/classes",
-    icon: Shapes
-  },
-  {
-    title: { ar: "الإستايلات", en: "styles" },
-    href: "/server/styles",
-    icon: Palette
-  },
-  {
-    title: { ar: "المنتجات", en: "products" },
-    href: "/server/products",
-    icon: Sofa
+    title: { ar: "المشاريع", en: "projects" },
+    href: "/server/projects",
+    icon: GrProjects
   },
   {
     title: { ar: "الإحصائيات", en: "charts" },
