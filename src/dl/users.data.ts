@@ -1,3 +1,4 @@
+import { Role } from "@/generated/prisma/enums"
 import prisma from "@/lib/prisma"
 
 /* ----------------------------- getAllUsers ---------------------------- */
@@ -21,12 +22,9 @@ export const getAllUsers = async (size: number, page: number) => {
 /* ---------------------------- getOneUser ------------------------------ */
 export const getOneUser = async (id: string) => {
   try {
-    const data = await prisma.user.findUnique({
-      where: {
-        id
-      }
+    return await prisma.user.findUnique({
+      where: { id }
     })
-    return { data }
   } catch (error) {
     console.error(error)
   }
@@ -40,6 +38,15 @@ export const getAllUsersForFactoriesPage = async () => {
       orderBy: { name: "asc" }
     })
     return data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+/* ------------------------------ getAllClients ----------------------------- */
+export const getAllClients = async () => {
+  try {
+    return await prisma.user.findMany({ where: { role: Role.client }, select: { id: true, name: true }, orderBy: { name: "asc" } })
   } catch (error) {
     console.error(error)
   }

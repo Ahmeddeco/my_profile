@@ -1,4 +1,7 @@
+import Footer from "@/components/layout/Footer"
 import Header from "@/components/layout/Header"
+import { Toaster } from "@/components/ui/sonner"
+import { CircleAlert, CircleCheckBig, CircleX } from "lucide-react"
 
 export default function FrontLayout({ children }: { children: React.ReactNode }) {
 	return (
@@ -7,6 +10,17 @@ export default function FrontLayout({ children }: { children: React.ReactNode })
 			<main className="min-h-dvh container mx-auto px-4 pt-14 lg:pt-20 " suppressHydrationWarning>
 				{children}
 			</main>
+			<Toaster
+				theme="system"
+				richColors
+				duration={5000}
+				icons={{
+					success: <CircleCheckBig />,
+					warning: <CircleAlert />,
+					error: <CircleX />,
+				}}
+			/>
+			<Footer />
 		</>
 	)
 }

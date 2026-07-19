@@ -1,11 +1,18 @@
+import ProductTypeSchema from "@/generated/zod/inputTypeSchemas/ProductTypeSchema"
 import { z } from 'zod'
 
 
 export const ProjectSchema = z.object({
   id: z.string().nullish(),
-  title: z.string(),
-  miniDescription: z.string(),
-  description: z.string(),
+  type: ProductTypeSchema,
+  slug: z.string().nullish(),
+  titleAr: z.string(),
+  titleEn: z.string(),
+  miniDescriptionAr: z.string(),
+  miniDescriptionEn: z.string(),
+  descriptionAr: z.string().nullish(),
+  descriptionEn: z.string().nullish(),
+  url: z.string().url(),
   mainImage: z.string(),
   images: z.string().array(),
   createdAt: z.date(),

@@ -112,15 +112,24 @@ enum ProductType {
 }
 
 model Project {
-  id              String      @id @default(cuid())
-  title           String
-  miniDescription String
-  description     String      @db.Text
-  mainImage       String
-  images          String[]
-  type            ProductType @default(web)
-  client          User        @relation(fields: [userId], references: [id])
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
-  userId          String
+  id                String      @id @default(cuid())
+  slug              String      @unique
+  titleAr           String
+  titleEn           String
+  miniDescriptionAr String
+  miniDescriptionEn String
+  descriptionAr     String?     @db.Text
+  descriptionEn     String?     @db.Text
+  url               String      @unique
+  mainImage         String
+  images            String[]
+  type              ProductType @default(web)
+  client            User        @relation(fields: [userId], references: [id])
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  userId            String
+
+  @@index([titleAr])
+  @@index([titleEn])
+  @@index([userId])
 }

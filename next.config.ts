@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "picsum.photos" },
       { protocol: "https", hostname: "avatars.githubusercontent.com" },
       { protocol: "https", hostname: "cdn.jsdelivr.net" },
+      { protocol: "https", hostname: "cgvdfjzle1.ufs.sh" },
+      { protocol: "https", hostname: "github.com" },
+      { protocol: "https", hostname: "images.unsplash.com" },
     ]
   },
   devIndicators: false,

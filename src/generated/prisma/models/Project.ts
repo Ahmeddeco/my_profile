@@ -26,9 +26,14 @@ export type AggregateProject = {
 
 export type ProjectMinAggregateOutputType = {
   id: string | null
-  title: string | null
-  miniDescription: string | null
-  description: string | null
+  slug: string | null
+  titleAr: string | null
+  titleEn: string | null
+  miniDescriptionAr: string | null
+  miniDescriptionEn: string | null
+  descriptionAr: string | null
+  descriptionEn: string | null
+  url: string | null
   mainImage: string | null
   type: $Enums.ProductType | null
   createdAt: Date | null
@@ -38,9 +43,14 @@ export type ProjectMinAggregateOutputType = {
 
 export type ProjectMaxAggregateOutputType = {
   id: string | null
-  title: string | null
-  miniDescription: string | null
-  description: string | null
+  slug: string | null
+  titleAr: string | null
+  titleEn: string | null
+  miniDescriptionAr: string | null
+  miniDescriptionEn: string | null
+  descriptionAr: string | null
+  descriptionEn: string | null
+  url: string | null
   mainImage: string | null
   type: $Enums.ProductType | null
   createdAt: Date | null
@@ -50,9 +60,14 @@ export type ProjectMaxAggregateOutputType = {
 
 export type ProjectCountAggregateOutputType = {
   id: number
-  title: number
-  miniDescription: number
-  description: number
+  slug: number
+  titleAr: number
+  titleEn: number
+  miniDescriptionAr: number
+  miniDescriptionEn: number
+  descriptionAr: number
+  descriptionEn: number
+  url: number
   mainImage: number
   images: number
   type: number
@@ -65,9 +80,14 @@ export type ProjectCountAggregateOutputType = {
 
 export type ProjectMinAggregateInputType = {
   id?: true
-  title?: true
-  miniDescription?: true
-  description?: true
+  slug?: true
+  titleAr?: true
+  titleEn?: true
+  miniDescriptionAr?: true
+  miniDescriptionEn?: true
+  descriptionAr?: true
+  descriptionEn?: true
+  url?: true
   mainImage?: true
   type?: true
   createdAt?: true
@@ -77,9 +97,14 @@ export type ProjectMinAggregateInputType = {
 
 export type ProjectMaxAggregateInputType = {
   id?: true
-  title?: true
-  miniDescription?: true
-  description?: true
+  slug?: true
+  titleAr?: true
+  titleEn?: true
+  miniDescriptionAr?: true
+  miniDescriptionEn?: true
+  descriptionAr?: true
+  descriptionEn?: true
+  url?: true
   mainImage?: true
   type?: true
   createdAt?: true
@@ -89,9 +114,14 @@ export type ProjectMaxAggregateInputType = {
 
 export type ProjectCountAggregateInputType = {
   id?: true
-  title?: true
-  miniDescription?: true
-  description?: true
+  slug?: true
+  titleAr?: true
+  titleEn?: true
+  miniDescriptionAr?: true
+  miniDescriptionEn?: true
+  descriptionAr?: true
+  descriptionEn?: true
+  url?: true
   mainImage?: true
   images?: true
   type?: true
@@ -175,9 +205,14 @@ export type ProjectGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type ProjectGroupByOutputType = {
   id: string
-  title: string
-  miniDescription: string
-  description: string
+  slug: string
+  titleAr: string
+  titleEn: string
+  miniDescriptionAr: string
+  miniDescriptionEn: string
+  descriptionAr: string | null
+  descriptionEn: string | null
+  url: string
   mainImage: string
   images: string[]
   type: $Enums.ProductType
@@ -209,9 +244,14 @@ export type ProjectWhereInput = {
   OR?: Prisma.ProjectWhereInput[]
   NOT?: Prisma.ProjectWhereInput | Prisma.ProjectWhereInput[]
   id?: Prisma.StringFilter<"Project"> | string
-  title?: Prisma.StringFilter<"Project"> | string
-  miniDescription?: Prisma.StringFilter<"Project"> | string
-  description?: Prisma.StringFilter<"Project"> | string
+  slug?: Prisma.StringFilter<"Project"> | string
+  titleAr?: Prisma.StringFilter<"Project"> | string
+  titleEn?: Prisma.StringFilter<"Project"> | string
+  miniDescriptionAr?: Prisma.StringFilter<"Project"> | string
+  miniDescriptionEn?: Prisma.StringFilter<"Project"> | string
+  descriptionAr?: Prisma.StringNullableFilter<"Project"> | string | null
+  descriptionEn?: Prisma.StringNullableFilter<"Project"> | string | null
+  url?: Prisma.StringFilter<"Project"> | string
   mainImage?: Prisma.StringFilter<"Project"> | string
   images?: Prisma.StringNullableListFilter<"Project">
   type?: Prisma.EnumProductTypeFilter<"Project"> | $Enums.ProductType
@@ -223,9 +263,14 @@ export type ProjectWhereInput = {
 
 export type ProjectOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  miniDescription?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  titleAr?: Prisma.SortOrder
+  titleEn?: Prisma.SortOrder
+  miniDescriptionAr?: Prisma.SortOrder
+  miniDescriptionEn?: Prisma.SortOrder
+  descriptionAr?: Prisma.SortOrderInput | Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrderInput | Prisma.SortOrder
+  url?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
   images?: Prisma.SortOrder
   type?: Prisma.SortOrder
@@ -237,12 +282,17 @@ export type ProjectOrderByWithRelationInput = {
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  slug?: string
+  url?: string
   AND?: Prisma.ProjectWhereInput | Prisma.ProjectWhereInput[]
   OR?: Prisma.ProjectWhereInput[]
   NOT?: Prisma.ProjectWhereInput | Prisma.ProjectWhereInput[]
-  title?: Prisma.StringFilter<"Project"> | string
-  miniDescription?: Prisma.StringFilter<"Project"> | string
-  description?: Prisma.StringFilter<"Project"> | string
+  titleAr?: Prisma.StringFilter<"Project"> | string
+  titleEn?: Prisma.StringFilter<"Project"> | string
+  miniDescriptionAr?: Prisma.StringFilter<"Project"> | string
+  miniDescriptionEn?: Prisma.StringFilter<"Project"> | string
+  descriptionAr?: Prisma.StringNullableFilter<"Project"> | string | null
+  descriptionEn?: Prisma.StringNullableFilter<"Project"> | string | null
   mainImage?: Prisma.StringFilter<"Project"> | string
   images?: Prisma.StringNullableListFilter<"Project">
   type?: Prisma.EnumProductTypeFilter<"Project"> | $Enums.ProductType
@@ -250,13 +300,18 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   userId?: Prisma.StringFilter<"Project"> | string
   client?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "id" | "slug" | "url">
 
 export type ProjectOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  miniDescription?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  titleAr?: Prisma.SortOrder
+  titleEn?: Prisma.SortOrder
+  miniDescriptionAr?: Prisma.SortOrder
+  miniDescriptionEn?: Prisma.SortOrder
+  descriptionAr?: Prisma.SortOrderInput | Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrderInput | Prisma.SortOrder
+  url?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
   images?: Prisma.SortOrder
   type?: Prisma.SortOrder
@@ -273,9 +328,14 @@ export type ProjectScalarWhereWithAggregatesInput = {
   OR?: Prisma.ProjectScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ProjectScalarWhereWithAggregatesInput | Prisma.ProjectScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Project"> | string
-  title?: Prisma.StringWithAggregatesFilter<"Project"> | string
-  miniDescription?: Prisma.StringWithAggregatesFilter<"Project"> | string
-  description?: Prisma.StringWithAggregatesFilter<"Project"> | string
+  slug?: Prisma.StringWithAggregatesFilter<"Project"> | string
+  titleAr?: Prisma.StringWithAggregatesFilter<"Project"> | string
+  titleEn?: Prisma.StringWithAggregatesFilter<"Project"> | string
+  miniDescriptionAr?: Prisma.StringWithAggregatesFilter<"Project"> | string
+  miniDescriptionEn?: Prisma.StringWithAggregatesFilter<"Project"> | string
+  descriptionAr?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
+  descriptionEn?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
+  url?: Prisma.StringWithAggregatesFilter<"Project"> | string
   mainImage?: Prisma.StringWithAggregatesFilter<"Project"> | string
   images?: Prisma.StringNullableListFilter<"Project">
   type?: Prisma.EnumProductTypeWithAggregatesFilter<"Project"> | $Enums.ProductType
@@ -286,9 +346,14 @@ export type ProjectScalarWhereWithAggregatesInput = {
 
 export type ProjectCreateInput = {
   id?: string
-  title: string
-  miniDescription: string
-  description: string
+  slug: string
+  titleAr: string
+  titleEn: string
+  miniDescriptionAr: string
+  miniDescriptionEn: string
+  descriptionAr?: string | null
+  descriptionEn?: string | null
+  url: string
   mainImage: string
   images?: Prisma.ProjectCreateimagesInput | string[]
   type?: $Enums.ProductType
@@ -299,9 +364,14 @@ export type ProjectCreateInput = {
 
 export type ProjectUncheckedCreateInput = {
   id?: string
-  title: string
-  miniDescription: string
-  description: string
+  slug: string
+  titleAr: string
+  titleEn: string
+  miniDescriptionAr: string
+  miniDescriptionEn: string
+  descriptionAr?: string | null
+  descriptionEn?: string | null
+  url: string
   mainImage: string
   images?: Prisma.ProjectCreateimagesInput | string[]
   type?: $Enums.ProductType
@@ -312,9 +382,14 @@ export type ProjectUncheckedCreateInput = {
 
 export type ProjectUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  miniDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProjectUpdateimagesInput | string[]
   type?: Prisma.EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
@@ -325,9 +400,14 @@ export type ProjectUpdateInput = {
 
 export type ProjectUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  miniDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProjectUpdateimagesInput | string[]
   type?: Prisma.EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
@@ -338,9 +418,14 @@ export type ProjectUncheckedUpdateInput = {
 
 export type ProjectCreateManyInput = {
   id?: string
-  title: string
-  miniDescription: string
-  description: string
+  slug: string
+  titleAr: string
+  titleEn: string
+  miniDescriptionAr: string
+  miniDescriptionEn: string
+  descriptionAr?: string | null
+  descriptionEn?: string | null
+  url: string
   mainImage: string
   images?: Prisma.ProjectCreateimagesInput | string[]
   type?: $Enums.ProductType
@@ -351,9 +436,14 @@ export type ProjectCreateManyInput = {
 
 export type ProjectUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  miniDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProjectUpdateimagesInput | string[]
   type?: Prisma.EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
@@ -363,9 +453,14 @@ export type ProjectUpdateManyMutationInput = {
 
 export type ProjectUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  miniDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProjectUpdateimagesInput | string[]
   type?: Prisma.EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
@@ -394,9 +489,14 @@ export type StringNullableListFilter<$PrismaModel = never> = {
 
 export type ProjectCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  miniDescription?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  titleAr?: Prisma.SortOrder
+  titleEn?: Prisma.SortOrder
+  miniDescriptionAr?: Prisma.SortOrder
+  miniDescriptionEn?: Prisma.SortOrder
+  descriptionAr?: Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
   images?: Prisma.SortOrder
   type?: Prisma.SortOrder
@@ -407,9 +507,14 @@ export type ProjectCountOrderByAggregateInput = {
 
 export type ProjectMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  miniDescription?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  titleAr?: Prisma.SortOrder
+  titleEn?: Prisma.SortOrder
+  miniDescriptionAr?: Prisma.SortOrder
+  miniDescriptionEn?: Prisma.SortOrder
+  descriptionAr?: Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
   type?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -419,9 +524,14 @@ export type ProjectMaxOrderByAggregateInput = {
 
 export type ProjectMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  miniDescription?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  titleAr?: Prisma.SortOrder
+  titleEn?: Prisma.SortOrder
+  miniDescriptionAr?: Prisma.SortOrder
+  miniDescriptionEn?: Prisma.SortOrder
+  descriptionAr?: Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
   type?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -486,9 +596,14 @@ export type EnumProductTypeFieldUpdateOperationsInput = {
 
 export type ProjectCreateWithoutClientInput = {
   id?: string
-  title: string
-  miniDescription: string
-  description: string
+  slug: string
+  titleAr: string
+  titleEn: string
+  miniDescriptionAr: string
+  miniDescriptionEn: string
+  descriptionAr?: string | null
+  descriptionEn?: string | null
+  url: string
   mainImage: string
   images?: Prisma.ProjectCreateimagesInput | string[]
   type?: $Enums.ProductType
@@ -498,9 +613,14 @@ export type ProjectCreateWithoutClientInput = {
 
 export type ProjectUncheckedCreateWithoutClientInput = {
   id?: string
-  title: string
-  miniDescription: string
-  description: string
+  slug: string
+  titleAr: string
+  titleEn: string
+  miniDescriptionAr: string
+  miniDescriptionEn: string
+  descriptionAr?: string | null
+  descriptionEn?: string | null
+  url: string
   mainImage: string
   images?: Prisma.ProjectCreateimagesInput | string[]
   type?: $Enums.ProductType
@@ -539,9 +659,14 @@ export type ProjectScalarWhereInput = {
   OR?: Prisma.ProjectScalarWhereInput[]
   NOT?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
   id?: Prisma.StringFilter<"Project"> | string
-  title?: Prisma.StringFilter<"Project"> | string
-  miniDescription?: Prisma.StringFilter<"Project"> | string
-  description?: Prisma.StringFilter<"Project"> | string
+  slug?: Prisma.StringFilter<"Project"> | string
+  titleAr?: Prisma.StringFilter<"Project"> | string
+  titleEn?: Prisma.StringFilter<"Project"> | string
+  miniDescriptionAr?: Prisma.StringFilter<"Project"> | string
+  miniDescriptionEn?: Prisma.StringFilter<"Project"> | string
+  descriptionAr?: Prisma.StringNullableFilter<"Project"> | string | null
+  descriptionEn?: Prisma.StringNullableFilter<"Project"> | string | null
+  url?: Prisma.StringFilter<"Project"> | string
   mainImage?: Prisma.StringFilter<"Project"> | string
   images?: Prisma.StringNullableListFilter<"Project">
   type?: Prisma.EnumProductTypeFilter<"Project"> | $Enums.ProductType
@@ -552,9 +677,14 @@ export type ProjectScalarWhereInput = {
 
 export type ProjectCreateManyClientInput = {
   id?: string
-  title: string
-  miniDescription: string
-  description: string
+  slug: string
+  titleAr: string
+  titleEn: string
+  miniDescriptionAr: string
+  miniDescriptionEn: string
+  descriptionAr?: string | null
+  descriptionEn?: string | null
+  url: string
   mainImage: string
   images?: Prisma.ProjectCreateimagesInput | string[]
   type?: $Enums.ProductType
@@ -564,9 +694,14 @@ export type ProjectCreateManyClientInput = {
 
 export type ProjectUpdateWithoutClientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  miniDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProjectUpdateimagesInput | string[]
   type?: Prisma.EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
@@ -576,9 +711,14 @@ export type ProjectUpdateWithoutClientInput = {
 
 export type ProjectUncheckedUpdateWithoutClientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  miniDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProjectUpdateimagesInput | string[]
   type?: Prisma.EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
@@ -588,9 +728,14 @@ export type ProjectUncheckedUpdateWithoutClientInput = {
 
 export type ProjectUncheckedUpdateManyWithoutClientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  miniDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionAr?: Prisma.StringFieldUpdateOperationsInput | string
+  miniDescriptionEn?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProjectUpdateimagesInput | string[]
   type?: Prisma.EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
@@ -602,9 +747,14 @@ export type ProjectUncheckedUpdateManyWithoutClientInput = {
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
-  miniDescription?: boolean
-  description?: boolean
+  slug?: boolean
+  titleAr?: boolean
+  titleEn?: boolean
+  miniDescriptionAr?: boolean
+  miniDescriptionEn?: boolean
+  descriptionAr?: boolean
+  descriptionEn?: boolean
+  url?: boolean
   mainImage?: boolean
   images?: boolean
   type?: boolean
@@ -616,9 +766,14 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 
 export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
-  miniDescription?: boolean
-  description?: boolean
+  slug?: boolean
+  titleAr?: boolean
+  titleEn?: boolean
+  miniDescriptionAr?: boolean
+  miniDescriptionEn?: boolean
+  descriptionAr?: boolean
+  descriptionEn?: boolean
+  url?: boolean
   mainImage?: boolean
   images?: boolean
   type?: boolean
@@ -630,9 +785,14 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
-  miniDescription?: boolean
-  description?: boolean
+  slug?: boolean
+  titleAr?: boolean
+  titleEn?: boolean
+  miniDescriptionAr?: boolean
+  miniDescriptionEn?: boolean
+  descriptionAr?: boolean
+  descriptionEn?: boolean
+  url?: boolean
   mainImage?: boolean
   images?: boolean
   type?: boolean
@@ -644,9 +804,14 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type ProjectSelectScalar = {
   id?: boolean
-  title?: boolean
-  miniDescription?: boolean
-  description?: boolean
+  slug?: boolean
+  titleAr?: boolean
+  titleEn?: boolean
+  miniDescriptionAr?: boolean
+  miniDescriptionEn?: boolean
+  descriptionAr?: boolean
+  descriptionEn?: boolean
+  url?: boolean
   mainImage?: boolean
   images?: boolean
   type?: boolean
@@ -655,7 +820,7 @@ export type ProjectSelectScalar = {
   userId?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "miniDescription" | "description" | "mainImage" | "images" | "type" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "titleAr" | "titleEn" | "miniDescriptionAr" | "miniDescriptionEn" | "descriptionAr" | "descriptionEn" | "url" | "mainImage" | "images" | "type" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   client?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -673,9 +838,14 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    title: string
-    miniDescription: string
-    description: string
+    slug: string
+    titleAr: string
+    titleEn: string
+    miniDescriptionAr: string
+    miniDescriptionEn: string
+    descriptionAr: string | null
+    descriptionEn: string | null
+    url: string
     mainImage: string
     images: string[]
     type: $Enums.ProductType
@@ -1107,9 +1277,14 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface ProjectFieldRefs {
   readonly id: Prisma.FieldRef<"Project", 'String'>
-  readonly title: Prisma.FieldRef<"Project", 'String'>
-  readonly miniDescription: Prisma.FieldRef<"Project", 'String'>
-  readonly description: Prisma.FieldRef<"Project", 'String'>
+  readonly slug: Prisma.FieldRef<"Project", 'String'>
+  readonly titleAr: Prisma.FieldRef<"Project", 'String'>
+  readonly titleEn: Prisma.FieldRef<"Project", 'String'>
+  readonly miniDescriptionAr: Prisma.FieldRef<"Project", 'String'>
+  readonly miniDescriptionEn: Prisma.FieldRef<"Project", 'String'>
+  readonly descriptionAr: Prisma.FieldRef<"Project", 'String'>
+  readonly descriptionEn: Prisma.FieldRef<"Project", 'String'>
+  readonly url: Prisma.FieldRef<"Project", 'String'>
   readonly mainImage: Prisma.FieldRef<"Project", 'String'>
   readonly images: Prisma.FieldRef<"Project", 'String[]'>
   readonly type: Prisma.FieldRef<"Project", 'ProductType'>

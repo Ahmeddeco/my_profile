@@ -1,112 +1,95 @@
+import { ProductType, Role } from "@/generated/prisma/enums"
 import prisma from "@/lib/prisma"
 import { faker } from '@faker-js/faker'
 
 
 async function main() {
-  console.log('⏳ Starting database cleanup...')
+  console.log('⏳ Starting database seeding...')
 
-  // Clean up existing data to avoid unique constraint errors on rerun
+  // 1. Clean existing data (Optional but recommended for fresh seeding)
+  console.log('🧹 Cleaning existing data...')
   await prisma.project.deleteMany()
   await prisma.session.deleteMany()
   await prisma.account.deleteMany()
   await prisma.verification.deleteMany()
   await prisma.user.deleteMany()
+  console.log('✅ Database cleaned.')
 
-  console.log('✅ Database cleaned up successfully.')
-
-  console.log('🌱 Starting database seeding...')
-
-  // 1. Create a static Admin user for development and testing
-  const adminUser = await prisma.user.create({
+  // 2. Create Admin User
+  console.log('👤 Creating admin user...')
+  const admin = await prisma.user.create({
     data: {
-      name: 'Ahmed Abdelfattah (Admin)',
-      email: 'admin@flux.com',
+      name: 'Admin User',
+      email: 'admin@flux-agency.com',
       emailVerified: true,
-      role: 'admin',
-      image: faker.image.avatar(),
+      role: Role.admin,
+      mobile: '+201000000000',
+      city: 'Sadat City',
+      state: 'Menofia',
+      country: 'Egypt',
     },
   })
-  console.log(`👑 Admin user created: ${adminUser.email}`)
+  console.log(`✅ Admin created with ID: ${admin.id}`)
 
-  // 2. Create a pool of Clients and Regular Users
-  const clientsList = []
-  const totalClients = 5
-  const totalRegularUsers = 5
+  // 3. Create Clients and their Projects
+  console.log('👥 Creating clients and projects...')
+  const clientRoles = [Role.client, Role.user]
 
-  // Create clients who will own projects
-  for (let i = 0; i < totalClients; i++) {
+  for (let i = 0; i < 5; i++) {
+    // Generate fake client details
+    const clientName = faker.person.fullName()
     const client = await prisma.user.create({
       data: {
-        name: faker.person.fullName(),
-        email: faker.internet.email().toLowerCase(),
+        name: clientName,
+        email: faker.internet.email(),
         emailVerified: faker.datatype.boolean(),
-        role: 'client',
-        image: faker.image.avatar(),
+        role: faker.helpers.arrayElement(clientRoles),
+        mobile: faker.phone.number({ style: 'international' }),
+        city: faker.location.city(),
+        state: faker.location.state(),
+        country: faker.location.country(),
       },
     })
-    clientsList.push(client)
-  }
-  console.log(`👥 Created ${totalClients} users with the (client) role.`)
 
-  // Create regular users
-  for (let i = 0; i < totalRegularUsers; i++) {
-    await prisma.user.create({
-      data: {
-        name: faker.person.fullName(),
-        email: faker.internet.email().toLowerCase(),
-        emailVerified: faker.datatype.boolean(),
-        role: 'user',
-        image: faker.image.avatar(),
-      },
-    })
-  }
-  console.log(`👤 Created ${totalRegularUsers} regular users with the (user) role.`)
+    console.log(`   └─ Created User: ${client.name} (${client.role})`)
 
-  // 3. Create projects and link them to Clients
-  console.log('🚀 Starting project creation...')
+    // Create 2-3 projects for each client
+    const projectCount = faker.number.int({ min: 2, max: 3 })
+    for (let j = 0; j < projectCount; j++) {
+      const projectTitleEn = faker.commerce.productName() + ' Platform'
+      const projectSlug = faker.helpers.slugify(projectTitleEn).toLowerCase() + '-' + faker.string.alphanumeric(5)
 
-  for (const clientUser of clientsList) {
-    // Each client will have 1 to 3 random projects
-    const projectsCount = faker.number.int({ min: 1, max: 3 })
-
-    for (let p = 0; p < projectsCount; p++) {
-      await prisma.project.create({
+      const project = await prisma.project.create({
         data: {
-          title: faker.commerce.productName() + ' Platform',
-          miniDescription: faker.commerce.productDescription(),
-          description: faker.lorem.paragraphs(3),
-          mainImage: faker.image.url(),
+          slug: projectSlug,
+          titleEn: projectTitleEn,
+          titleAr: `منصة ${faker.commerce.productName()}`, // Fallback Arabic title
+          miniDescriptionEn: faker.company.catchPhrase(),
+          miniDescriptionAr: 'وصف مصغر باللغة العربية يوضح طبيعة هذا المشروع الإبداعي.',
+          descriptionEn: faker.lorem.paragraphs(2),
+          descriptionAr: 'تفاصيل المشروع بالكامل باللغة العربية تشمل كل المميزات والخصائص البرمجية التي تم بناؤها.',
+          url: faker.internet.url(),
+          mainImage: faker.image.urlPicsumPhotos({ width: 800, height: 600 }),
           images: [
-            faker.image.url(),
-            faker.image.url(),
-            faker.image.url(),
+            faker.image.urlPicsumPhotos({ width: 800, height: 600 }),
+            faker.image.urlPicsumPhotos({ width: 800, height: 600 }),
           ],
-          userId: clientUser.id, // Linking project to current client
+          type: faker.helpers.arrayElement([ProductType.web, ProductType.mobile, ProductType.ai]),
+          userId: client.id,
         },
       })
+
+      console.log(`      ├── Project Created: ${project.titleEn} [Type: ${project.type}]`)
     }
   }
-  console.log('✅ Projects created and linked to clients successfully.')
 
-  // 4. Create dummy verification data as examples
-  console.log('🔑 Creating temporary verification data...')
-  for (let i = 0; i < 3; i++) {
-    await prisma.verification.create({
-      data: {
-        id: faker.string.uuid(),
-        identifier: faker.internet.email().toLowerCase(),
-        value: faker.string.alphanumeric(32),
-        expiresAt: faker.date.future(),
-      },
-    })
-  }
-
-  console.log('🎉 Seeding completed successfully!')
+  console.log('🎉 Database seeding completed successfully!')
 }
 
 main()
   .catch((e) => {
-    console.error('❌ Error occurred during seeding:', e)
+    console.error('❌ Seeding error encountered:')
+    console.error(e)
     process.exit(1)
   })
   .finally(async () => {

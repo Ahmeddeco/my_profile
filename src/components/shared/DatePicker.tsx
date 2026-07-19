@@ -20,14 +20,19 @@ export default function DatePicker({ defaultValue, key, name, errors }: Props) {
 		const d = defaultValue ? new Date(defaultValue) : undefined
 		return d && !isNaN(d.getTime()) ? d : undefined
 	})
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 	const [open, setOpen] = useState(false)
+
+	const formatDateString = (d: Date | undefined) => {
+		if (!d) return ""
+		return d.toISOString().split("T")[0]
+	}
 
 	return (
 		<Field>
 			<FieldLabel htmlFor={name}>{name}</FieldLabel>
-			<Popover>
-				<Input type="hidden" key={key} name={name} defaultValue={defaultValue} value={date ? date.toISOString() : ""} />
+			<Popover open={open} onOpenChange={setOpen}>
+				<Input type="hidden" key={key} name={name} value={formatDateString(date)} />
 				<PopoverTrigger asChild>
 					<Button
 						variant="outline"

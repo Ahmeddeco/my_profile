@@ -22,9 +22,9 @@ export function ServerSidebar({ locale }: Props) {
 			<SidebarContent>
 				<SidebarGroup>
 					<SidebarGroupLabel>
-						<Logo />
+						<Logo className="text-sidebar-foreground" />
 					</SidebarGroupLabel>
-					<SidebarGroupContent className="mt-4 ">
+					<SidebarGroupContent className="mt-6 ">
 						<ServerNavigation />
 					</SidebarGroupContent>
 				</SidebarGroup>

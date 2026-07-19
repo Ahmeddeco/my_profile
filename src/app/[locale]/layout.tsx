@@ -1,9 +1,6 @@
 import type { Metadata } from "next"
 import "../globals.css"
 import { ThemeProvider } from "@/components/theme/theme-provider"
-import { Toaster } from "@/components/ui/sonner"
-import { CircleAlert, CircleCheckBig, CircleX } from "lucide-react"
-import Footer from "@/components/layout/Footer"
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin"
 import { extractRouterConfig } from "uploadthing/server"
 import { ourFileRouter } from "@/app/api/uploadthing/core"
@@ -37,23 +34,12 @@ export default async function RootLayout({
 			className={`h-full antialiased ${cairo.className}`}
 			suppressHydrationWarning
 		>
-			<body className="scroll-smooth">
+			<body className="scroll-smooth" suppressHydrationWarning>
 				<ThemeProvider attribute="class" enableSystem defaultTheme="system" disableTransitionOnChange>
 					<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
 					<TooltipProvider>
 						<DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>{children}</DirectionProvider>
-						<Toaster
-							theme="system"
-							richColors
-							duration={5000}
-							icons={{
-								success: <CircleCheckBig />,
-								warning: <CircleAlert />,
-								error: <CircleX />,
-							}}
-						/>
 					</TooltipProvider>
-					<Footer />
 				</ThemeProvider>
 			</body>
 		</html>
