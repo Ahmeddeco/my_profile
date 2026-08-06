@@ -69,10 +69,10 @@ async function main() {
           descriptionEn: faker.lorem.paragraphs(2),
           descriptionAr: 'تفاصيل المشروع بالكامل باللغة العربية تشمل كل المميزات والخصائص البرمجية التي تم بناؤها.',
           url: faker.internet.url(),
-          mainImage: faker.image.urlPicsumPhotos({ width: 800, height: 600 }),
+          mainImage: faker.image.url(),
           images: [
-            faker.image.urlPicsumPhotos({ width: 800, height: 600 }),
-            faker.image.urlPicsumPhotos({ width: 800, height: 600 }),
+            faker.image.url(),
+            faker.image.url(),
           ],
           type: faker.helpers.arrayElement([ProductType.web, ProductType.mobile, ProductType.ai]),
           userId: client.id,

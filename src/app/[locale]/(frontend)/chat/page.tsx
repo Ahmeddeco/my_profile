@@ -3,7 +3,7 @@ import BotChat from "@/components/shared/BotChat"
 export default function BotPage() {
 	return (
 		<BotChat
-			apiRoute={"/api/chat"}
+			apiRoute={"/api/chat/user"}
 			placeholder={{
 				en: "Write what you need?",
 				ar: "أكتب ما تريده هنا",
