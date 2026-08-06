@@ -40,7 +40,7 @@ export const arDic = {
     },
   },
   projectsPage: {
-    title: "مشايعنا ",
+    title: "مشاريعنا ",
     titleSpan: "المتكاملة",
     subTitle: "حوّل رؤيتك إلى واقع رقمي متطور. تصميمات Full-Stack ذكية مدعومة بالذكاء الاصطناعي.",
 
