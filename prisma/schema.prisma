@@ -132,4 +132,14 @@ model Project {
   @@index([titleAr])
   @@index([titleEn])
   @@index([userId])
+  @@map("project")
+}
+
+model Article {
+  id String @id @default(cuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("article")
 }

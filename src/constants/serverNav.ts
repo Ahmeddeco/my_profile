@@ -1,4 +1,4 @@
-import { ChartNoAxesCombined, Server, Users } from "lucide-react"
+import { ChartNoAxesCombined, Newspaper, Server, Users } from "lucide-react"
 import { GrProjects } from "react-icons/gr"
 
 export const serverNav = [
@@ -16,6 +16,11 @@ export const serverNav = [
     title: { ar: "المشاريع", en: "projects" },
     href: "/server/projects",
     icon: GrProjects
+  },
+  {
+    title: { ar: "مقالاتنا", en: "articles" },
+    href: "/server/articles",
+    icon: Newspaper
   },
   {
     title: { ar: "الإحصائيات", en: "charts" },

@@ -109,7 +109,7 @@ export default async function ProjectsPage({
 										</ItemContent>
 									</Item>
 								</TableCell>
-								<TableCell>{dateFormate({ day: createdAt })}</TableCell>
+								<TableCell>{dateFormate(createdAt)}</TableCell>
 
 								{/* -------------------------------- settings -------------------------------- */}
 								<TableCell className="text-left">

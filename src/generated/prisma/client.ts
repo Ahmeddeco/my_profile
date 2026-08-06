@@ -66,3 +66,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type Project = Prisma.ProjectModel
+/**
+ * Model Article
+ * 
+ */
+export type Article = Prisma.ArticleModel

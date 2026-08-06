@@ -9,7 +9,7 @@ export const getAllProjectsForServerPage = async (size: number, page: number) =>
       skip: (page * size) - size,
       take: size,
       orderBy: { createdAt: "desc" },
-      select: { titleAr: true, titleEn: true, id: true, createdAt: true, mainImage: true, type: true, client: { select: { name: true, image: true, id: true } } }
+      select: { titleAr: true, titleEn: true, id: true, slug: true, createdAt: true, mainImage: true, type: true, url: true, client: { select: { name: true, image: true, id: true } } }
     })
     return { data, totalPages }
 
@@ -46,3 +46,4 @@ export const getOneProject = async (id: string) => {
     console.error(error)
   }
 }
+
