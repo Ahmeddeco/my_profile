@@ -1,5 +1,5 @@
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
-import ServerPageCard from "@/components/shared/ServerPageCard"
+import ServerPageCard from "@/components/backend/ServerPageCard"
 import { getOneProject } from "@/dl/project.data"
 import { getAllClients } from "@/dl/users.data"
 import EditProject from "@/forms/EditProject"

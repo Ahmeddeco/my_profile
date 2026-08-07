@@ -1,4 +1,5 @@
-import { Delete, DeleteActionState } from "@/components/backend/Delete"
+"use client"
+
 import { Button } from "@/components/ui/button"
 import {
 	Dialog,
@@ -10,10 +11,14 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { FieldError } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { Spinner } from "@/components/ui/spinner"
 import { TableCell } from "@/components/ui/table"
 import { MoreVertical } from "lucide-react"
+import Form from "next/form"
 import Link from "next/link"
-import React from "react"
+import { useActionState } from "react"
 
 type Props = {
 	id: string
@@ -22,7 +27,17 @@ type Props = {
 	deleteName: string
 }
 
+export type DeleteActionState = {
+	success?: boolean
+	error?: string | null
+}
+
 export default function Settings({ id, deleteAction, editLink, deleteName }: Props) {
+	const [state, action, isPending] = useActionState(deleteAction, {
+		success: false,
+		error: null,
+	})
+
 	return (
 		<TableCell className="text-end">
 			<DropdownMenu>
@@ -32,6 +47,7 @@ export default function Settings({ id, deleteAction, editLink, deleteName }: Pro
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="end" className="space-y-2">
+					{/* -------------------------------- edit ------------------------------- */}
 					<DropdownMenuItem asChild>
 						<Button variant={"outline"} size={"full"} asChild>
 							<Link href={editLink}>edit</Link>
@@ -57,7 +73,19 @@ export default function Settings({ id, deleteAction, editLink, deleteName }: Pro
 										<DialogClose>cancel</DialogClose>
 									</Button>
 									{/* --------------------------------- Delete --------------------------------- */}
-									<Delete id={id} deleteAction={deleteAction} />
+									<Form action={action}>
+										<Input type="hidden" name="id" value={id} />
+										{isPending ? (
+											<Button variant="destructive" type="submit" disabled={isPending}>
+												<Spinner /> Deleting...
+											</Button>
+										) : (
+											<Button variant="destructive" type="submit" disabled={isPending}>
+												Delete
+											</Button>
+										)}
+										{state.error && <FieldError>{state.error}</FieldError>}
+									</Form>
 								</div>
 							</DialogContent>
 						</Dialog>

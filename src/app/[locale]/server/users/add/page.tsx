@@ -1,5 +1,5 @@
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
-import ServerPageCard from "@/components/shared/ServerPageCard"
+import ServerPageCard from "@/components/backend/ServerPageCard"
 import AddUser from "@/forms/AddUser"
 import { Role } from "@/generated/prisma/enums"
 

@@ -1,29 +1,6 @@
-import { ImageOff, MoreVertical, PlusCircle } from "lucide-react"
-import ServerPageCard from "@/components/shared/ServerPageCard"
+import { ImageOff, PlusCircle } from "lucide-react"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import {
-	Pagination,
-	PaginationContent,
-	PaginationItem,
-	PaginationLink,
-	PaginationNext,
-	PaginationPrevious,
-} from "@/components/ui/pagination"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import {
-	Dialog,
-	DialogClose,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "@/components/ui/dialog"
-import Form from "next/form"
-import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import { Role } from "@/generated/prisma/enums"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
@@ -33,6 +10,9 @@ import { deleteProjectAction } from "@/actions/project.action"
 import { Badge } from "@/components/ui/badge"
 import { Item, ItemContent, ItemMedia, ItemTitle } from "@/components/ui/item"
 import { dateFormate } from "@/logic/dateFormate"
+import ServerPageCard from "@/components/backend/ServerPageCard"
+import Settings from "@/components/backend/Settings"
+import PaginationSection from "@/components/backend/Pagination"
 
 export default async function ProjectsPage({
 	searchParams,
@@ -53,7 +33,7 @@ export default async function ProjectsPage({
 		<ServerPageCard
 			btnTitle="add project"
 			icon={PlusCircle}
-			title={"all products"}
+			title={"all projects"}
 			description={"All projects in the database."}
 			href={"/server/projects/add"}
 		>
@@ -69,7 +49,7 @@ export default async function ProjectsPage({
 							<TableHead>type</TableHead>
 							<TableHead>client</TableHead>
 							<TableHead>created At</TableHead>
-							<TableHead className="text-left">settings</TableHead>
+							<TableHead className="text-end">settings</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
@@ -91,9 +71,7 @@ export default async function ProjectsPage({
 								</TableCell>
 								<TableCell>{locale === "en" ? titleEn : titleAr}</TableCell>
 								<TableCell>
-									<Badge className="capitalize " variant={"outline"}>
-										{type}
-									</Badge>
+									<Badge>{type}</Badge>
 								</TableCell>
 								<TableCell>
 									<Item size={"xs"} className="px-0">
@@ -112,82 +90,18 @@ export default async function ProjectsPage({
 								<TableCell>{dateFormate(createdAt)}</TableCell>
 
 								{/* -------------------------------- settings -------------------------------- */}
-								<TableCell className="text-left">
-									<DropdownMenu>
-										<DropdownMenuTrigger>
-											<MoreVertical />
-										</DropdownMenuTrigger>
-										<DropdownMenuContent align="start" className="space-y-2">
-											<DropdownMenuItem asChild>
-												<Button variant={"default"} size={"full"} asChild>
-													<Link href={`/server/projects/edit/${id}`}>edit</Link>
-												</Button>
-											</DropdownMenuItem>
-											{/* ---------------------------- delete --------------------------- */}
-											<DropdownMenuItem asChild>
-												<Dialog>
-													<DialogTrigger asChild>
-														<Button variant={"destructive"} size={"full"}>
-															delete
-														</Button>
-													</DialogTrigger>
-													<DialogContent>
-														<DialogHeader>
-															<DialogTitle>
-																{locale === "en"
-																	? "Are you sure you want to delete this project ?"
-																	: "هل أنت متأكد من رغبتك في حذف هذا المشروع؟"}
-															</DialogTitle>
-															<DialogDescription>
-																{locale === "en"
-																	? "This action can not be undone. This will permanently delete this project and remove its data from our servers."
-																	: "لا يمكن التراجع عن هذا الإجراء. سيؤدي ذلك إلى حذف هذا المشروع نهائياً وإزالة بياناته من خوادمنا."}
-															</DialogDescription>
-														</DialogHeader>
-														<div className="flex items-center justify-between ">
-															<Button asChild variant={"outline"}>
-																<DialogClose>cancel</DialogClose>
-															</Button>
-															<Form action={deleteProjectAction}>
-																<Input type="hidden" name="id" value={id} />
-																<Button variant={"destructive"} type="submit">
-																	delete
-																</Button>
-															</Form>
-														</div>
-													</DialogContent>
-												</Dialog>
-											</DropdownMenuItem>
-										</DropdownMenuContent>
-									</DropdownMenu>
-								</TableCell>
+								<Settings
+									id={id}
+									deleteAction={deleteProjectAction}
+									editLink={`/server/projects/edit/${id}`}
+									deleteName={"service"}
+								/>
 							</TableRow>
 						))}
 					</TableBody>
 					{/* ---------------------------- Pagination ---------------------------- */}
 					<TableCaption>
-						<Pagination>
-							<PaginationContent>
-								<PaginationItem>
-									{/* --------------------------- Previous --------------------------- */}
-									{pageNumber > 1 && <PaginationPrevious href={`?size=${pageSize}&page=${pageNumber - 1}`} />}
-								</PaginationItem>
-								{/* ------------------------- PaginationLink ------------------------ */}
-								{Array.from({ length: projects.totalPages ?? 1 }).map((_, index) => (
-									<PaginationItem key={index}>
-										<PaginationLink href={`?size=${pageSize}&page=${index + 1}`} isActive={pageNumber === index + 1}>
-											{index + 1}
-										</PaginationLink>
-									</PaginationItem>
-								))}
-								<PaginationItem>
-									{/* ----------------------------- Next ----------------------------- */}
-									{pageNumber < projects.totalPages && (
-										<PaginationNext href={`?size=${pageSize}&page=${pageNumber + 1}`} />
-									)}
-								</PaginationItem>
-							</PaginationContent>
-						</Pagination>
+						<PaginationSection pageNumber={pageNumber} pageSize={pageSize} totalPages={projects.totalPages} />
 					</TableCaption>
 				</Table>
 			)}

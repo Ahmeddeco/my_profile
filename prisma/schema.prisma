@@ -92,6 +92,7 @@ model User {
   state         String?
   country       String?
   projects      Project[]
+  articles      Article[]
 
   @@unique([email, mobile])
   @@index([email])
@@ -136,10 +137,24 @@ model Project {
 }
 
 model Article {
-  id String @id @default(cuid())
+  id            String   @id @default(cuid())
+  author        User     @relation(fields: [userId], references: [id])
+  titleAr       String
+  titleEn       String
+  descriptionAr String
+  descriptionEn String
+  slug          String   @unique
+  topicAr       String   @db.Text
+  topicEn       String   @db.Text
+  mainImage     String
+  images        String[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  userId        String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  @@index([titleAr])
+  @@index([titleEn])
+  @@index([slug])
+  @@index([userId])
   @@map("article")
 }

@@ -1,9 +1,10 @@
 'use server'
 
+import { DeleteActionState } from "@/components/backend/Settings"
 import prisma from "@/lib/prisma"
 import ProjectSchema from "@/schemas/ProjectSchema"
 import { parseWithZod } from "@conform-to/zod"
-import { refresh } from "next/cache"
+import { refresh, updateTag } from "next/cache"
 import { redirect } from "next/navigation"
 
 /* ----------------------------- addProjectAction ----------------------------- */
@@ -57,6 +58,7 @@ export const addProjectAction = async (prevState: unknown, formData: FormData) =
       formErrors: ["Server Error"],
     })
   }
+  updateTag("projects")
   redirect("/server/projects")
 }
 
@@ -96,20 +98,31 @@ export const editProjectAction = async (prevState: unknown, formData: FormData) 
       formErrors: ["فشل تحديث البيانات، تأكد من أن المعرف صحيح"],
     })
   }
+  updateTag("projects")
   redirect("/server/projects")
 }
 
 /* ---------------------------- deleteProjectAction --------------------------- */
-export const deleteProjectAction = async (formData: FormData) => {
-  const id = formData.get("id")
+export const deleteProjectAction = async (
+  _prevState: DeleteActionState,
+  formData: FormData
+): Promise<DeleteActionState> => {
+  const id = formData.get("id") as string
+
+  if (!id) {
+    return { success: false, error: "project ID not found" }
+  }
+
   try {
     await prisma.project.delete({
-      where: {
-        id: id as string
-      }
+      where: { id },
     })
   } catch (error) {
-    console.error(error)
+    console.error("Delete Action Error:", error)
+    return { success: false, error: "An error occurred during the deletion project." }
   }
+
+  updateTag("projects")
   refresh()
+  return { success: true, error: null }
 }

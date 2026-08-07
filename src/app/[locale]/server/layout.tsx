@@ -1,6 +1,8 @@
 import Footer from "@/components/layout/Footer"
 import { ServerSidebar } from "@/components/layout/ServerSidebar"
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { Toaster } from "@/components/ui/sonner"
+import { CircleAlert, CircleCheckBig, CircleX } from "lucide-react"
 
 export default async function ServerLayout({
 	children,
@@ -19,6 +21,16 @@ export default async function ServerLayout({
 					<SidebarTrigger dir={locale === "ar" ? "rtl" : "ltr"} />
 					{children}
 				</main>
+				<Toaster
+					theme="system"
+					richColors
+					duration={5000}
+					icons={{
+						success: <CircleCheckBig />,
+						warning: <CircleAlert />,
+						error: <CircleX />,
+					}}
+				/>
 				<Footer />
 			</div>
 		</SidebarProvider>

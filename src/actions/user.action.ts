@@ -1,9 +1,10 @@
 'use server'
 
+import { DeleteActionState } from "@/components/backend/Settings"
 import prisma from "@/lib/prisma"
 import UserSchema from "@/schemas/UserSchema"
 import { parseWithZod } from "@conform-to/zod"
-import { refresh } from "next/cache"
+import { refresh, updateTag } from "next/cache"
 import { redirect } from "next/navigation"
 
 /* ----------------------------- addUserAction ----------------------------- */
@@ -83,16 +84,26 @@ export const editUserAction = async (prevState: unknown, formData: FormData) => 
 }
 
 /* ---------------------------- deleteUserAction --------------------------- */
-export const deleteUserAction = async (formData: FormData) => {
-  const id = formData.get("id")
+export const deleteUserAction = async (
+  _prevState: DeleteActionState,
+  formData: FormData
+): Promise<DeleteActionState> => {
+  const id = formData.get("id") as string
+
+  if (!id) {
+    return { success: false, error: "project ID not found" }
+  }
+
   try {
     await prisma.user.delete({
-      where: {
-        id: id as string
-      }
+      where: { id },
     })
   } catch (error) {
-    console.error(error)
+    console.error("Delete Action Error:", error)
+    return { success: false, error: "An error occurred during the deletion project." }
   }
+
+  updateTag("users")
   refresh()
+  return { success: true, error: null }
 }

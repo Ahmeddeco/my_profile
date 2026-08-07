@@ -163,8 +163,18 @@ export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeo
 
 export const ArticleScalarFieldEnum = {
   id: 'id',
+  titleAr: 'titleAr',
+  titleEn: 'titleEn',
+  descriptionAr: 'descriptionAr',
+  descriptionEn: 'descriptionEn',
+  slug: 'slug',
+  topicAr: 'topicAr',
+  topicEn: 'topicEn',
+  mainImage: 'mainImage',
+  images: 'images',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type ArticleScalarFieldEnum = (typeof ArticleScalarFieldEnum)[keyof typeof ArticleScalarFieldEnum]

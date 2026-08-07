@@ -1,24 +1,85 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import "../globals.css"
 import { ThemeProvider } from "@/components/theme/theme-provider"
-import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin"
-import { extractRouterConfig } from "uploadthing/server"
-import { ourFileRouter } from "@/app/api/uploadthing/core"
 import localFont from "next/font/local"
 import { DirectionProvider } from "@/components/ui/direction"
-
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { UploadthingSSRPlugin } from "@/utils/uploadthing-plugin"
 
+/* -------------------------------- localFont ------------------------------- */
 const cairo = localFont({
 	src: "../../../public/fonts/Cairo.ttf",
 	variable: "--cairo-font",
 })
+
+/* -------------------------------- APP_INFO -------------------------------- */
+const APP_NAME = "AHMED"
+const APP_DEFAULT_TITLE = "AI Engineer | Fullstack & AI Engineer"
+const APP_TITLE_TEMPLATE = "%s - AHMED"
+const APP_DESCRIPTION = "مطور تطبيقات ويب وذكاء اصطناعي"
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL
+	? process.env.NEXT_PUBLIC_APP_URL
+	: process.env.NODE_ENV === "development"
+		? "http://localhost:3000"
+		: "https://eng-ahmed-ai.vercel.app"
+
+/* -------------------------------- Metadata -------------------------------- */
 export const metadata: Metadata = {
-	title: "Ahmed Abdelfattah | Agentic AI Engineer",
-	description: "Agentic Ai Engineer & Full-Stack Web Developer. Professional in Next-js , Mastra-ai , Typescript. ",
+	metadataBase: new URL(baseUrl),
+
+	applicationName: APP_NAME,
+	title: {
+		default: APP_DEFAULT_TITLE,
+		template: APP_TITLE_TEMPLATE,
+	},
+	description: APP_DESCRIPTION,
+	manifest: "/manifest.json",
+	appleWebApp: {
+		capable: true,
+		statusBarStyle: "default",
+		title: APP_NAME,
+	},
+	formatDetection: {
+		telephone: false,
+	},
+	icons: {
+		icon: [
+			{ url: "/icons/manifest-icon-192.maskable.png", sizes: "192x192", type: "image/png" },
+			{ url: "/icons/manifest-icon-512.maskable.png", sizes: "512x512", type: "image/png" },
+		],
+		apple: [{ url: "/icons/apple-icon-180.png", sizes: "180x180", type: "image/png" }],
+	},
+	openGraph: {
+		type: "website",
+		siteName: APP_NAME,
+		title: {
+			default: APP_DEFAULT_TITLE,
+			template: APP_TITLE_TEMPLATE,
+		},
+		description: APP_DESCRIPTION,
+	},
+	twitter: {
+		card: "summary",
+		title: {
+			default: APP_DEFAULT_TITLE,
+			template: APP_TITLE_TEMPLATE,
+		},
+		description: APP_DESCRIPTION,
+	},
 }
 
-export default async function RootLayout({
+/* -------------------------------- Viewport -------------------------------- */
+export const viewport: Viewport = {
+	themeColor: "#facc15",
+}
+
+/* -------------------------- generateStaticParams -------------------------- */
+export function generateStaticParams() {
+	return [{ locale: "ar" }, { locale: "en" }]
+}
+
+/* ------------------------------- LocaleLayout ------------------------------- */
+export default async function LocaleLayout({
 	children,
 	params,
 }: Readonly<{
@@ -34,9 +95,9 @@ export default async function RootLayout({
 			className={`h-full antialiased ${cairo.className}`}
 			suppressHydrationWarning
 		>
-			<body className="scroll-smooth" suppressHydrationWarning>
-				<ThemeProvider attribute="class" enableSystem defaultTheme="system" disableTransitionOnChange>
-					<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+			<body className="scroll-smooth min-h-screen w-full overflow-x-hidden">
+				<ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
+					<UploadthingSSRPlugin />
 					<TooltipProvider>
 						<DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>{children}</DirectionProvider>
 					</TooltipProvider>

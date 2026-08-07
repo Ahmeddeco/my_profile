@@ -17,7 +17,7 @@ export default async function HomePage({ params }: Props) {
 			<Services locale={locale} />
 			<WhyYouHireMe locale={locale} />
 			<Technologies locale={locale} />
-			{/* <Testimonials locale={locale} /> */}
+			<Testimonials locale={locale} />
 		</>
 	)
 }

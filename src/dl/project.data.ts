@@ -1,8 +1,13 @@
+"use cache"
+
 import prisma from "@/lib/prisma"
+import { cacheLife, cacheTag } from "next/cache"
 
 /* ----------------------- getAllProjectsForServerPage ---------------------- */
 export const getAllProjectsForServerPage = async (size: number, page: number) => {
   try {
+    cacheLife("days")
+    cacheTag('projects')
     const totalColors = await prisma.project.count()
     const totalPages = Math.ceil(totalColors / size)
     const data = await prisma.project.findMany({
@@ -21,6 +26,8 @@ export const getAllProjectsForServerPage = async (size: number, page: number) =>
 
 /* ----------------------------- getAllProjects ----------------------------- */
 export const getAllProjects = async (size: number, page: number) => {
+  cacheLife("days")
+  cacheTag('projects')
   try {
     const totalColors = await prisma.project.count()
     const totalPages = Math.ceil(totalColors / size)
@@ -40,6 +47,8 @@ export const getAllProjects = async (size: number, page: number) => {
 
 /* ------------------------------ getOneProject ----------------------------- */
 export const getOneProject = async (id: string) => {
+  cacheLife("days")
+  cacheTag('projects')
   try {
     return await prisma.project.findUniqueOrThrow({ where: { id }, include: { client: true } })
   } catch (error) {

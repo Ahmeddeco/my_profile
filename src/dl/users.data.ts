@@ -1,8 +1,13 @@
+"use cache"
+
 import { Role } from "@/generated/prisma/enums"
 import prisma from "@/lib/prisma"
+import { cacheLife, cacheTag } from "next/cache"
 
 /* ----------------------------- getAllUsers ---------------------------- */
 export const getAllUsers = async (size: number, page: number) => {
+  cacheLife("hours")
+  cacheTag('users')
   try {
     const totalColors = await prisma.user.count()
     const totalPages = Math.ceil(totalColors / size)
@@ -47,6 +52,22 @@ export const getAllUsersForFactoriesPage = async () => {
 export const getAllClients = async () => {
   try {
     return await prisma.user.findMany({ where: { role: Role.client }, select: { id: true, name: true }, orderBy: { name: "asc" } })
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+/* ------------------------------ getAllAdmins ----------------------------- */
+export const getAllAdmins = async () => {
+  cacheLife("hours")
+  cacheTag('users')
+
+  try {
+    return await prisma.user.findMany({
+      where: { role: { in: ["admin"] } },
+      select: { id: true, name: true },
+      orderBy: { name: "asc" }
+    })
   } catch (error) {
     console.error(error)
   }
