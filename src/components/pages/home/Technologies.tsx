@@ -17,9 +17,9 @@ export default async function Technologies({ locale }: Props) {
 				<h6 className="max-w-lg text-center text-balance">{dic.homePage.technologies.subTitle}</h6>
 			</div>
 
-			<div className="flex flex-wrap items-center justify-center gap-6">
+			<div className="flex flex-wrap items-center justify-center gap-4">
 				{technologies.map(({ icon, title }, index) => (
-					<Button key={index} className="cursor-none ">
+					<Button key={index} className="cursor-none  " variant={"outline"} size={"sm"}>
 						{React.createElement(icon)}
 						{title}
 					</Button>

@@ -26,7 +26,7 @@ export default async function ProjectsPage({ params, searchParams }: Props) {
 					{dic.projectsPage.title} <span className="text-primary">{dic.projectsPage.titleSpan}</span>
 				</h1>
 				<h6 className="text-center max-w-md">{dic.projectsPage.subTitle}</h6>
-				<div className="flex items-center justify-between w-full">
+				<div className="flex lg:flex-row flex-col lg:items-center gap-2 lg:justify-between w-full">
 					<h4 className="text-center max-w-md capitalize self-start">
 						{locale === "en" ? "total Projects:" : "عدد المشاريع:"}{" "}
 						<span className="text-primary font-black text-2xl">{projects?.totalProjects}</span>

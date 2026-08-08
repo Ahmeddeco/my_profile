@@ -29,6 +29,10 @@ export const technologies = [
     icon: SiNextdotjs,
   },
   {
+    title: "mastra-ai",
+    icon: SiMastodon,
+  },
+  {
     title: "react-js",
     icon: SiReact,
   },
@@ -52,8 +56,5 @@ export const technologies = [
     title: "Mongodb",
     icon: SiMongodb,
   },
-  {
-    title: "mastra-ai",
-    icon: SiMastodon,
-  },
+
 ]

@@ -14,9 +14,9 @@ const cairo = localFont({
 
 /* -------------------------------- APP_INFO -------------------------------- */
 const APP_NAME = "AHMED"
-const APP_DEFAULT_TITLE = "AI Engineer | Fullstack & AI Engineer"
+const APP_DEFAULT_TITLE = "AHMED"
 const APP_TITLE_TEMPLATE = "%s - AHMED"
-const APP_DESCRIPTION = "مطور تطبيقات ويب وذكاء اصطناعي"
+const APP_DESCRIPTION = "AI Engineer | Fullstack & AI Engineer"
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL
 	? process.env.NEXT_PUBLIC_APP_URL
 	: process.env.NODE_ENV === "development"

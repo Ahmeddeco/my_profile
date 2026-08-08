@@ -7,7 +7,7 @@ export default function FrontLayout({ children }: { children: React.ReactNode })
 	return (
 		<>
 			<Header />
-			<main className="min-h-dvh container mx-auto px-4 pt-14 lg:pt-20 " suppressHydrationWarning>
+			<main className="min-h-dvh container mx-auto pt-4 lg:pt-20 " suppressHydrationWarning>
 				{children}
 			</main>
 			<Toaster

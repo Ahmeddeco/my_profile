@@ -15,7 +15,7 @@ export default async function ArticlePage({ params }: Props) {
 	const article: getOneArticleBySlugType = await getOneArticleBySlug(slug)
 
 	return (
-		<div className="flex lg:flex-row flex-col gap-6">
+		<article className="flex lg:flex-row flex-col gap-6">
 			<div className="flex-1 ">
 				<ImageSlider
 					mainImage={article?.mainImage ?? ""}
@@ -48,6 +48,6 @@ export default async function ArticlePage({ params }: Props) {
 					}}
 				/>
 			</div>
-		</div>
+		</article>
 	)
 }
