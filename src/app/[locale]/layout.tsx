@@ -97,7 +97,7 @@ export default async function LocaleLayout({
 			suppressHydrationWarning
 		>
 			<body className="scroll-smooth min-h-screen w-full overflow-x-hidden">
-				<ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
+				<ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange enableSystem>
 					<Suspense fallback={null}>
 						<UploadthingSSRPlugin />
 					</Suspense>
