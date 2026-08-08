@@ -8,8 +8,6 @@ import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui
 import { Input } from "@/components/ui/input"
 import SubmitButton from "@/components/shared/SubmitButton"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { UploadManyImagesDropZone, UploadOneImagesDropZone } from "@/components/shared/UploadImagesDropZone"
-import TiptapEditor from "@/components/shared/TiptapEditor"
 import DatePicker from "@/components/shared/DatePicker"
 import slugify from "slugify"
 import { editArticleAction } from "@/actions/article.action"
@@ -17,6 +15,17 @@ import ArticleSchema from "@/schemas/ArticleSchema"
 import { Textarea } from "@/components/ui/textarea"
 import { getOneArticleType } from "@/types/article.type"
 import { getAllAdminsType } from "@/types/user.type"
+import dynamic from "next/dynamic"
+
+const TiptapEditor = dynamic(() => import("@/components/shared/TiptapEditor"), { ssr: false })
+const UploadManyImagesDropZone = dynamic(
+	() => import("@/components/shared/UploadImagesDropZone").then((mod) => mod.UploadManyImagesDropZone),
+	{ ssr: false },
+)
+const UploadOneImagesDropZone = dynamic(
+	() => import("@/components/shared/UploadImagesDropZone").then((mod) => mod.UploadOneImagesDropZone),
+	{ ssr: false },
+)
 
 type Props = {
 	authors: getAllAdminsType

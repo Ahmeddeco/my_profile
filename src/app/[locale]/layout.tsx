@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme/theme-provider"
 import localFont from "next/font/local"
 import { DirectionProvider } from "@/components/ui/direction"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { Suspense } from "react"
 import { UploadthingSSRPlugin } from "@/utils/uploadthing-plugin"
 
 /* -------------------------------- localFont ------------------------------- */
@@ -97,7 +98,9 @@ export default async function LocaleLayout({
 		>
 			<body className="scroll-smooth min-h-screen w-full overflow-x-hidden">
 				<ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
-					<UploadthingSSRPlugin />
+					<Suspense fallback={null}>
+						<UploadthingSSRPlugin />
+					</Suspense>
 					<TooltipProvider>
 						<DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>{children}</DirectionProvider>
 					</TooltipProvider>

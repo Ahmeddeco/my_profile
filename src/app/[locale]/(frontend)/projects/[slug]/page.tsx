@@ -18,7 +18,7 @@ export default async function ProjectPage({ params }: Props) {
 	const project: getOneProjectBySlugType = await getOneProjectBySlug(slug)
 
 	return (
-		<div className="flex lg:flex-row flex-col gap-6">
+		<div className="flex lg:flex-row flex-col gap-6  pt-8 px-4">
 			<div className="flex-1 ">
 				<ImageSlider
 					mainImage={project?.mainImage ?? ""}

@@ -2,8 +2,10 @@ import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import ServerPageCard from "@/components/backend/ServerPageCard"
 import AddUser from "@/forms/AddUser"
 import { Role } from "@/generated/prisma/enums"
+import { connection } from "next/server"
 
 export default async function AddColorPage() {
+	await connection()
 	await isAllowedRoles([Role.admin])
 
 	return (

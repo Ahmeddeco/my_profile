@@ -13,6 +13,7 @@ import { dateFormate } from "@/logic/dateFormate"
 import ServerPageCard from "@/components/backend/ServerPageCard"
 import Settings from "@/components/backend/Settings"
 import PaginationSection from "@/components/backend/Pagination"
+import { connection } from "next/server"
 
 export default async function ProjectsPage({
 	searchParams,
@@ -21,6 +22,7 @@ export default async function ProjectsPage({
 	searchParams: Promise<{ page: string; size: string }>
 	params: Promise<{ locale: "en" | "ar" }>
 }) {
+	await connection()
 	await isAllowedRoles([Role.admin])
 
 	const { page, size } = await searchParams

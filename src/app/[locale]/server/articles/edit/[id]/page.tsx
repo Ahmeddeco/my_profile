@@ -6,12 +6,15 @@ import EditArticle from "@/forms/EditArticle"
 import { Role } from "@/generated/prisma/enums"
 import { getOneArticleType } from "@/types/article.type"
 import { getAllAdminsType } from "@/types/user.type"
+import { connection } from "next/server"
 
 type Props = {
 	params: Promise<{ id: string }>
 }
 
 export default async function EditArticlePage({ params }: Props) {
+	await connection()
+
 	await isAllowedRoles([Role.admin])
 	const id = (await params).id
 	const authors: getAllAdminsType = await getAllAdmins()

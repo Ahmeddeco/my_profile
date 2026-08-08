@@ -12,6 +12,7 @@ import PaginationSection from "@/components/backend/Pagination"
 import { deleteArticlesAction } from "@/actions/article.action"
 import { getAllArticlesForArticlesPageType } from "@/types/article.type"
 import { getAllArticlesForArticlesPage } from "@/dl/article.data"
+import { connection } from "next/server"
 
 export default async function ArticlesPage({
 	searchParams,
@@ -20,6 +21,7 @@ export default async function ArticlesPage({
 	searchParams: Promise<{ page: string; size: string }>
 	params: Promise<{ locale: "en" | "ar" }>
 }) {
+	await connection()
 	await isAllowedRoles([Role.admin])
 
 	const { page, size } = await searchParams

@@ -1,9 +1,11 @@
+import { Suspense } from "react"
 import { ThemeButton } from "../theme/ThemeButton"
 import FrontNavigation from "./FrontNavigation"
 import LanguageButton from "./LanguageButton"
 import Logo from "./Logo"
 import MobileMenu from "./MobileMenu"
 import UserButton from "@/components/auth/UserButton"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export default function Header() {
 	return (
@@ -18,7 +20,9 @@ export default function Header() {
 			<div className="hidden lg:flex items-center gap-4">
 				<LanguageButton />
 				<ThemeButton />
-				<UserButton />
+				<Suspense fallback={<Skeleton className="size-8 rounded-full " />}>
+					<UserButton />
+				</Suspense>
 			</div>
 			<div className="lg:hidden block">
 				<MobileMenu />

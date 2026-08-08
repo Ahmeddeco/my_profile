@@ -1,3 +1,6 @@
-export default function ChartsPage() {
-  return <h1>Welcome to Chartspage!</h1>;
+import { connection } from "next/server"
+
+export default async function ChartsPage() {
+	await connection()
+	return <h1>Welcome to Chartspage!</h1>
 }

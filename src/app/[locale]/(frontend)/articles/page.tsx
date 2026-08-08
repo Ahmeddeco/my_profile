@@ -21,9 +21,9 @@ export default async function ArticlesPage({ params, searchParams }: Props) {
 		<section className="flex flex-col items-center justify-center gap-6">
 			<div className="flex flex-col items-center justify-center gap-2 w-full">
 				<h1>
-					{dic.projectsPage.title} <span className="text-primary">{dic.projectsPage.titleSpan}</span>
+					{dic.articlesPage.title} <span className="text-primary">{dic.articlesPage.titleSpan}</span>
 				</h1>
-				<h6 className="text-center max-w-md">{dic.projectsPage.subTitle}</h6>
+				<h6 className="text-center max-w-md">{dic.articlesPage.subTitle}</h6>
 				<h4 className="text-center max-w-md capitalize self-start">
 					{locale === "en" ? "total Articles:" : "عدد المقالات:"}{" "}
 					<span className="text-primary font-black text-2xl">{articles?.totalArticles}</span>

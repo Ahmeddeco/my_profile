@@ -6,6 +6,8 @@ import UserButton from "@/components/auth/UserButton"
 import FrontNavigation from "./FrontNavigation"
 import LanguageButton from "./LanguageButton"
 import { Separator } from "../ui/separator"
+import { Suspense } from "react"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export default function MobileMenu() {
 	return (
@@ -25,8 +27,10 @@ export default function MobileMenu() {
 						<FrontNavigation />
 					</nav>
 					<SheetFooter className="flex-row items-center justify-between border-t shadow-md">
+						<Suspense fallback={<Skeleton className="size-8 rounded-full " />}>
+							<UserButton />
+						</Suspense>
 						<LanguageButton />
-						<UserButton />
 						<ThemeButton />
 					</SheetFooter>
 				</SheetContent>

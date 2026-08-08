@@ -45,4 +45,10 @@ export const enDic = {
     subTitle: "Turn your vision into a cutting-edge digital reality. Smart, AI-powered Full-Stack designs.",
 
   },
+  articlesPage: {
+    title: "our",
+    titleSpan: "articles",
+    subTitle: "Read everything about modern technology and the latest frameworks in the field of web and artificial intelligence.",
+
+  },
 }

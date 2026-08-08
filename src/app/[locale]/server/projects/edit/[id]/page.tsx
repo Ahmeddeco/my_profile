@@ -6,12 +6,14 @@ import EditProject from "@/forms/EditProject"
 import { Role } from "@/generated/prisma/enums"
 import { getOneProjectType } from "@/types/project.type"
 import { getAllClientsType } from "@/types/user.type"
+import { connection } from "next/server"
 
 type Props = {
 	params: Promise<{ id: string }>
 }
 
 export default async function EditProjectPage({ params }: Props) {
+	await connection()
 	await isAllowedRoles([Role.admin])
 	const id = (await params).id
 	const allClients: getAllClientsType = await getAllClients()

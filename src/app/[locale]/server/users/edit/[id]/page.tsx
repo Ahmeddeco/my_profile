@@ -5,8 +5,10 @@ import EditUser from "@/forms/EditUser"
 import { Role } from "@/generated/prisma/enums"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import { getOneUser } from "@/dl/users.data"
+import { connection } from "next/server"
 
 export default async function EditClassPage({ params }: { params: Promise<{ id: string }> }) {
+	await connection()
 	await isAllowedRoles([Role.admin])
 
 	const id = (await params).id
@@ -20,7 +22,7 @@ export default async function EditClassPage({ params }: { params: Promise<{ id: 
 			btnTitle={"back"}
 			href="/server/users"
 		>
-			{!user?.data ? <EmptyCard href={"/server/users"} linkTitle={"no user found"} /> : <EditUser user={user.data} />}
+			{!user ? <EmptyCard href={"/server/users"} linkTitle={"no user found"} /> : <EditUser user={user} />}
 		</ServerPageCard>
 	)
 }

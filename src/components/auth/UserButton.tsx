@@ -10,7 +10,7 @@ import Image from "next/image"
 import SignOut from "./signOut"
 import SignIn from "./SignIn"
 import { getSession } from "./getSession"
-import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default async function UserButton() {
 	const Session = await getSession()
@@ -20,20 +20,16 @@ export default async function UserButton() {
 		<>
 			{user ? (
 				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<Button className=" relative " variant={"ghost"} size={"icon-sm"}>
-							<Image src={user.image ?? "/icons/noImage.svg"} alt={"user"} fill className="rounded-full object-cover" />
-						</Button>
+					<DropdownMenuTrigger className="cursor-pointer" asChild>
+						<Avatar>
+							{user.image && <AvatarImage src={user.image} />}
+							<AvatarFallback>{user.name[0]}</AvatarFallback>
+						</Avatar>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="start" className="w-fit p-4">
 						<DropdownMenuLabel>
 							<div className="w-full aspect-square relative rounded-xl">
-								<Image
-									src={user.image ?? "/icons/noImage.svg"}
-									alt={"user"}
-									fill
-									className="rounded-full object-cover"
-								/>
+								<Image src={user.image ?? "/icons/noImage.svg"} alt={"user"} fill className="rounded-xl object-cover" />
 							</div>
 						</DropdownMenuLabel>
 						<DropdownMenuSeparator />

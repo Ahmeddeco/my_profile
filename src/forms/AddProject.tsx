@@ -8,8 +8,6 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import SubmitButton from "@/components/shared/SubmitButton"
 import { Textarea } from "@/components/ui/textarea"
-import { UploadManyImagesDropZone, UploadOneImagesDropZone } from "@/components/shared/UploadImagesDropZone"
-import TiptapEditor from "@/components/shared/TiptapEditor"
 import { addProjectAction } from "@/actions/project.action"
 import ProjectSchema from "@/schemas/ProjectSchema"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -18,6 +16,17 @@ import { getAllClientsType } from "@/types/user.type"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { ProductType } from "@/generated/prisma/enums"
 import slugify from "slugify"
+import dynamic from "next/dynamic"
+
+const TiptapEditor = dynamic(() => import("@/components/shared/TiptapEditor"), { ssr: false })
+const UploadManyImagesDropZone = dynamic(
+	() => import("@/components/shared/UploadImagesDropZone").then((mod) => mod.UploadManyImagesDropZone),
+	{ ssr: false },
+)
+const UploadOneImagesDropZone = dynamic(
+	() => import("@/components/shared/UploadImagesDropZone").then((mod) => mod.UploadOneImagesDropZone),
+	{ ssr: false },
+)
 
 type Props = {
 	allClients: getAllClientsType

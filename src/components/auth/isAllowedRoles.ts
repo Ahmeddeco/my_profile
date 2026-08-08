@@ -1,24 +1,27 @@
 import { redirect } from "next/navigation"
 import { getSession } from "./getSession"
 import { Role } from "@/generated/prisma/enums"
-import prisma from "@/lib/prisma"
 
-export const isAllowedRoles = async (isAllowedRoles: Role[]) => {
-  const superAdmin = process.env.SUPPER_ADMIN
+export const isAllowedRoles = async (allowedRoles: Role[]) => {
   const session = await getSession()
-  const userId = session?.user.id
 
-  if (!session && !userId) {
-    redirect("/")
+  // 1. إذا لم يكن هناك جلسة تسجيل دخول أصلاً
+  if (!session?.user) {
+    redirect("/login") // أو التوجيه للرئيسية "/"
   }
 
-  const role = await prisma.user.findUnique({ where: { id: userId }, select: { role: true } })
+  const superAdminEmail = process.env.SUPER_ADMIN
 
-  if (session?.user.email === superAdmin) {
-    return
+  // 2. السماح الفوري للـ Super Admin
+  if (superAdminEmail && session.user.email === superAdminEmail) {
+    return session
   }
-  if (!role || !isAllowedRoles.includes(role.role)) {
-    redirect("/")
+
+  // 3. التحقق من مطابقة الدور الحالي للمستخدم للأدوار المسموحة
+  const userRole = session.user.role as Role
+  if (!allowedRoles.includes(userRole)) {
+    redirect("/login")
   }
-  return
+
+  return session
 }

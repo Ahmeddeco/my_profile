@@ -9,8 +9,10 @@ import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import { getAllUsers } from "@/dl/users.data"
 import Settings from "@/components/backend/Settings"
 import PaginationSection from "@/components/backend/Pagination"
+import { connection } from "next/server"
 
 export default async function StylesPage({ searchParams }: { searchParams: Promise<{ page: string; size: string }> }) {
+	await connection()
 	await isAllowedRoles([Role.admin])
 
 	const { page, size } = await searchParams
