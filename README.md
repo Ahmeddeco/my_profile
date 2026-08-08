@@ -1,37 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ahmed Abdelfattah — Personal Portfolio & Agentic AI Platform
 
-## Getting Started
+![Ahmed Abdelfattah Portfolio](public/images/heroSection.webp)
 
-First, run the development server:
+## Full-Stack Web Development & Agentic AI Integration
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+A modern, highly scalable full-stack personal portfolio and AI workspace built with Next.js 16 (App Router), React 19, Mastra AI Agent Framework, Prisma ORM, and Tailwind CSS v4.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Overview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This repository contains the official personal platform for Ahmed Abdelfattah (Agentic AI Engineer & Full-Stack Developer). The project serves as a practical showcase of modern web architecture, integrating type-safe server workflows, scalable database operations, interactive client interfaces, and autonomous AI agents capable of contextual tool execution and workflow orchestration.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Architecture & Advanced Next.js Features
 
-## Learn More
+This project utilizes the latest paradigms introduced in Next.js 16 and React 19, maximizing performance, SEO, and developer experience:
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js `<Form>` Component:** Integrated for handling search, filtering, and mutation forms with automatic URL parameter synchronization, smooth navigation, and progressive enhancement.
+- **Optimized `<Link>` Component:** Utilized across the application for client-side route prefetching and zero-latency page transitions.
+- **Explicit Cache Directive (`'use cache'`):** Implemented alongside `cacheLife` and `cacheTag` to fine-grain control Server Action caching, database query memoization, and targeted cache revalidation.
+- **Server Actions & Server Components:** Built with React 19 Server Components to execute backend operations securely, reducing client-side JavaScript bundles.
+- **Progressive Web App (PWA):** Configured via `@ducanh2912/next-pwa` for offline readiness, asset caching, and mobile installability.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Why Next.js & Mastra AI?
 
-## Deploy on Vercel
+### Key Advantages of Next.js 16
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Unified Server/Client Execution:** Allows direct database calls via Prisma inside Server Components, reducing API overhead and eliminating client-side data fetching waterfalls.
+2. **Advanced Caching Capabilities:** The `'use cache'` directive provides granular control over dynamic data fetching, ensuring fast load times while maintaining real-time data accuracy through tags (`cacheTag`).
+3. **Enhanced Form & Navigation Primitives:** Native support for optimistic UI updates, Server Actions, and integrated `<Form>` handling provides clean fallback mechanisms even when JavaScript is disabled or loading.
+4. **Turbopack Compiler:** Speeds up local development feedback loops and production builds significantly.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# my_profile
+### Key Advantages of Mastra AI Engine
+
+1. **Autonomous Agent Architecture:** Provides a structured, framework-native solution to create, manage, and execute complex LLM agents in Node.js/Next.js environments.
+2. **Context & Memory Management:** Built-in support for vector stores (`@mastra/pg`, `@mastra/libsql`) and conversation memory, enabling contextual awareness across multi-turn interactions.
+3. **Type-Safe Tool Integration:** Seamlessly connects backend utility functions, APIs, and databases as executable tools for agents using Zod schema definitions.
+4. **Local & Cloud LLM Flexibility:** Works with local models via Ollama (`ollama-ai-provider-v2`) as well as cloud-hosted LLM providers with unified API interfaces.
+
+---
+
+## Complete Tech Stack & Dependencies
+
+### Core Frameworks & Runtime
+
+- **Framework:** Next.js 16.2 (App Router)
+- **UI Runtime:** React 19.2
+- **Language:** TypeScript 5.9
+
+### AI & Agentic Systems
+
+- **Agent Framework:** Mastra AI Suite (`@mastra/core`, `@mastra/memory`, `@mastra/pg`, `@mastra/libsql`)
+- **Vercel AI SDK:** `ai` v7 & `@ai-sdk/react`
+- **LLM Integrations:** Ollama Provider (`ollama-ai-provider-v2`), TokenLens
+
+### Database & Authentication
+
+- **ORM:** Prisma ORM 7.9 (`@prisma/client`, `@prisma/adapter-pg`)
+- **Database Driver:** PostgreSQL (`pg`)
+- **Authentication:** Better Auth 1.6 (`better-auth`)
+
+### State Management & Validation
+
+- **State Management:** Zustand 5.0
+- **Form Validation:** Conform (`@conform-to/react`, `@conform-to/zod`)
+- **Schema Validation:** Zod 3.25
+
+### UI & Styling
+
+- **CSS Framework:** Tailwind CSS v4, PostCSS
+- **UI Components:** Radix UI, Base UI, Shadcn UI
+- **Animations:** Motion (Framer Motion), Rive WebGL (`@rive-app/react-webgl2`)
+- **Rich Text Editor:** TipTap (`@tiptap/react`)
+- **Charts & Graphs:** Recharts
+- **Icons:** Lucide React, React Icons
