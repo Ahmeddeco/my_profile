@@ -1,5 +1,6 @@
 "use cache"
 
+import { ProductType } from "@/generated/prisma/enums"
 import prisma from "@/lib/prisma"
 import { cacheLife, cacheTag } from "next/cache"
 
@@ -8,15 +9,15 @@ export const getAllProjectsForServerPage = async (size: number, page: number) =>
   try {
     cacheLife("days")
     cacheTag('projects')
-    const totalColors = await prisma.project.count()
-    const totalPages = Math.ceil(totalColors / size)
+    const totalProjects = await prisma.project.count()
+    const totalPages = Math.ceil(totalProjects / size)
     const data = await prisma.project.findMany({
       skip: (page * size) - size,
       take: size,
       orderBy: { createdAt: "desc" },
       select: { titleAr: true, titleEn: true, id: true, slug: true, createdAt: true, mainImage: true, type: true, url: true, client: { select: { name: true, image: true, id: true } } }
     })
-    return { data, totalPages }
+    return { data, totalPages, totalProjects }
 
   } catch (error) {
     console.error(error)
@@ -24,20 +25,21 @@ export const getAllProjectsForServerPage = async (size: number, page: number) =>
   }
 }
 
-/* ----------------------------- getAllProjects ----------------------------- */
-export const getAllProjects = async (size: number, page: number) => {
-  cacheLife("days")
-  cacheTag('projects')
+/* ----------------------- getAllProjectsByCategory ---------------------- */
+export const getAllProjectsByCategory = async (size: number, page: number, category: ProductType) => {
   try {
-    const totalColors = await prisma.project.count()
-    const totalPages = Math.ceil(totalColors / size)
+    cacheLife("days")
+    cacheTag(`projects-${category}`)
+    const totalProjects = await prisma.project.count({ where: { type: category } })
+    const totalPages = Math.ceil(totalProjects / size)
     const data = await prisma.project.findMany({
+      where: { type: category },
       skip: (page * size) - size,
       take: size,
       orderBy: { createdAt: "desc" },
-      include: { client: true }
+      select: { titleAr: true, titleEn: true, id: true, slug: true, createdAt: true, mainImage: true, type: true, url: true, client: { select: { name: true, image: true, id: true } } }
     })
-    return { data, totalPages }
+    return { data, totalPages, totalProjects }
 
   } catch (error) {
     console.error(error)
@@ -50,7 +52,24 @@ export const getOneProject = async (id: string) => {
   cacheLife("days")
   cacheTag('projects')
   try {
-    return await prisma.project.findUniqueOrThrow({ where: { id }, include: { client: true } })
+    return await prisma.project.findUniqueOrThrow({
+      where: { id },
+      include: { client: { select: { id: true, name: true, image: true } } },
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+/* ------------------------------ getOneProjectBySlug ----------------------------- */
+export const getOneProjectBySlug = async (slug: string) => {
+  cacheLife("days")
+  cacheTag('projects')
+  try {
+    return await prisma.project.findUniqueOrThrow({
+      where: { slug },
+      include: { client: { select: { id: true, name: true, image: true } } },
+    })
   } catch (error) {
     console.error(error)
   }

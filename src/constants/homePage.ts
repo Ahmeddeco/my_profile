@@ -1,24 +1,25 @@
 import { SiMastodon, SiMongodb, SiNextdotjs, SiPrisma, SiReact, SiShadcnui, SiTailwindcss } from "react-icons/si"
 import { BiLogoPostgresql } from "react-icons/bi"
+import { ProductType } from "@/generated/prisma/enums"
 
 export const myServices = [
   {
     titleAr: "تطوير مواقع ويب",
     titleEn: "web development",
     image: "/images/webDevelop.webp",
-    href: "/projects?category=web-development",
+    href: `/projects?category=${ProductType.web}`,
   },
   {
     titleAr: "تطوير وكلاء ذكاء اصطناعي",
     titleEn: "Agentic ai development ",
     image: "/images/baladyBot.webp",
-    href: "/projects?category=agentic-ai",
+    href: `/projects?category=${ProductType.ai}`,
   },
   {
     titleAr: "تطوير تطبيقات موبايل",
     titleEn: "mobile development",
     image: "/images/mobileDevelop.webp",
-    href: "/projects?category=mobile-development",
+    href: `/projects?category=${ProductType.mobile}`,
   },
 ]
 

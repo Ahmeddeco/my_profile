@@ -12,8 +12,6 @@ type Props = {
 }
 
 export default function ProjectCard({ project, locale }: Props) {
-	console.log("project from ProjectCard", project)
-
 	return (
 		<div className=" max-w-lg w-full rounded-xl shadow-lg bg-card flex flex-col gap-2 ">
 			<div className="size-full aspect-video relative rounded-t-xl">
@@ -38,7 +36,7 @@ export default function ProjectCard({ project, locale }: Props) {
 						{project.client.name}
 					</Badge>
 					<Badge variant={"outline"}>
-						<Calendar1 />{" "}
+						<Calendar1 />
 						{dateFormate(project.createdAt ? new Date(project.createdAt) : new Date(), locale, "monthAndYear")}
 					</Badge>
 				</div>

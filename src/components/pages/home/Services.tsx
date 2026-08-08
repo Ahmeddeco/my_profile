@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { myServices } from "@/constants/homePage"
 import { getDictionary } from "@/locales/dictionaries"
 import { ExternalLink } from "lucide-react"
@@ -15,13 +14,12 @@ export default async function Services({ locale }: Props) {
 	const dic = await getDictionary(locale)
 
 	return (
-		<Card className="bg-primary ">
-			<CardHeader>
-				<CardTitle className="text-primary-foreground">{dic.homePage.services.title}</CardTitle>
-				<CardDescription className="text-primary-foreground">{dic.homePage.services.description}</CardDescription>
-				<Separator />
-			</CardHeader>
-			<CardContent className="flex flex-wrap items-center justify-center gap-6">
+		<section className="flex flex-col items-center justify-center gap-6 ">
+			<div className="flex flex-col items-center justify-center gap-2">
+				<h2 className="text-primary">{dic.homePage.services.title}</h2>
+				<h4 className="max-w-md text-center">{dic.homePage.services.description}</h4>
+			</div>
+			<div className="flex flex-wrap items-center justify-center gap-6">
 				{myServices.map(({ href, image, titleAr, titleEn }, index) => (
 					<Card className={` min-w-3xs max-w-md w-full`} key={index}>
 						<CardHeader>
@@ -31,7 +29,7 @@ export default async function Services({ locale }: Props) {
 							<Image src={image} alt={"services"} width={1600} height={900} className="object-cover rounded-lg" />
 						</CardContent>
 						<CardFooter className="justify-center">
-							<Button asChild size={"sm"}>
+							<Button asChild size={"full"}>
 								<Link href={href}>
 									<ExternalLink />
 									{locale === "en" ? `go to ${titleEn}` : `اذهب الى ${titleAr}`}
@@ -40,7 +38,7 @@ export default async function Services({ locale }: Props) {
 						</CardFooter>
 					</Card>
 				))}
-			</CardContent>
-		</Card>
+			</div>
+		</section>
 	)
 }

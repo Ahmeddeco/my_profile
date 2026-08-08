@@ -1,29 +1,37 @@
 import PaginationSection from "@/components/backend/Pagination"
 import ProjectCard from "@/components/pages/projects/ProjectCard"
-import { getAllProjectsForServerPage } from "@/dl/project.data"
+import { getAllProjectsByCategory } from "@/dl/project.data"
+import { ProductType } from "@/generated/prisma/enums"
 import { getDictionary } from "@/locales/dictionaries"
-import { getAllProjectsForServerPageType } from "@/types/project.type"
+import { getAllProjectsByCategoryType } from "@/types/project.type"
 
 type Props = {
 	params: Promise<{ locale: "en" | "ar" }>
-	searchParams: Promise<{ page: string; size: string }>
+	searchParams: Promise<{ page: string; size: string; category: ProductType }>
 }
 
 export default async function ProjectsPage({ params, searchParams }: Props) {
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 9
-	const projects: getAllProjectsForServerPageType = await getAllProjectsForServerPage(pageSize, pageNumber)
+	const category = (await searchParams).category
+	const projects: getAllProjectsByCategoryType = await getAllProjectsByCategory(pageSize, pageNumber, category)
 	const locale = (await params).locale
 	const dic = await getDictionary(locale)
 
+	console.log("projects from ProjectsPage", projects)
+
 	return (
 		<section className="flex flex-col items-center justify-center gap-6">
-			<div className="flex flex-col items-center justify-center gap-2">
+			<div className="flex flex-col items-center justify-center gap-2 w-full">
 				<h1>
 					{dic.projectsPage.title} <span className="text-primary">{dic.projectsPage.titleSpan}</span>
 				</h1>
 				<h6 className="text-center max-w-md">{dic.projectsPage.subTitle}</h6>
+				<h4 className="text-center max-w-md capitalize self-start">
+					{locale === "en" ? "total Projects:" : "عدد المشاريع:"}{" "}
+					<span className="text-primary font-black text-2xl">{projects?.totalProjects}</span>
+				</h4>
 			</div>
 
 			{/* --------------------------- project cards -------------------------- */}
