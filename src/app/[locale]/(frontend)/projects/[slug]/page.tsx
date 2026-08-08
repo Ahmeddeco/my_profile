@@ -17,8 +17,6 @@ export default async function ProjectPage({ params }: Props) {
 	const slug = (await params).slug
 	const project: getOneProjectBySlugType = await getOneProjectBySlug(slug)
 
-	console.log("project from ProjectPage", project)
-
 	return (
 		<div className="flex lg:flex-row flex-col gap-6">
 			<div className="flex-1 ">

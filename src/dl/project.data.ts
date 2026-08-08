@@ -30,10 +30,10 @@ export const getAllProjectsByCategory = async (size: number, page: number, categ
   try {
     cacheLife("days")
     cacheTag(`projects-${category}`)
-    const totalProjects = await prisma.project.count({ where: { type: category } })
+    const totalProjects = await prisma.project.count({ where: category ? { type: category } : {} })
     const totalPages = Math.ceil(totalProjects / size)
     const data = await prisma.project.findMany({
-      where: { type: category },
+      where: category ? { type: category } : {},
       skip: (page * size) - size,
       take: size,
       orderBy: { createdAt: "desc" },

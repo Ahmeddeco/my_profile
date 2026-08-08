@@ -1,5 +1,6 @@
 import PaginationSection from "@/components/backend/Pagination"
 import ProjectCard from "@/components/pages/projects/ProjectCard"
+import CategoryFilter from "@/components/shared/CategoryFilter"
 import { getAllProjectsByCategory } from "@/dl/project.data"
 import { ProductType } from "@/generated/prisma/enums"
 import { getDictionary } from "@/locales/dictionaries"
@@ -11,15 +12,12 @@ type Props = {
 }
 
 export default async function ProjectsPage({ params, searchParams }: Props) {
-	const { page, size } = await searchParams
+	const { page, size, category } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 9
-	const category = (await searchParams).category
 	const projects: getAllProjectsByCategoryType = await getAllProjectsByCategory(pageSize, pageNumber, category)
 	const locale = (await params).locale
 	const dic = await getDictionary(locale)
-
-	console.log("projects from ProjectsPage", projects)
 
 	return (
 		<section className="flex flex-col items-center justify-center gap-6">
@@ -28,10 +26,13 @@ export default async function ProjectsPage({ params, searchParams }: Props) {
 					{dic.projectsPage.title} <span className="text-primary">{dic.projectsPage.titleSpan}</span>
 				</h1>
 				<h6 className="text-center max-w-md">{dic.projectsPage.subTitle}</h6>
-				<h4 className="text-center max-w-md capitalize self-start">
-					{locale === "en" ? "total Projects:" : "عدد المشاريع:"}{" "}
-					<span className="text-primary font-black text-2xl">{projects?.totalProjects}</span>
-				</h4>
+				<div className="flex items-center justify-between w-full">
+					<h4 className="text-center max-w-md capitalize self-start">
+						{locale === "en" ? "total Projects:" : "عدد المشاريع:"}{" "}
+						<span className="text-primary font-black text-2xl">{projects?.totalProjects}</span>
+					</h4>
+					<CategoryFilter className="self-start" category={category} />
+				</div>
 			</div>
 
 			{/* --------------------------- project cards -------------------------- */}

@@ -16,8 +16,6 @@ export default async function EditArticlePage({ params }: Props) {
 	const id = (await params).id
 	const authors: getAllAdminsType = await getAllAdmins()
 	const article: getOneArticleType = await getOneArticle(id)
-	console.log("id", id)
-	console.log("article", article)
 
 	return (
 		<ServerPageCard title={"edit article"} description={"edit a article to the database."} href="/server/articles">

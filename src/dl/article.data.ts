@@ -42,3 +42,20 @@ export const getOneArticle = async (id: string) => {
     console.error(error)
   }
 }
+/* ------------------------------ getOneArticleBySlug ----------------------------- */
+export const getOneArticleBySlug = async (slug: string) => {
+  cacheLife("days")
+  cacheTag('articles')
+
+  try {
+    return await prisma.article.findUnique({
+      where: { slug },
+      include: {
+        author: { select: { name: true, image: true, id: true } }
+      },
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
+
