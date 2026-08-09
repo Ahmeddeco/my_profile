@@ -10,12 +10,12 @@ import { useState } from "react"
 
 type Props = {
 	name: string | undefined
-	key: string | undefined
+	dateKey: string | undefined
 	defaultValue: string | undefined
 	errors: string[] | undefined
 }
 
-export default function DatePicker({ defaultValue, key, name, errors }: Props) {
+export default function DatePicker({ defaultValue, dateKey, name, errors }: Props) {
 	const [date, setDate] = useState<Date | undefined>(() => {
 		const d = defaultValue ? new Date(defaultValue) : undefined
 		return d && !isNaN(d.getTime()) ? d : undefined
@@ -32,7 +32,7 @@ export default function DatePicker({ defaultValue, key, name, errors }: Props) {
 		<Field>
 			<FieldLabel htmlFor={name}>{name}</FieldLabel>
 			<Popover open={open} onOpenChange={setOpen}>
-				<Input type="hidden" key={key} name={name} value={formatDateString(date)} />
+				<Input type="hidden" key={dateKey} name={name} value={formatDateString(date)} />
 				<PopoverTrigger asChild>
 					<Button
 						variant="outline"

@@ -33,12 +33,11 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+TODO.md
 
 # vercel
 .vercel
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
 # mastra*

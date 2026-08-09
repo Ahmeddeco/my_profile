@@ -77,14 +77,7 @@ export default function AddProject({ allClients }: Props) {
 			{/* ---------------------------------- slug ---------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.slug.name}>{fields.slug.name}</FieldLabel>
-				<Input
-					type="text"
-					key={fields.slug.key}
-					name={fields.slug.name}
-					defaultValue={slugify(slug)}
-					readOnly
-					disabled
-				/>
+				<Input type="text" key={fields.slug.key} name={fields.slug.name} defaultValue={slugify(slug)} readOnly />
 				<FieldError>{fields.slug.errors}</FieldError>
 			</Field>
 
@@ -133,7 +126,7 @@ export default function AddProject({ allClients }: Props) {
 			<div className="flex lg:flex-row flex-col items-center justify-center gap-6">
 				{/* -------------------------------- createdAt ------------------------------- */}
 				<DatePicker
-					key={fields.createdAt.key}
+					dateKey={fields.createdAt.key}
 					name={fields.createdAt.name}
 					defaultValue={fields.createdAt.initialValue}
 					errors={fields.createdAt.errors}

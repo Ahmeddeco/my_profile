@@ -16,9 +16,7 @@ export const addProjectAction = async (prevState: unknown, formData: FormData) =
     return submission.reply()
   }
 
-
   try {
-
     await prisma.project.upsert({
       where: { slug: submission.value.slug! },
       create: {
