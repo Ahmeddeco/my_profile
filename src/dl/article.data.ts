@@ -29,7 +29,7 @@ export const getAllArticlesForArticlesPage = async (size: number, page: number) 
 /* ------------------------------ getOneArticle ----------------------------- */
 export const getOneArticle = async (id: string) => {
   cacheLife("days")
-  cacheTag('articles')
+  cacheTag(`articles-${id}`)
 
   try {
     return await prisma.article.findUnique({
@@ -45,7 +45,7 @@ export const getOneArticle = async (id: string) => {
 /* ------------------------------ getOneArticleBySlug ----------------------------- */
 export const getOneArticleBySlug = async (slug: string) => {
   cacheLife("days")
-  cacheTag('articles')
+  cacheTag(`articles-${slug}`)
 
   try {
     return await prisma.article.findUnique({

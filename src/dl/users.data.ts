@@ -7,7 +7,7 @@ import { cacheLife, cacheTag } from "next/cache"
 /* ----------------------------- getAllUsers ---------------------------- */
 export const getAllUsers = async (size: number, page: number) => {
   cacheLife("hours")
-  cacheTag('users')
+  cacheTag('allUsers')
   try {
     const totalColors = await prisma.user.count()
     const totalPages = Math.ceil(totalColors / size)
@@ -26,6 +26,8 @@ export const getAllUsers = async (size: number, page: number) => {
 
 /* ---------------------------- getOneUser ------------------------------ */
 export const getOneUser = async (id: string) => {
+  cacheLife("hours")
+  cacheTag(`users-${id}`)
   try {
     return await prisma.user.findUnique({
       where: { id }
@@ -37,6 +39,8 @@ export const getOneUser = async (id: string) => {
 
 /* ----------------------- getAllUsersForFactoriesPage ---------------------- */
 export const getAllUsersForFactoriesPage = async () => {
+  cacheLife("hours")
+  cacheTag('users')
   try {
     const data = await prisma.user.findMany({
       select: { id: true, name: true },
@@ -50,6 +54,9 @@ export const getAllUsersForFactoriesPage = async () => {
 
 /* ------------------------------ getAllClients ----------------------------- */
 export const getAllClients = async () => {
+  cacheLife("hours")
+  cacheTag('clients')
+
   try {
     return await prisma.user.findMany({ where: { role: Role.client }, select: { id: true, name: true }, orderBy: { name: "asc" } })
   } catch (error) {
@@ -60,7 +67,7 @@ export const getAllClients = async () => {
 /* ------------------------------ getAllAdmins ----------------------------- */
 export const getAllAdmins = async () => {
   cacheLife("hours")
-  cacheTag('users')
+  cacheTag('admins')
 
   try {
     return await prisma.user.findMany({

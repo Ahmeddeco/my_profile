@@ -1,16 +1,16 @@
-import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6"
+import { FaFacebookF, FaGithub, FaLinkedinIn, } from "react-icons/fa6"
 
 export const socials = [
   {
-    href: "https://www.facebook.com//",
+    href: "https://www.facebook.com/profile.php?id=61590739256714",
     icon: FaFacebookF
   },
   {
-    href: "https://www.instagram.com//#",
-    icon: FaInstagram
+    href: "https://www.linkedin.com/in/ahmed-next/",
+    icon: FaLinkedinIn
   },
   {
-    href: "https://x.com/",
-    icon: FaXTwitter
+    href: "https://github.com/Ahmeddeco",
+    icon: FaGithub
   },
 ]

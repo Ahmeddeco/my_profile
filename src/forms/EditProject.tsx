@@ -8,7 +8,7 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import SubmitButton from "@/components/shared/SubmitButton"
 import { Textarea } from "@/components/ui/textarea"
-import { addProjectAction } from "@/actions/project.action"
+import { editProjectAction } from "@/actions/project.action"
 import ProjectSchema from "@/schemas/ProjectSchema"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import DatePicker from "@/components/shared/DatePicker"
@@ -36,10 +36,8 @@ type Props = {
 
 export default function EditProject({ allClients, oneProject }: Props) {
 	const [slug, setSlug] = useState(oneProject?.slug)
-	console.log("slug from EditProject", slug)
-	console.log("oneProject from EditProject", oneProject)
 
-	const [lastResult, action] = useActionState(addProjectAction, undefined)
+	const [lastResult, action] = useActionState(editProjectAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
 		onValidate({ formData }) {
@@ -147,7 +145,7 @@ export default function EditProject({ allClients, oneProject }: Props) {
 				{/* --------------------------------- client --------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.userId.name}>client</FieldLabel>
-					<Select key={fields.userId.key} name={fields.userId.name} defaultValue={fields.userId.initialValue}>
+					<Select key={fields.userId.key} name={fields.userId.name} defaultValue={oneProject?.userId}>
 						<SelectTrigger>
 							<SelectValue />
 						</SelectTrigger>

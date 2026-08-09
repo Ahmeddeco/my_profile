@@ -2,6 +2,7 @@
 
 import { DeleteActionState } from "@/components/backend/Settings"
 import prisma from "@/lib/prisma"
+import { splittedImages } from "@/logic/splittedImages"
 import ProjectSchema from "@/schemas/ProjectSchema"
 import { parseWithZod } from "@conform-to/zod"
 import { refresh, updateTag } from "next/cache"
@@ -16,6 +17,8 @@ export const addProjectAction = async (prevState: unknown, formData: FormData) =
     return submission.reply()
   }
 
+  const splitImages = splittedImages(submission.value.images[0])
+
   try {
     await prisma.project.upsert({
       where: { slug: submission.value.slug! },
@@ -27,7 +30,7 @@ export const addProjectAction = async (prevState: unknown, formData: FormData) =
         miniDescriptionAr: submission.value.miniDescriptionAr,
         miniDescriptionEn: submission.value.miniDescriptionEn,
         mainImage: submission.value.mainImage,
-        images: submission.value.images,
+        images: splitImages,
         url: submission.value.url,
         createdAt: submission.value.createdAt,
         type: submission.value.type,
@@ -42,7 +45,7 @@ export const addProjectAction = async (prevState: unknown, formData: FormData) =
         miniDescriptionAr: submission.value.miniDescriptionAr,
         miniDescriptionEn: submission.value.miniDescriptionEn,
         mainImage: submission.value.mainImage,
-        images: submission.value.images,
+        images: splitImages,
         url: submission.value.url,
         createdAt: submission.value.createdAt,
         type: submission.value.type,
@@ -69,6 +72,8 @@ export const editProjectAction = async (prevState: unknown, formData: FormData) 
     return submission.reply()
   }
 
+  const splitImages = splittedImages(submission.value.images[0])
+
   try {
     await prisma.project.update({
       where: {
@@ -82,7 +87,7 @@ export const editProjectAction = async (prevState: unknown, formData: FormData) 
         miniDescriptionAr: submission.value.miniDescriptionAr,
         miniDescriptionEn: submission.value.miniDescriptionEn,
         mainImage: submission.value.mainImage,
-        images: submission.value.images,
+        images: splitImages,
         url: submission.value.url,
         createdAt: submission.value.createdAt,
         type: submission.value.type,

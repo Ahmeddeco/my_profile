@@ -50,7 +50,7 @@ export const getAllProjectsByCategory = async (size: number, page: number, categ
 /* ------------------------------ getOneProject ----------------------------- */
 export const getOneProject = async (id: string) => {
   cacheLife("days")
-  cacheTag('projects')
+  cacheTag(`projects-${id}`)
   try {
     return await prisma.project.findUniqueOrThrow({
       where: { id },
@@ -64,7 +64,7 @@ export const getOneProject = async (id: string) => {
 /* ------------------------------ getOneProjectBySlug ----------------------------- */
 export const getOneProjectBySlug = async (slug: string) => {
   cacheLife("days")
-  cacheTag('projects')
+  cacheTag(`projects-${slug}`)
   try {
     return await prisma.project.findUniqueOrThrow({
       where: { slug },

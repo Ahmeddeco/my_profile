@@ -1,11 +1,9 @@
 "use client"
 
-import Link from "next/link"
 import Logo from "./Logo"
 import { Separator } from "../ui/separator"
 import { Copyright } from "lucide-react"
 import Socials from "./Socials"
-import { Button } from "../ui/button"
 import { Badge } from "../ui/badge"
 import { useCurrentLocale } from "@/locales/client.locale"
 
@@ -25,22 +23,10 @@ export default function Footer() {
 					</h6>
 					<Socials />
 					<Separator className="my-6" />
-				</div>
-
-				{/* حقوق النشر */}
-				<div className="flex flex-col md:flex-row justify-between items-center gap-4">
 					<Badge>
 						<Copyright />
 						{locale === "en" ? "Built with Next.js & Mastra AI 2026" : "تم تطويره باستخدام Next.js و Mastra AI 2026"}
 					</Badge>
-					<div className="flex items-center justify-center gap-8">
-						<Button asChild variant={"link"}>
-							<Link href="#">سياسة الخصوصية</Link>
-						</Button>
-						<Button asChild variant={"link"}>
-							<Link href="#">شروط الخدمة</Link>
-						</Button>
-					</div>
 				</div>
 			</div>
 		</footer>
