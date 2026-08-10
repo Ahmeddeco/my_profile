@@ -27,7 +27,7 @@ export default async function ArticlePage({ params }: Props) {
 				{/* ------------------------------ title ----------------------------- */}
 				<h2 className="text-primary ">{locale === "en" ? article?.titleEn : article?.titleAr}</h2>
 				{/* ------------------------- Description ------------------------ */}
-				<h6 className=" ">{locale === "en" ? article?.descriptionEn : article?.descriptionEn}</h6>
+				<h6 className="text-pretty ">{locale === "en" ? article?.descriptionEn : article?.descriptionAr}</h6>
 				{/* -------------------- client - type - createdAt ------------------- */}
 				<div className="flex flex-wrap gap-2">
 					<Badge>
@@ -42,7 +42,7 @@ export default async function ArticlePage({ params }: Props) {
 
 				{/* --------------------------- topic -------------------------- */}
 				<div
-					className="prose dark:prose-invert max-w-none w-full"
+					className="prose dark:prose-invert max-w-none w-full text-pretty"
 					dangerouslySetInnerHTML={{
 						__html: locale === "en" ? (article?.topicEn ?? "") : (article?.topicAr ?? ""),
 					}}
