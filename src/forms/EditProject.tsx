@@ -35,7 +35,8 @@ type Props = {
 }
 
 export default function EditProject({ allClients, oneProject }: Props) {
-	const [slug, setSlug] = useState(oneProject?.slug)
+	const [slug, setSlug] = useState(oneProject?.slug ?? "")
+	const slugTitle = slugify(slug, { lower: true, strict: true })
 
 	const [lastResult, action] = useActionState(editProjectAction, undefined)
 	const [form, fields] = useForm({
@@ -76,7 +77,7 @@ export default function EditProject({ allClients, oneProject }: Props) {
 			{/* ---------------------------------- slug ---------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.slug.name}>{fields.slug.name}</FieldLabel>
-				<Input type="text" key={fields.slug.key} name={fields.slug.name} value={slug} readOnly />
+				<Input type="text" key={fields.slug.key} name={fields.slug.name} value={slugTitle} readOnly />
 				<FieldError>{fields.slug.errors}</FieldError>
 			</Field>
 

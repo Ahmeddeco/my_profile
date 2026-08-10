@@ -34,6 +34,7 @@ type Props = {
 
 export default function AddProject({ allClients }: Props) {
 	const [slug, setSlug] = useState("")
+	const slugTitle = slugify(slug, { lower: true, strict: true })
 	const [lastResult, action] = useActionState(addProjectAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
@@ -77,7 +78,7 @@ export default function AddProject({ allClients }: Props) {
 			{/* ---------------------------------- slug ---------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.slug.name}>{fields.slug.name}</FieldLabel>
-				<Input type="text" key={fields.slug.key} name={fields.slug.name} defaultValue={slugify(slug)} readOnly />
+				<Input type="text" key={fields.slug.key} name={fields.slug.name} value={slugTitle} readOnly />
 				<FieldError>{fields.slug.errors}</FieldError>
 			</Field>
 

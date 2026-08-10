@@ -34,7 +34,7 @@ type Props = {
 
 export default function EditArticle({ authors, article }: Props) {
 	const [slug, setSlug] = useState(article?.slug ?? "")
-	const slugTitle = slugify(slug, { lower: true })
+	const slugTitle = slugify(slug, { lower: true, strict: true })
 
 	const [lastResult, action] = useActionState(editArticleAction, undefined)
 	const [form, fields] = useForm({
