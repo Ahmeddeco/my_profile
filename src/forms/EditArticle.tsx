@@ -103,7 +103,7 @@ export default function EditArticle({ authors, article }: Props) {
 					name={fields.createdAt.name}
 					defaultValue={article?.createdAt ? article.createdAt.toISOString() : undefined}
 					errors={fields.createdAt.errors}
-					key={fields.createdAt.key}
+					dateKey={fields.createdAt.key}
 				/>
 			</div>
 

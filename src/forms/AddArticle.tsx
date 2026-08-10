@@ -105,7 +105,7 @@ export default function AddArticle({ authors }: Props) {
 					name={fields.createdAt.name}
 					defaultValue={fields.createdAt.initialValue}
 					errors={fields.createdAt.errors}
-					key={fields.createdAt.key}
+					dateKey={fields.createdAt.key}
 				/>
 			</div>
 
