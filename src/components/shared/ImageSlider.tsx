@@ -18,7 +18,7 @@ export default function ImageSlider({ images, mainImage, alt = "image" }: Props)
 	const locale = useCurrentLocale()
 
 	return (
-		<div className="size-full aspect-square flex flex-col lg:gap-4 gap-2 ">
+		<div className="w-full  h-fit! flex flex-col lg:gap-4 gap-2 ">
 			<Dialog>
 				<DialogTrigger>
 					<div className=" w-full  relative aspect-video">
@@ -27,7 +27,7 @@ export default function ImageSlider({ images, mainImage, alt = "image" }: Props)
 				</DialogTrigger>
 				<DialogContent className="p-0 h-[90vh] w-[90vw] max-w-none! overflow-hidden flex items-center justify-center aspect-video! ">
 					<Carousel
-						className="size-full  "
+						className="w-full  "
 						opts={{
 							loop: true,
 							direction: locale === "en" ? "ltr" : "rtl",
@@ -46,10 +46,10 @@ export default function ImageSlider({ images, mainImage, alt = "image" }: Props)
 				</DialogContent>
 			</Dialog>
 
-			<div className="w-full h-2/12  rounded-lg  overflow-x-auto flex lg:gap-4 gap-2 ">
+			<div className="size-full h-2/12  rounded-lg  overflow-x-auto flex lg:gap-4 gap-2 ">
 				{allImagesArray.map((image, index) => (
 					<div
-						className={`rounded-lg aspect-video relative  h-full ${activeImage === image ? "border-2 border-primary" : "border"}`}
+						className={`rounded-lg aspect-video relative min-w-44 h-full ${activeImage === image ? "border-2 border-primary" : "border"}`}
 						key={index}
 						onClick={() => setActiveImage(image)}
 					>

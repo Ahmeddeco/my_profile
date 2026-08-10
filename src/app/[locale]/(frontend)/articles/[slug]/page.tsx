@@ -15,15 +15,15 @@ export default async function ArticlePage({ params }: Props) {
 	const article: getOneArticleBySlugType = await getOneArticleBySlug(slug)
 
 	return (
-		<article className="flex lg:flex-row flex-col gap-6 pt-8 px-4">
-			<div className="flex-1 ">
+		<article className="flex  flex-col gap-6 pt-8 px-4 w-full max-w-7xl mx-auto">
+			<div className="">
 				<ImageSlider
 					mainImage={article?.mainImage ?? ""}
 					images={article?.images ?? []}
 					alt={article?.titleEn ?? "article"}
 				/>
 			</div>
-			<div className="flex-1 flex flex-col gap-2">
+			<div className=" flex flex-col gap-2">
 				{/* ------------------------------ title ----------------------------- */}
 				<h2 className="text-primary">{locale === "en" ? article?.titleEn : article?.titleAr}</h2>
 				{/* ------------------------- Description ------------------------ */}
