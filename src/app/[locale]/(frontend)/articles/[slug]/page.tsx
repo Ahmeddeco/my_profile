@@ -15,7 +15,7 @@ export default async function ArticlePage({ params }: Props) {
 	const article: getOneArticleBySlugType = await getOneArticleBySlug(slug)
 
 	return (
-		<article className="flex  flex-col gap-6 pt-8 px-4 w-full max-w-7xl mx-auto">
+		<article className="flex  flex-col gap-6 pt-8 px-4 w-full max-w-6xl mx-auto">
 			<div className="">
 				<ImageSlider
 					mainImage={article?.mainImage ?? ""}
@@ -25,9 +25,9 @@ export default async function ArticlePage({ params }: Props) {
 			</div>
 			<div className=" flex flex-col gap-2">
 				{/* ------------------------------ title ----------------------------- */}
-				<h2 className="text-primary">{locale === "en" ? article?.titleEn : article?.titleAr}</h2>
+				<h2 className="text-primary max-w-xl">{locale === "en" ? article?.titleEn : article?.titleAr}</h2>
 				{/* ------------------------- Description ------------------------ */}
-				<h6>{locale === "en" ? article?.descriptionEn : article?.descriptionEn}</h6>
+				<h6 className=" max-w-xl">{locale === "en" ? article?.descriptionEn : article?.descriptionEn}</h6>
 				{/* -------------------- client - type - createdAt ------------------- */}
 				<div className="flex flex-wrap gap-2">
 					<Badge>
@@ -42,7 +42,7 @@ export default async function ArticlePage({ params }: Props) {
 
 				{/* --------------------------- topic -------------------------- */}
 				<div
-					className="prose dark:prose-invert"
+					className="prose dark:prose-invert max-w-none w-full"
 					dangerouslySetInnerHTML={{
 						__html: locale === "en" ? (article?.topicEn ?? "") : (article?.topicAr ?? ""),
 					}}
