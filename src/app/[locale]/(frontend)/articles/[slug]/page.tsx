@@ -23,11 +23,11 @@ export default async function ArticlePage({ params }: Props) {
 					alt={article?.titleEn ?? "article"}
 				/>
 			</div>
-			<div className=" flex flex-col gap-2">
+			<div className=" flex flex-col gap-4">
 				{/* ------------------------------ title ----------------------------- */}
-				<h2 className="text-primary max-w-xl">{locale === "en" ? article?.titleEn : article?.titleAr}</h2>
+				<h2 className="text-primary ">{locale === "en" ? article?.titleEn : article?.titleAr}</h2>
 				{/* ------------------------- Description ------------------------ */}
-				<h6 className=" max-w-xl">{locale === "en" ? article?.descriptionEn : article?.descriptionEn}</h6>
+				<h6 className=" ">{locale === "en" ? article?.descriptionEn : article?.descriptionEn}</h6>
 				{/* -------------------- client - type - createdAt ------------------- */}
 				<div className="flex flex-wrap gap-2">
 					<Badge>
