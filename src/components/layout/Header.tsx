@@ -1,11 +1,12 @@
 import { Suspense } from "react"
 import { ThemeButton } from "../theme/ThemeButton"
 import FrontNavigation from "./FrontNavigation"
-import LanguageButton from "./LanguageButton"
+
 import Logo from "./Logo"
 import MobileMenu from "./MobileMenu"
 import UserButton from "@/components/auth/UserButton"
 import { Skeleton } from "@/components/ui/skeleton"
+import LanguageButton from "@/locales/LanguageButton"
 
 export default function Header() {
 	return (

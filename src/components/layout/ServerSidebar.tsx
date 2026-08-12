@@ -10,7 +10,7 @@ import Logo from "./Logo"
 import { ThemeButton } from "../theme/ThemeButton"
 import ServerNavigation from "./ServerNavigation"
 import UserButton from "@/components/auth/UserButton"
-import LanguageButton from "./LanguageButton"
+import LanguageButton from "@/locales/LanguageButton"
 import { Suspense } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
 
