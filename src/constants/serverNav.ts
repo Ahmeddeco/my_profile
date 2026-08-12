@@ -1,5 +1,6 @@
 import { ChartNoAxesCombined, Newspaper, Server, Users } from "lucide-react"
 import { GrProjects } from "react-icons/gr"
+import { FaChalkboardTeacher } from "react-icons/fa"
 
 export const serverNav = [
   {
@@ -16,6 +17,11 @@ export const serverNav = [
     title: { ar: "المشاريع", en: "projects" },
     href: "/server/projects",
     icon: GrProjects
+  },
+  {
+    title: { ar: "الكورسات", en: "courses" },
+    href: "/server/route",
+    icon: FaChalkboardTeacher
   },
   {
     title: { ar: "مقالاتنا", en: "articles" },

@@ -41,15 +41,15 @@ export default function ProjectCard({ project, locale }: Props) {
 					</Badge>
 				</div>
 				{/* ------------------------------ Buttons ------------------------------- */}
-				<div className="w-full flex lg:flex-row flex-col items-center justify-center gap-4 my-2">
-					<Button size={"full"} className="lg:w-1/2" variant={"default"} asChild>
+				<div className="w-full flex lg:flex-row flex-col items-center justify-between gap-4 my-2">
+					<Button size={"sm"} variant={"default"} asChild>
 						<Link href={`/projects/${project.slug}`}>
-							<Eye /> {locale === "en" ? "see project details" : "شاهد تفاصيل المشروع"}
+							<Eye /> {locale === "en" ? "see details" : "شاهد التفاصيل "}
 						</Link>
 					</Button>
-					<Button size={"full"} className="lg:w-1/2" variant={"outline"} asChild>
+					<Button size={"sm"} variant={"link"} asChild>
 						<Link href={project.url} target="_blank">
-							<ExternalLink /> {locale === "en" ? "go to project link" : "اذهب الى صفحة المشروع"}
+							<ExternalLink /> {locale === "en" ? "go to project" : "اذهب الى صفحة المشروع"}
 						</Link>
 					</Button>
 				</div>

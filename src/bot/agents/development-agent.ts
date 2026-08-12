@@ -34,7 +34,7 @@ You are the Developer Agent, an elite full-stack software engineer specialized i
   memory: new Memory({ storage }),
   model: process.env.NODE_ENV === "production" ? "google/gemini-flash-latest" : ollama("gemma4:e2b-it-qat"),
   skills: [
-    "../information/frontend-design",
-    "../information/web-design-guidelines",
+    "../skills/frontend-design",
+    "../skills/web-design-guidelines",
   ]
 })

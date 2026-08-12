@@ -37,12 +37,12 @@ You are the Supervisor Agent, the central coordinator and orchestrator of an aut
   memory: new Memory({ storage }),
   model: process.env.NODE_ENV === "production" ? "google/gemini-flash-latest" : ollama("gemma4:e2b-it-qat"),
   skills: [
-    "../information/marketing-psychology",
-    "../information/copywriting",
-    "../information/product-marketing",
-    "../information/find-skills",
-    "../information/frontend-design",
-    "../information/web-design-guidelines",
+    "../skills/marketing-psychology",
+    "../skills/copywriting",
+    "../skills/product-marketing",
+    "../skills/find-skills",
+    "../skills/frontend-design",
+    "../skills/web-design-guidelines",
   ],
   agents: { developmentAgent, marketingAgent }
 })

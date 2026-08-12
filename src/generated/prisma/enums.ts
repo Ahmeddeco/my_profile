@@ -12,7 +12,8 @@
 export const Role = {
   user: 'user',
   admin: 'admin',
-  client: 'client'
+  client: 'client',
+  instractor: 'instractor'
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
@@ -25,3 +26,27 @@ export const ProductType = {
 } as const
 
 export type ProductType = (typeof ProductType)[keyof typeof ProductType]
+
+
+export const Field = {
+  web: 'web',
+  mobile: 'mobile',
+  marketing: 'marketing',
+  interior_design: 'interior_design',
+  automation: 'automation',
+  ai: 'ai'
+} as const
+
+export type Field = (typeof Field)[keyof typeof Field]
+
+
+export const BatchStatus = {
+  UPCOMING: 'UPCOMING',
+  OPEN: 'OPEN',
+  FULL: 'FULL',
+  STARTED: 'STARTED',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type BatchStatus = (typeof BatchStatus)[keyof typeof BatchStatus]

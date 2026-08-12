@@ -31,9 +31,9 @@ You are the Digital Marketing Agent, a senior digital marketing strategist, grow
   memory: new Memory({ storage }),
   model: process.env.NODE_ENV === "production" ? "google/gemini-flash-latest" : ollama("gemma4:e2b-it-qat"),
   skills: [
-    "../information/marketing-psychology",
-    "../information/copywriting",
-    "../information/product-marketing",
-    "../information/find-skills",
+    "../skills/marketing-psychology",
+    "../skills/copywriting",
+    "../skills/product-marketing",
+    "../skills/find-skills",
   ]
 })

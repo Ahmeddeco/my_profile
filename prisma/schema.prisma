@@ -75,24 +75,26 @@ model Verification {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  email         String    @unique
-  emailVerified Boolean   @default(false)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  email         String       @unique
+  emailVerified Boolean      @default(false)
   image         String?
   sessions      Session[]
   accounts      Account[]
-  role          Role      @default(user)
+  role          Role         @default(user)
   lat           String?
   lng           String?
-  mobile        String?   @unique
+  mobile        String?      @unique
   city          String?
   state         String?
   country       String?
   projects      Project[]
   articles      Article[]
+  courses       Course[]
+  enrollments   Enrollment[]
 
   @@unique([email, mobile])
   @@index([email])
@@ -104,6 +106,7 @@ enum Role {
   user
   admin
   client
+  instractor
 }
 
 enum ProductType {
@@ -157,4 +160,93 @@ model Article {
   @@index([slug])
   @@index([userId])
   @@map("article")
+}
+
+model Course {
+  id             String        @id @default(cuid())
+  titleAr        String
+  titleEn        String
+  slug           String        @unique
+  descriptionAr  String        @db.Text
+  descriptionEn  String        @db.Text
+  detailsAr      String        @db.Text
+  detailsEn      String        @db.Text
+  price          Int
+  discountAmount Int?
+  mainImage      String
+  images         String[]
+  fieldId        String
+  field          Field
+  instructorId   String
+  instructor     User          @relation(fields: [instructorId], references: [id])
+  batches        CourseBatch[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model CourseBatch {
+  id          String       @id @default(cuid())
+  courseId    String
+  course      Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  locationId  String
+  location    Location     @relation(fields: [locationId], references: [id])
+  startAt     DateTime
+  endAt       DateTime?
+  capacity    Int?
+  status      BatchStatus  @default(UPCOMING)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  enrollments Enrollment[]
+
+  @@index([courseId])
+  @@index([locationId])
+  @@index([startAt])
+}
+
+model Enrollment {
+  id        String      @id @default(cuid())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id])
+  batchId   String
+  batch     CourseBatch @relation(fields: [batchId], references: [id])
+  price     Int
+  createdAt DateTime    @default(now())
+
+  @@unique([userId, batchId])
+  @@index([userId])
+  @@index([batchId])
+}
+
+model Location {
+  id            String        @id @default(cuid())
+  nameAr        String
+  nameEn        String
+  country       String?
+  state         String?
+  city          String?
+  latitude      Float?
+  longitude     Float?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  courseBatches CourseBatch[]
+
+  @@map("location")
+}
+
+enum Field {
+  web
+  mobile
+  marketing
+  interior_design
+  automation
+  ai
+}
+
+enum BatchStatus {
+  UPCOMING
+  OPEN
+  FULL
+  STARTED
+  COMPLETED
+  CANCELLED
 }

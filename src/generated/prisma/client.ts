@@ -71,3 +71,23 @@ export type Project = Prisma.ProjectModel
  * 
  */
 export type Article = Prisma.ArticleModel
+/**
+ * Model Course
+ * 
+ */
+export type Course = Prisma.CourseModel
+/**
+ * Model CourseBatch
+ * 
+ */
+export type CourseBatch = Prisma.CourseBatchModel
+/**
+ * Model Enrollment
+ * 
+ */
+export type Enrollment = Prisma.EnrollmentModel
+/**
+ * Model Location
+ * 
+ */
+export type Location = Prisma.LocationModel
