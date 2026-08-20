@@ -45,6 +45,7 @@ export type LocationMinAggregateOutputType = {
   city: string | null
   latitude: number | null
   longitude: number | null
+  tel: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,6 +59,7 @@ export type LocationMaxAggregateOutputType = {
   city: string | null
   latitude: number | null
   longitude: number | null
+  tel: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -71,6 +73,7 @@ export type LocationCountAggregateOutputType = {
   city: number
   latitude: number
   longitude: number
+  tel: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -96,6 +99,7 @@ export type LocationMinAggregateInputType = {
   city?: true
   latitude?: true
   longitude?: true
+  tel?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -109,6 +113,7 @@ export type LocationMaxAggregateInputType = {
   city?: true
   latitude?: true
   longitude?: true
+  tel?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -122,6 +127,7 @@ export type LocationCountAggregateInputType = {
   city?: true
   latitude?: true
   longitude?: true
+  tel?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -222,6 +228,7 @@ export type LocationGroupByOutputType = {
   city: string | null
   latitude: number | null
   longitude: number | null
+  tel: string | null
   createdAt: Date
   updatedAt: Date
   _count: LocationCountAggregateOutputType | null
@@ -258,6 +265,7 @@ export type LocationWhereInput = {
   city?: Prisma.StringNullableFilter<"Location"> | string | null
   latitude?: Prisma.FloatNullableFilter<"Location"> | number | null
   longitude?: Prisma.FloatNullableFilter<"Location"> | number | null
+  tel?: Prisma.StringNullableFilter<"Location"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Location"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Location"> | Date | string
   courseBatches?: Prisma.CourseBatchListRelationFilter
@@ -272,6 +280,7 @@ export type LocationOrderByWithRelationInput = {
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  tel?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   courseBatches?: Prisma.CourseBatchOrderByRelationAggregateInput
@@ -289,6 +298,7 @@ export type LocationWhereUniqueInput = Prisma.AtLeast<{
   city?: Prisma.StringNullableFilter<"Location"> | string | null
   latitude?: Prisma.FloatNullableFilter<"Location"> | number | null
   longitude?: Prisma.FloatNullableFilter<"Location"> | number | null
+  tel?: Prisma.StringNullableFilter<"Location"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Location"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Location"> | Date | string
   courseBatches?: Prisma.CourseBatchListRelationFilter
@@ -303,6 +313,7 @@ export type LocationOrderByWithAggregationInput = {
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  tel?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.LocationCountOrderByAggregateInput
@@ -324,6 +335,7 @@ export type LocationScalarWhereWithAggregatesInput = {
   city?: Prisma.StringNullableWithAggregatesFilter<"Location"> | string | null
   latitude?: Prisma.FloatNullableWithAggregatesFilter<"Location"> | number | null
   longitude?: Prisma.FloatNullableWithAggregatesFilter<"Location"> | number | null
+  tel?: Prisma.StringNullableWithAggregatesFilter<"Location"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Location"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Location"> | Date | string
 }
@@ -337,6 +349,7 @@ export type LocationCreateInput = {
   city?: string | null
   latitude?: number | null
   longitude?: number | null
+  tel?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   courseBatches?: Prisma.CourseBatchCreateNestedManyWithoutLocationInput
@@ -351,6 +364,7 @@ export type LocationUncheckedCreateInput = {
   city?: string | null
   latitude?: number | null
   longitude?: number | null
+  tel?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   courseBatches?: Prisma.CourseBatchUncheckedCreateNestedManyWithoutLocationInput
@@ -365,6 +379,7 @@ export type LocationUpdateInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   courseBatches?: Prisma.CourseBatchUpdateManyWithoutLocationNestedInput
@@ -379,6 +394,7 @@ export type LocationUncheckedUpdateInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   courseBatches?: Prisma.CourseBatchUncheckedUpdateManyWithoutLocationNestedInput
@@ -393,6 +409,7 @@ export type LocationCreateManyInput = {
   city?: string | null
   latitude?: number | null
   longitude?: number | null
+  tel?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -406,6 +423,7 @@ export type LocationUpdateManyMutationInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -419,6 +437,7 @@ export type LocationUncheckedUpdateManyInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -437,6 +456,7 @@ export type LocationCountOrderByAggregateInput = {
   city?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  tel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -455,6 +475,7 @@ export type LocationMaxOrderByAggregateInput = {
   city?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  tel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -468,6 +489,7 @@ export type LocationMinOrderByAggregateInput = {
   city?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  tel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -508,6 +530,7 @@ export type LocationCreateWithoutCourseBatchesInput = {
   city?: string | null
   latitude?: number | null
   longitude?: number | null
+  tel?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -521,6 +544,7 @@ export type LocationUncheckedCreateWithoutCourseBatchesInput = {
   city?: string | null
   latitude?: number | null
   longitude?: number | null
+  tel?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -550,6 +574,7 @@ export type LocationUpdateWithoutCourseBatchesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -563,6 +588,7 @@ export type LocationUncheckedUpdateWithoutCourseBatchesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -607,6 +633,7 @@ export type LocationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   city?: boolean
   latitude?: boolean
   longitude?: boolean
+  tel?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   courseBatches?: boolean | Prisma.Location$courseBatchesArgs<ExtArgs>
@@ -622,6 +649,7 @@ export type LocationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   city?: boolean
   latitude?: boolean
   longitude?: boolean
+  tel?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["location"]>
@@ -635,6 +663,7 @@ export type LocationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   city?: boolean
   latitude?: boolean
   longitude?: boolean
+  tel?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["location"]>
@@ -648,11 +677,12 @@ export type LocationSelectScalar = {
   city?: boolean
   latitude?: boolean
   longitude?: boolean
+  tel?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type LocationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameAr" | "nameEn" | "country" | "state" | "city" | "latitude" | "longitude" | "createdAt" | "updatedAt", ExtArgs["result"]["location"]>
+export type LocationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameAr" | "nameEn" | "country" | "state" | "city" | "latitude" | "longitude" | "tel" | "createdAt" | "updatedAt", ExtArgs["result"]["location"]>
 export type LocationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   courseBatches?: boolean | Prisma.Location$courseBatchesArgs<ExtArgs>
   _count?: boolean | Prisma.LocationCountOutputTypeDefaultArgs<ExtArgs>
@@ -674,6 +704,7 @@ export type $LocationPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     city: string | null
     latitude: number | null
     longitude: number | null
+    tel: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["location"]>
@@ -1108,6 +1139,7 @@ export interface LocationFieldRefs {
   readonly city: Prisma.FieldRef<"Location", 'String'>
   readonly latitude: Prisma.FieldRef<"Location", 'Float'>
   readonly longitude: Prisma.FieldRef<"Location", 'Float'>
+  readonly tel: Prisma.FieldRef<"Location", 'String'>
   readonly createdAt: Prisma.FieldRef<"Location", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Location", 'DateTime'>
 }

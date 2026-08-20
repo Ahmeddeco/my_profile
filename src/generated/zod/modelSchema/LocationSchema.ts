@@ -13,6 +13,7 @@ export const LocationSchema = z.object({
   city: z.string().nullish(),
   latitude: z.number().nullish(),
   longitude: z.number().nullish(),
+  tel: z.string().nullish(),
   createdAt: z.date(),
   updatedAt: z.date(),
 })

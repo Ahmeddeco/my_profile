@@ -9,6 +9,7 @@ export const LocationSchema = z.object({
   city: z.string().nullish(),
   latitude: z.number().nullish(),
   longitude: z.number().nullish(),
+  tel: z.string().nullish(),
 })
 
 export type Location = z.infer<typeof LocationSchema>

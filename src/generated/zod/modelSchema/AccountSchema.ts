@@ -12,6 +12,7 @@ export const AccountSchema = z.object({
   accessToken: z.string().nullish(),
   refreshToken: z.string().nullish(),
   idToken: z.string().nullish(),
+  issuer: z.string().nullish(),
   accessTokenExpiresAt: z.date().nullish(),
   refreshTokenExpiresAt: z.date().nullish(),
   scope: z.string().nullish(),

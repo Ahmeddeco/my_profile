@@ -19,6 +19,7 @@ export default withPWA({
       { protocol: "https", hostname: "cgvdfjzle1.ufs.sh" },
       { protocol: "https", hostname: "github.com" },
       { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "8skh3k9x4h.ufs.sh" },
     ]
   },
   devIndicators: false,

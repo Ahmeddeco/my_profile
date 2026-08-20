@@ -48,7 +48,6 @@ export type CourseMinAggregateOutputType = {
   price: number | null
   discountAmount: number | null
   mainImage: string | null
-  fieldId: string | null
   field: $Enums.Field | null
   instructorId: string | null
   createdAt: Date | null
@@ -67,7 +66,6 @@ export type CourseMaxAggregateOutputType = {
   price: number | null
   discountAmount: number | null
   mainImage: string | null
-  fieldId: string | null
   field: $Enums.Field | null
   instructorId: string | null
   createdAt: Date | null
@@ -87,7 +85,6 @@ export type CourseCountAggregateOutputType = {
   discountAmount: number
   mainImage: number
   images: number
-  fieldId: number
   field: number
   instructorId: number
   createdAt: number
@@ -118,7 +115,6 @@ export type CourseMinAggregateInputType = {
   price?: true
   discountAmount?: true
   mainImage?: true
-  fieldId?: true
   field?: true
   instructorId?: true
   createdAt?: true
@@ -137,7 +133,6 @@ export type CourseMaxAggregateInputType = {
   price?: true
   discountAmount?: true
   mainImage?: true
-  fieldId?: true
   field?: true
   instructorId?: true
   createdAt?: true
@@ -157,7 +152,6 @@ export type CourseCountAggregateInputType = {
   discountAmount?: true
   mainImage?: true
   images?: true
-  fieldId?: true
   field?: true
   instructorId?: true
   createdAt?: true
@@ -264,7 +258,6 @@ export type CourseGroupByOutputType = {
   discountAmount: number | null
   mainImage: string
   images: string[]
-  fieldId: string
   field: $Enums.Field
   instructorId: string
   createdAt: Date
@@ -307,7 +300,6 @@ export type CourseWhereInput = {
   discountAmount?: Prisma.IntNullableFilter<"Course"> | number | null
   mainImage?: Prisma.StringFilter<"Course"> | string
   images?: Prisma.StringNullableListFilter<"Course">
-  fieldId?: Prisma.StringFilter<"Course"> | string
   field?: Prisma.EnumFieldFilter<"Course"> | $Enums.Field
   instructorId?: Prisma.StringFilter<"Course"> | string
   createdAt?: Prisma.DateTimeFilter<"Course"> | Date | string
@@ -329,7 +321,6 @@ export type CourseOrderByWithRelationInput = {
   discountAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   mainImage?: Prisma.SortOrder
   images?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
   field?: Prisma.SortOrder
   instructorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -354,7 +345,6 @@ export type CourseWhereUniqueInput = Prisma.AtLeast<{
   discountAmount?: Prisma.IntNullableFilter<"Course"> | number | null
   mainImage?: Prisma.StringFilter<"Course"> | string
   images?: Prisma.StringNullableListFilter<"Course">
-  fieldId?: Prisma.StringFilter<"Course"> | string
   field?: Prisma.EnumFieldFilter<"Course"> | $Enums.Field
   instructorId?: Prisma.StringFilter<"Course"> | string
   createdAt?: Prisma.DateTimeFilter<"Course"> | Date | string
@@ -376,7 +366,6 @@ export type CourseOrderByWithAggregationInput = {
   discountAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   mainImage?: Prisma.SortOrder
   images?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
   field?: Prisma.SortOrder
   instructorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -404,7 +393,6 @@ export type CourseScalarWhereWithAggregatesInput = {
   discountAmount?: Prisma.IntNullableWithAggregatesFilter<"Course"> | number | null
   mainImage?: Prisma.StringWithAggregatesFilter<"Course"> | string
   images?: Prisma.StringNullableListFilter<"Course">
-  fieldId?: Prisma.StringWithAggregatesFilter<"Course"> | string
   field?: Prisma.EnumFieldWithAggregatesFilter<"Course"> | $Enums.Field
   instructorId?: Prisma.StringWithAggregatesFilter<"Course"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Course"> | Date | string
@@ -424,7 +412,6 @@ export type CourseCreateInput = {
   discountAmount?: number | null
   mainImage: string
   images?: Prisma.CourseCreateimagesInput | string[]
-  fieldId: string
   field: $Enums.Field
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -445,7 +432,6 @@ export type CourseUncheckedCreateInput = {
   discountAmount?: number | null
   mainImage: string
   images?: Prisma.CourseCreateimagesInput | string[]
-  fieldId: string
   field: $Enums.Field
   instructorId: string
   createdAt?: Date | string
@@ -466,7 +452,6 @@ export type CourseUpdateInput = {
   discountAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.CourseUpdateimagesInput | string[]
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
   field?: Prisma.EnumFieldFieldUpdateOperationsInput | $Enums.Field
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -487,7 +472,6 @@ export type CourseUncheckedUpdateInput = {
   discountAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.CourseUpdateimagesInput | string[]
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
   field?: Prisma.EnumFieldFieldUpdateOperationsInput | $Enums.Field
   instructorId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -508,7 +492,6 @@ export type CourseCreateManyInput = {
   discountAmount?: number | null
   mainImage: string
   images?: Prisma.CourseCreateimagesInput | string[]
-  fieldId: string
   field: $Enums.Field
   instructorId: string
   createdAt?: Date | string
@@ -528,7 +511,6 @@ export type CourseUpdateManyMutationInput = {
   discountAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.CourseUpdateimagesInput | string[]
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
   field?: Prisma.EnumFieldFieldUpdateOperationsInput | $Enums.Field
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -547,7 +529,6 @@ export type CourseUncheckedUpdateManyInput = {
   discountAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.CourseUpdateimagesInput | string[]
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
   field?: Prisma.EnumFieldFieldUpdateOperationsInput | $Enums.Field
   instructorId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -577,7 +558,6 @@ export type CourseCountOrderByAggregateInput = {
   discountAmount?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
   images?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
   field?: Prisma.SortOrder
   instructorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -601,7 +581,6 @@ export type CourseMaxOrderByAggregateInput = {
   price?: Prisma.SortOrder
   discountAmount?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
   field?: Prisma.SortOrder
   instructorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -620,7 +599,6 @@ export type CourseMinOrderByAggregateInput = {
   price?: Prisma.SortOrder
   discountAmount?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
   field?: Prisma.SortOrder
   instructorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -735,7 +713,6 @@ export type CourseCreateWithoutInstructorInput = {
   discountAmount?: number | null
   mainImage: string
   images?: Prisma.CourseCreateimagesInput | string[]
-  fieldId: string
   field: $Enums.Field
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -755,7 +732,6 @@ export type CourseUncheckedCreateWithoutInstructorInput = {
   discountAmount?: number | null
   mainImage: string
   images?: Prisma.CourseCreateimagesInput | string[]
-  fieldId: string
   field: $Enums.Field
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -804,7 +780,6 @@ export type CourseScalarWhereInput = {
   discountAmount?: Prisma.IntNullableFilter<"Course"> | number | null
   mainImage?: Prisma.StringFilter<"Course"> | string
   images?: Prisma.StringNullableListFilter<"Course">
-  fieldId?: Prisma.StringFilter<"Course"> | string
   field?: Prisma.EnumFieldFilter<"Course"> | $Enums.Field
   instructorId?: Prisma.StringFilter<"Course"> | string
   createdAt?: Prisma.DateTimeFilter<"Course"> | Date | string
@@ -824,7 +799,6 @@ export type CourseCreateWithoutBatchesInput = {
   discountAmount?: number | null
   mainImage: string
   images?: Prisma.CourseCreateimagesInput | string[]
-  fieldId: string
   field: $Enums.Field
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -844,7 +818,6 @@ export type CourseUncheckedCreateWithoutBatchesInput = {
   discountAmount?: number | null
   mainImage: string
   images?: Prisma.CourseCreateimagesInput | string[]
-  fieldId: string
   field: $Enums.Field
   instructorId: string
   createdAt?: Date | string
@@ -880,7 +853,6 @@ export type CourseUpdateWithoutBatchesInput = {
   discountAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.CourseUpdateimagesInput | string[]
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
   field?: Prisma.EnumFieldFieldUpdateOperationsInput | $Enums.Field
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -900,7 +872,6 @@ export type CourseUncheckedUpdateWithoutBatchesInput = {
   discountAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.CourseUpdateimagesInput | string[]
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
   field?: Prisma.EnumFieldFieldUpdateOperationsInput | $Enums.Field
   instructorId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -920,7 +891,6 @@ export type CourseCreateManyInstructorInput = {
   discountAmount?: number | null
   mainImage: string
   images?: Prisma.CourseCreateimagesInput | string[]
-  fieldId: string
   field: $Enums.Field
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -939,7 +909,6 @@ export type CourseUpdateWithoutInstructorInput = {
   discountAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.CourseUpdateimagesInput | string[]
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
   field?: Prisma.EnumFieldFieldUpdateOperationsInput | $Enums.Field
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -959,7 +928,6 @@ export type CourseUncheckedUpdateWithoutInstructorInput = {
   discountAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.CourseUpdateimagesInput | string[]
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
   field?: Prisma.EnumFieldFieldUpdateOperationsInput | $Enums.Field
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -979,7 +947,6 @@ export type CourseUncheckedUpdateManyWithoutInstructorInput = {
   discountAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.CourseUpdateimagesInput | string[]
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
   field?: Prisma.EnumFieldFieldUpdateOperationsInput | $Enums.Field
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1029,7 +996,6 @@ export type CourseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   discountAmount?: boolean
   mainImage?: boolean
   images?: boolean
-  fieldId?: boolean
   field?: boolean
   instructorId?: boolean
   createdAt?: boolean
@@ -1052,7 +1018,6 @@ export type CourseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   discountAmount?: boolean
   mainImage?: boolean
   images?: boolean
-  fieldId?: boolean
   field?: boolean
   instructorId?: boolean
   createdAt?: boolean
@@ -1073,7 +1038,6 @@ export type CourseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   discountAmount?: boolean
   mainImage?: boolean
   images?: boolean
-  fieldId?: boolean
   field?: boolean
   instructorId?: boolean
   createdAt?: boolean
@@ -1094,14 +1058,13 @@ export type CourseSelectScalar = {
   discountAmount?: boolean
   mainImage?: boolean
   images?: boolean
-  fieldId?: boolean
   field?: boolean
   instructorId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titleAr" | "titleEn" | "slug" | "descriptionAr" | "descriptionEn" | "detailsAr" | "detailsEn" | "price" | "discountAmount" | "mainImage" | "images" | "fieldId" | "field" | "instructorId" | "createdAt" | "updatedAt", ExtArgs["result"]["course"]>
+export type CourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titleAr" | "titleEn" | "slug" | "descriptionAr" | "descriptionEn" | "detailsAr" | "detailsEn" | "price" | "discountAmount" | "mainImage" | "images" | "field" | "instructorId" | "createdAt" | "updatedAt", ExtArgs["result"]["course"]>
 export type CourseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   instructor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   batches?: boolean | Prisma.Course$batchesArgs<ExtArgs>
@@ -1133,7 +1096,6 @@ export type $CoursePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     discountAmount: number | null
     mainImage: string
     images: string[]
-    fieldId: string
     field: $Enums.Field
     instructorId: string
     createdAt: Date
@@ -1575,7 +1537,6 @@ export interface CourseFieldRefs {
   readonly discountAmount: Prisma.FieldRef<"Course", 'Int'>
   readonly mainImage: Prisma.FieldRef<"Course", 'String'>
   readonly images: Prisma.FieldRef<"Course", 'String[]'>
-  readonly fieldId: Prisma.FieldRef<"Course", 'String'>
   readonly field: Prisma.FieldRef<"Course", 'Field'>
   readonly instructorId: Prisma.FieldRef<"Course", 'String'>
   readonly createdAt: Prisma.FieldRef<"Course", 'DateTime'>

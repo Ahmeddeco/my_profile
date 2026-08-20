@@ -21,7 +21,7 @@ export const frontNavLinks = [
   },
   {
     title: { ar: "الكورسات", en: "courses" },
-    href: "/route",
+    href: "/courses",
     icon: FaChalkboardTeacher
   },
   {

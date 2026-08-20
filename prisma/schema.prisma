@@ -51,6 +51,7 @@ model Account {
   accessToken           String?
   refreshToken          String?
   idToken               String?
+  issuer                String?
   accessTokenExpiresAt  DateTime?
   refreshTokenExpiresAt DateTime?
   scope                 String?
@@ -106,7 +107,7 @@ enum Role {
   user
   admin
   client
-  instractor
+  instructor
 }
 
 enum ProductType {
@@ -162,6 +163,11 @@ model Article {
   @@map("article")
 }
 
+// ==========================================
+// 1. نموذج الكورس الأساسي (Course)
+// يحتوي على التفاصيل العامة والوصف والسعر الأساسي للدورة.
+// يربط بين المدرب (User) والدفعات الخاصة بالكورس (CourseBatch).
+// ==========================================
 model Course {
   id             String        @id @default(cuid())
   titleAr        String
@@ -175,15 +181,22 @@ model Course {
   discountAmount Int?
   mainImage      String
   images         String[]
-  fieldId        String
   field          Field
   instructorId   String
   instructor     User          @relation(fields: [instructorId], references: [id])
   batches        CourseBatch[]
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
+
+  @@map("course")
 }
 
+// ==========================================
+// 2. نموذج دفعة الكورس / الموعد (CourseBatch)
+// يمثل الدورة المحددة بتاريخ وساعة ومكان معينين.
+// يرتبط بالكورس الرئيسي (Course) وبالموقع الجغرافي (Location)
+// ويحتوي على سجل التسجيلات الخاصة بالطبلة (Enrollment).
+// ==========================================
 model CourseBatch {
   id          String       @id @default(cuid())
   courseId    String
@@ -201,8 +214,14 @@ model CourseBatch {
   @@index([courseId])
   @@index([locationId])
   @@index([startAt])
+  @@map("course_batch")
 }
 
+// ==========================================
+// 3. نموذج عملية تسجيل الطالب (Enrollment)
+// جدول ربط يحدد انضمام طالب (User) إلى دفعة كورس معينة (CourseBatch).
+// يحفظ السعر المدفوع وقت التسجيل ويمنع تكرار تسجيل الطالب في نفس الدفعة.
+// ==========================================
 model Enrollment {
   id        String      @id @default(cuid())
   userId    String
@@ -215,8 +234,13 @@ model Enrollment {
   @@unique([userId, batchId])
   @@index([userId])
   @@index([batchId])
+  @@map("enrollment")
 }
 
+// ==========================================
+// 4. نموذج موقع إقامة الكورس (Location)
+// يحفظ تفاصيل العنوان والإحداثيات الجغرافية لمقر إقامة الدفعة التدريبية.
+// ==========================================
 model Location {
   id            String        @id @default(cuid())
   nameAr        String
@@ -226,6 +250,7 @@ model Location {
   city          String?
   latitude      Float?
   longitude     Float?
+  tel           String?
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   courseBatches CourseBatch[]

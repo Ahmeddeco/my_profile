@@ -20,7 +20,7 @@ export const serverNav = [
   },
   {
     title: { ar: "الكورسات", en: "courses" },
-    href: "/server/route",
+    href: "/server/courses",
     icon: FaChalkboardTeacher
   },
   {

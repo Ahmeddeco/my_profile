@@ -46,6 +46,7 @@ export const addUserAction = async (prevState: unknown, formData: FormData) => {
       formErrors: ["Server Error"],
     })
   }
+  updateTag("users")
   redirect("/server/users")
 }
 
@@ -80,6 +81,7 @@ export const editUserAction = async (prevState: unknown, formData: FormData) => 
       formErrors: ["فشل تحديث البيانات، تأكد من أن المعرف صحيح"],
     })
   }
+  updateTag("users")
   redirect("/server/users")
 }
 

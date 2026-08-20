@@ -101,6 +101,7 @@ export const AccountScalarFieldEnum = {
   accessToken: 'accessToken',
   refreshToken: 'refreshToken',
   idToken: 'idToken',
+  issuer: 'issuer',
   accessTokenExpiresAt: 'accessTokenExpiresAt',
   refreshTokenExpiresAt: 'refreshTokenExpiresAt',
   scope: 'scope',
@@ -197,7 +198,6 @@ export const CourseScalarFieldEnum = {
   discountAmount: 'discountAmount',
   mainImage: 'mainImage',
   images: 'images',
-  fieldId: 'fieldId',
   field: 'field',
   instructorId: 'instructorId',
   createdAt: 'createdAt',
@@ -242,6 +242,7 @@ export const LocationScalarFieldEnum = {
   city: 'city',
   latitude: 'latitude',
   longitude: 'longitude',
+  tel: 'tel',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
