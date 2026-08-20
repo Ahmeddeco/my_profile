@@ -1,5 +1,5 @@
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
-import ServerPageCard from "@/components/backend/ServerPageCard"
+import ServerPageCard from "@/components/server/ServerPageCard"
 import { getAllAdmins } from "@/app/[locale]/server/users/modules/users.data"
 import AddArticle from "@/app/[locale]/server/articles/modules/forms/AddArticle"
 import { Role } from "@/generated/prisma/enums"

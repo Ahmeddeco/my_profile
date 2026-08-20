@@ -1,5 +1,5 @@
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
-import ServerPageCard from "@/components/backend/ServerPageCard"
+import ServerPageCard from "@/components/server/ServerPageCard"
 import { getOneArticle } from "@/app/[locale]/server/articles/modules/article.data"
 import { getAllAdmins } from "@/app/[locale]/server/users/modules/users.data"
 import EditArticle from "@/app/[locale]/server/articles/modules/forms/EditArticle"

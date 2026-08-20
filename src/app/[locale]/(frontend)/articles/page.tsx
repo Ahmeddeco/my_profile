@@ -1,5 +1,5 @@
-import PaginationSection from "@/components/backend/Pagination"
-import ArticleCard from "@/components/pages/articles/ArticleCard"
+import PaginationSection from "@/components/server/Pagination"
+import ArticleCard from "@/components/frontend/articles/ArticleCard"
 import { getAllArticlesForArticlesPage } from "@/app/[locale]/server/articles/modules/article.data"
 import { getDictionary } from "@/locales/dictionaries"
 import { getAllArticlesForArticlesPageType } from "@/app/[locale]/server/articles/modules/article.type"

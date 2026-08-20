@@ -1,7 +1,7 @@
-import Hero from "@/components/pages/home/Hero"
-import Services from "@/components/pages/home/Services"
-import Technologies from "@/components/pages/home/Technologies"
-import WhyYouHireMe from "@/components/pages/home/WhyYouHireMe"
+import Hero from "@/components/frontend/home/Hero"
+import Services from "@/components/frontend/home/Services"
+import Technologies from "@/components/frontend/home/Technologies"
+import WhyYouHireMe from "@/components/frontend/home/WhyYouHireMe"
 
 type Props = {
 	params: Promise<{ locale: "ar" | "en" }>

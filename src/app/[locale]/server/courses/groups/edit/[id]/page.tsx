@@ -5,7 +5,7 @@ import {
 } from "@/app/[locale]/server/courses/(courses)/modules/course.type"
 import EditCourseForm from "@/app/[locale]/server/courses/(courses)/modules/forms/EditCourseForm"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
-import ServerPageCard from "@/components/backend/ServerPageCard"
+import ServerPageCard from "@/components/server/ServerPageCard"
 import { Role } from "@/generated/prisma/enums"
 import { connection } from "next/server"
 

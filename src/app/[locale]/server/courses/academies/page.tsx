@@ -6,64 +6,57 @@ import { Role } from "@/generated/prisma/enums"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import { Badge } from "@/components/ui/badge"
 import { Item, ItemContent, ItemMedia, ItemTitle } from "@/components/ui/item"
-import { dateFormate } from "@/logic/dateFormate"
-import ServerPageCard from "@/components/backend/ServerPageCard"
-import Settings from "@/components/backend/Settings"
-import PaginationSection from "@/components/backend/Pagination"
+import { dateFormate } from "@/helpers/dateFormate"
+import ServerPageCard from "@/components/server/ServerPageCard"
+import Settings from "@/components/server/Settings"
+import PaginationSection from "@/components/server/Pagination"
 import { connection } from "next/server"
-import { getAllCoursesForPageType } from "@/app/[locale]/server/courses/(courses)/modules/course.type"
-import { getAllCoursesForPage } from "@/app/[locale]/server/courses/(courses)/modules/course.data"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { deleteCourseAction } from "@/app/[locale]/server/courses/(courses)/modules/course.action"
+import { getAllAcademiesForPageType } from "@/app/[locale]/server/courses/academies/modules/academy.type"
+import { getAllAcademiesForPage } from "@/app/[locale]/server/courses/academies/modules/academy.data"
+import { deleteAcademyAction } from "@/app/[locale]/server/courses/academies/modules/academy.action"
 
-export default async function CoursesPage({
-	searchParams,
-	params,
-}: {
-	searchParams: Promise<{ page: string; size: string }>
-	params: Promise<{ locale: "en" | "ar" }>
-}) {
+export default async function CoursesPage({ searchParams }: { searchParams: Promise<{ page: string; size: string }> }) {
 	await connection()
 	await isAllowedRoles([Role.admin, Role.instructor])
 
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 10
-	const courses: getAllCoursesForPageType = await getAllCoursesForPage(pageSize, pageNumber)
-	const locale = (await params).locale
+	const academies: getAllAcademiesForPageType = await getAllAcademiesForPage(pageSize, pageNumber)
 
 	return (
 		<ServerPageCard
-			btnTitle="add course"
+			btnTitle="add academy"
 			icon={PlusCircle}
-			title={"all courses"}
-			description={"All courses in the database."}
-			href={"/server/courses/add"}
+			title={"all academies"}
+			description={"All academies in the database."}
+			href={"/server/courses/academies/add"}
 		>
-			{!courses?.data.length ? (
-				<EmptyCard href={"/server/courses/add"} linkTitle={"add course"} />
+			{!academies?.data.length ? (
+				<EmptyCard href={"/server/courses/academies/add"} linkTitle={"add academy"} />
 			) : (
 				<Table>
 					{/* ---------------------------- TableHeader ---------------------------- */}
 					<TableHeader>
 						<TableRow>
 							<TableHead>Image</TableHead>
-							<TableHead>title</TableHead>
-							<TableHead>field</TableHead>
-							<TableHead>instructor</TableHead>
+							<TableHead>name</TableHead>
+							<TableHead>owner</TableHead>
+							<TableHead>tel</TableHead>
 							<TableHead>created At</TableHead>
 							<TableHead className="text-end">settings</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{courses.data.map(({ createdAt, field, id, instructor, mainImage, titleAr, titleEn }) => (
+						{academies.data.map(({ createdAt, id, logo, name, owner, tel }) => (
 							<TableRow key={id}>
 								<TableCell>
-									{mainImage ? (
+									{logo ? (
 										<Image
-											src={mainImage}
-											alt={titleAr}
+											src={logo}
+											alt={"logo"}
 											width={48}
 											height={48}
 											className=" object-cover aspect-square rounded-lg"
@@ -72,38 +65,39 @@ export default async function CoursesPage({
 										<ImageOff size={48} />
 									)}
 								</TableCell>
-								<TableCell>{locale === "en" ? titleEn : titleAr}</TableCell>
-								<TableCell>
-									<Badge>{field}</Badge>
-								</TableCell>
+								<TableCell>{name}</TableCell>
+
 								<TableCell>
 									<Item size={"xs"} className="px-0">
 										<ItemMedia variant={"icon"}>
 											<Avatar>
-												<AvatarImage src={instructor.image ?? ""} />
-												<AvatarFallback>{instructor.name[0]}</AvatarFallback>
+												<AvatarImage src={owner?.image ?? ""} />
+												<AvatarFallback>{owner?.name[0]}</AvatarFallback>
 											</Avatar>
 										</ItemMedia>
 										<ItemContent>
-											<ItemTitle>{instructor.name}</ItemTitle>
+											<ItemTitle>{owner?.name}</ItemTitle>
 										</ItemContent>
 									</Item>
+								</TableCell>
+								<TableCell>
+									<Badge variant={"outline"}>{tel}</Badge>
 								</TableCell>
 								<TableCell>{dateFormate(createdAt)}</TableCell>
 
 								{/* -------------------------------- settings -------------------------------- */}
 								<Settings
 									id={id}
-									deleteAction={deleteCourseAction}
-									editLink={`/server/courses/edit/${id}`}
-									deleteName={"Course"}
+									deleteAction={deleteAcademyAction}
+									editLink={`/server/courses/academies/edit/${id}`}
+									deleteName={"Academy"}
 								/>
 							</TableRow>
 						))}
 					</TableBody>
 					{/* ---------------------------- Pagination ---------------------------- */}
 					<TableCaption>
-						<PaginationSection pageNumber={pageNumber} pageSize={pageSize} totalPages={courses.totalPages} />
+						<PaginationSection pageNumber={pageNumber} pageSize={pageSize} totalPages={academies.totalPages} />
 					</TableCaption>
 				</Table>
 			)}

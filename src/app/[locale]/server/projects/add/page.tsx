@@ -1,5 +1,5 @@
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
-import ServerPageCard from "@/components/backend/ServerPageCard"
+import ServerPageCard from "@/components/server/ServerPageCard"
 import AddProject from "@/app/[locale]/server/projects/modules/forms/AddProject"
 import { Role } from "@/generated/prisma/enums"
 import { connection } from "next/server"

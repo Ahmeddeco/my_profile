@@ -1,12 +1,12 @@
 "use server"
 
 import prisma from "@/lib/prisma"
-import { splittedItems } from "@/logic/splittedItems"
+import { splittedItems } from "@/helpers/splittedItems"
 import { parseWithZod } from "@conform-to/zod"
 import { redirect } from "next/navigation"
 import { refresh, updateTag } from "next/cache"
 import ArticleSchema from "@/app/[locale]/server/articles/modules/article.schema"
-import { DeleteActionState } from "@/components/backend/Settings"
+import { DeleteActionState } from "@/components/server/Settings"
 
 /* ----------------------------- addArticleAction ----------------------------- */
 export const addArticleAction = async (prevState: unknown, formData: FormData) => {

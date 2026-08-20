@@ -1,11 +1,11 @@
-import { getAllInstructorsForSelect, getOneCourse } from "@/app/[locale]/server/courses/(courses)/modules/course.data"
+import { getAllOwnersForSelect, getOneAcademy } from "@/app/[locale]/server/courses/academies/modules/academy.data"
 import {
-	getAllInstructorsForSelectType,
-	getOneCourseType,
-} from "@/app/[locale]/server/courses/(courses)/modules/course.type"
-import EditCourseForm from "@/app/[locale]/server/courses/(courses)/modules/forms/EditCourseForm"
+	getAllOwnersForSelectType,
+	getOneAcademyType,
+} from "@/app/[locale]/server/courses/academies/modules/academy.type"
+import EditAcademy from "@/app/[locale]/server/courses/academies/modules/forms/EditAcademy"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
-import ServerPageCard from "@/components/backend/ServerPageCard"
+import ServerPageCard from "@/components/server/ServerPageCard"
 import { Role } from "@/generated/prisma/enums"
 import { connection } from "next/server"
 
@@ -17,12 +17,16 @@ export default async function EditProjectPage({ params }: Props) {
 	await connection()
 	await isAllowedRoles([Role.admin, Role.instructor])
 	const id = (await params).id
-	const allInstructors: getAllInstructorsForSelectType = await getAllInstructorsForSelect()
-	const course: getOneCourseType = await getOneCourse(id)
+	const owners: getAllOwnersForSelectType = await getAllOwnersForSelect()
+	const academy: getOneAcademyType = await getOneAcademy(id)
 
 	return (
-		<ServerPageCard title={"edit project"} description={"edit project in the database."} href={"/server/courses"}>
-			<EditCourseForm allInstructors={allInstructors} course={course} />
+		<ServerPageCard
+			title={"edit Academy"}
+			description={"edit Academy in the database."}
+			href={"/server/courses/academies"}
+		>
+			<EditAcademy owners={owners} academy={academy} />
 		</ServerPageCard>
 	)
 }

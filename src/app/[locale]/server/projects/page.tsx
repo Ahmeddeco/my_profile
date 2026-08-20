@@ -9,10 +9,10 @@ import { getAllProjectsForServerPage } from "@/app/[locale]/server/projects/modu
 import { deleteProjectAction } from "@/app/[locale]/server/projects/modules/project.action"
 import { Badge } from "@/components/ui/badge"
 import { Item, ItemContent, ItemMedia, ItemTitle } from "@/components/ui/item"
-import { dateFormate } from "@/logic/dateFormate"
-import ServerPageCard from "@/components/backend/ServerPageCard"
-import Settings from "@/components/backend/Settings"
-import PaginationSection from "@/components/backend/Pagination"
+import { dateFormate } from "@/helpers/dateFormate"
+import ServerPageCard from "@/components/server/ServerPageCard"
+import Settings from "@/components/server/Settings"
+import PaginationSection from "@/components/server/Pagination"
 import { connection } from "next/server"
 
 export default async function ProjectsPage({

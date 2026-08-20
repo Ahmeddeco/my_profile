@@ -1,5 +1,5 @@
 import { CircleChevronLeft } from "lucide-react"
-import ServerPageCard from "@/components/backend/ServerPageCard"
+import ServerPageCard from "@/components/server/ServerPageCard"
 import EmptyCard from "@/components/shared/EmptyCard"
 import EditUser from "@/app/[locale]/server/users/modules/forms/EditUser"
 import { Role } from "@/generated/prisma/enums"

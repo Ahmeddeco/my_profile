@@ -1,5 +1,5 @@
 import { PlusCircle } from "lucide-react"
-import ServerPageCard from "@/components/backend/ServerPageCard"
+import ServerPageCard from "@/components/server/ServerPageCard"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import Image from "next/image"
@@ -7,8 +7,8 @@ import { deleteUserAction } from "@/app/[locale]/server/users/modules/user.actio
 import { Role } from "@/generated/prisma/enums"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import { getAllUsers } from "@/app/[locale]/server/users/modules/users.data"
-import Settings from "@/components/backend/Settings"
-import PaginationSection from "@/components/backend/Pagination"
+import Settings from "@/components/server/Settings"
+import PaginationSection from "@/components/server/Pagination"
 import { connection } from "next/server"
 
 export default async function StylesPage({ searchParams }: { searchParams: Promise<{ page: string; size: string }> }) {

@@ -1,8 +1,8 @@
 'use server'
 
-import { DeleteActionState } from "@/components/backend/Settings"
+import { DeleteActionState } from "@/components/server/Settings"
 import prisma from "@/lib/prisma"
-import { splittedImages } from "@/logic/splittedImages"
+import { splittedImages } from "@/helpers/splittedImages"
 import ProjectSchema from "@/app/[locale]/server/projects/modules/project.schema"
 import { parseWithZod } from "@conform-to/zod"
 import { refresh, updateTag } from "next/cache"

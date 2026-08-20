@@ -1,9 +1,9 @@
 'use server'
 
 import CourseSchema from "@/app/[locale]/server/courses/(courses)/modules/course.schema"
-import { DeleteActionState } from "@/components/backend/Settings"
+import { DeleteActionState } from "@/components/server/Settings"
 import prisma from "@/lib/prisma"
-import { splittedImages } from "@/logic/splittedImages"
+import { splittedImages } from "@/helpers/splittedImages"
 import { parseWithZod } from "@conform-to/zod"
 import { refresh, updateTag } from "next/cache"
 import { redirect } from "next/navigation"

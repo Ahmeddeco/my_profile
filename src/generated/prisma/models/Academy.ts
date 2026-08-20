@@ -27,28 +27,37 @@ export type AggregateAcademy = {
 export type AcademyMinAggregateOutputType = {
   id: string | null
   name: string | null
+  slug: string | null
   description: string | null
+  logo: string | null
   tel: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  userId: string | null
 }
 
 export type AcademyMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  slug: string | null
   description: string | null
+  logo: string | null
   tel: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  userId: string | null
 }
 
 export type AcademyCountAggregateOutputType = {
   id: number
   name: number
+  slug: number
   description: number
+  logo: number
   tel: number
   createdAt: number
   updatedAt: number
+  userId: number
   _all: number
 }
 
@@ -56,28 +65,37 @@ export type AcademyCountAggregateOutputType = {
 export type AcademyMinAggregateInputType = {
   id?: true
   name?: true
+  slug?: true
   description?: true
+  logo?: true
   tel?: true
   createdAt?: true
   updatedAt?: true
+  userId?: true
 }
 
 export type AcademyMaxAggregateInputType = {
   id?: true
   name?: true
+  slug?: true
   description?: true
+  logo?: true
   tel?: true
   createdAt?: true
   updatedAt?: true
+  userId?: true
 }
 
 export type AcademyCountAggregateInputType = {
   id?: true
   name?: true
+  slug?: true
   description?: true
+  logo?: true
   tel?: true
   createdAt?: true
   updatedAt?: true
+  userId?: true
   _all?: true
 }
 
@@ -156,10 +174,13 @@ export type AcademyGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type AcademyGroupByOutputType = {
   id: string
   name: string
+  slug: string
   description: string | null
+  logo: string | null
   tel: string
   createdAt: Date
   updatedAt: Date
+  userId: string | null
   _count: AcademyCountAggregateOutputType | null
   _min: AcademyMinAggregateOutputType | null
   _max: AcademyMaxAggregateOutputType | null
@@ -186,43 +207,58 @@ export type AcademyWhereInput = {
   NOT?: Prisma.AcademyWhereInput | Prisma.AcademyWhereInput[]
   id?: Prisma.StringFilter<"Academy"> | string
   name?: Prisma.StringFilter<"Academy"> | string
+  slug?: Prisma.StringFilter<"Academy"> | string
   description?: Prisma.StringNullableFilter<"Academy"> | string | null
+  logo?: Prisma.StringNullableFilter<"Academy"> | string | null
   tel?: Prisma.StringFilter<"Academy"> | string
   createdAt?: Prisma.DateTimeFilter<"Academy"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Academy"> | Date | string
+  userId?: Prisma.StringNullableFilter<"Academy"> | string | null
+  owner?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   branches?: Prisma.BranchListRelationFilter
 }
 
 export type AcademyOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  logo?: Prisma.SortOrderInput | Prisma.SortOrder
   tel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  owner?: Prisma.UserOrderByWithRelationInput
   branches?: Prisma.BranchOrderByRelationAggregateInput
 }
 
 export type AcademyWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  slug?: string
   AND?: Prisma.AcademyWhereInput | Prisma.AcademyWhereInput[]
   OR?: Prisma.AcademyWhereInput[]
   NOT?: Prisma.AcademyWhereInput | Prisma.AcademyWhereInput[]
   name?: Prisma.StringFilter<"Academy"> | string
   description?: Prisma.StringNullableFilter<"Academy"> | string | null
+  logo?: Prisma.StringNullableFilter<"Academy"> | string | null
   tel?: Prisma.StringFilter<"Academy"> | string
   createdAt?: Prisma.DateTimeFilter<"Academy"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Academy"> | Date | string
+  userId?: Prisma.StringNullableFilter<"Academy"> | string | null
+  owner?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   branches?: Prisma.BranchListRelationFilter
-}, "id">
+}, "id" | "slug">
 
 export type AcademyOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  logo?: Prisma.SortOrderInput | Prisma.SortOrder
   tel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.AcademyCountOrderByAggregateInput
   _max?: Prisma.AcademyMaxOrderByAggregateInput
   _min?: Prisma.AcademyMinOrderByAggregateInput
@@ -234,65 +270,85 @@ export type AcademyScalarWhereWithAggregatesInput = {
   NOT?: Prisma.AcademyScalarWhereWithAggregatesInput | Prisma.AcademyScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Academy"> | string
   name?: Prisma.StringWithAggregatesFilter<"Academy"> | string
+  slug?: Prisma.StringWithAggregatesFilter<"Academy"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Academy"> | string | null
+  logo?: Prisma.StringNullableWithAggregatesFilter<"Academy"> | string | null
   tel?: Prisma.StringWithAggregatesFilter<"Academy"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Academy"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Academy"> | Date | string
+  userId?: Prisma.StringNullableWithAggregatesFilter<"Academy"> | string | null
 }
 
 export type AcademyCreateInput = {
   id?: string
   name: string
+  slug: string
   description?: string | null
+  logo?: string | null
   tel: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  owner?: Prisma.UserCreateNestedOneWithoutAcademiesInput
   branches?: Prisma.BranchCreateNestedManyWithoutAcademyInput
 }
 
 export type AcademyUncheckedCreateInput = {
   id?: string
   name: string
+  slug: string
   description?: string | null
+  logo?: string | null
   tel: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  userId?: string | null
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutAcademyInput
 }
 
 export type AcademyUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tel?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneWithoutAcademiesNestedInput
   branches?: Prisma.BranchUpdateManyWithoutAcademyNestedInput
 }
 
 export type AcademyUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tel?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   branches?: Prisma.BranchUncheckedUpdateManyWithoutAcademyNestedInput
 }
 
 export type AcademyCreateManyInput = {
   id?: string
   name: string
+  slug: string
   description?: string | null
+  logo?: string | null
   tel: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  userId?: string | null
 }
 
 export type AcademyUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tel?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -301,42 +357,106 @@ export type AcademyUpdateManyMutationInput = {
 export type AcademyUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tel?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type AcademyListRelationFilter = {
+  every?: Prisma.AcademyWhereInput
+  some?: Prisma.AcademyWhereInput
+  none?: Prisma.AcademyWhereInput
+}
+
+export type AcademyOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type AcademyCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  logo?: Prisma.SortOrder
   tel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type AcademyMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  logo?: Prisma.SortOrder
   tel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type AcademyMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  logo?: Prisma.SortOrder
   tel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type AcademyScalarRelationFilter = {
   is?: Prisma.AcademyWhereInput
   isNot?: Prisma.AcademyWhereInput
+}
+
+export type AcademyCreateNestedManyWithoutOwnerInput = {
+  create?: Prisma.XOR<Prisma.AcademyCreateWithoutOwnerInput, Prisma.AcademyUncheckedCreateWithoutOwnerInput> | Prisma.AcademyCreateWithoutOwnerInput[] | Prisma.AcademyUncheckedCreateWithoutOwnerInput[]
+  connectOrCreate?: Prisma.AcademyCreateOrConnectWithoutOwnerInput | Prisma.AcademyCreateOrConnectWithoutOwnerInput[]
+  createMany?: Prisma.AcademyCreateManyOwnerInputEnvelope
+  connect?: Prisma.AcademyWhereUniqueInput | Prisma.AcademyWhereUniqueInput[]
+}
+
+export type AcademyUncheckedCreateNestedManyWithoutOwnerInput = {
+  create?: Prisma.XOR<Prisma.AcademyCreateWithoutOwnerInput, Prisma.AcademyUncheckedCreateWithoutOwnerInput> | Prisma.AcademyCreateWithoutOwnerInput[] | Prisma.AcademyUncheckedCreateWithoutOwnerInput[]
+  connectOrCreate?: Prisma.AcademyCreateOrConnectWithoutOwnerInput | Prisma.AcademyCreateOrConnectWithoutOwnerInput[]
+  createMany?: Prisma.AcademyCreateManyOwnerInputEnvelope
+  connect?: Prisma.AcademyWhereUniqueInput | Prisma.AcademyWhereUniqueInput[]
+}
+
+export type AcademyUpdateManyWithoutOwnerNestedInput = {
+  create?: Prisma.XOR<Prisma.AcademyCreateWithoutOwnerInput, Prisma.AcademyUncheckedCreateWithoutOwnerInput> | Prisma.AcademyCreateWithoutOwnerInput[] | Prisma.AcademyUncheckedCreateWithoutOwnerInput[]
+  connectOrCreate?: Prisma.AcademyCreateOrConnectWithoutOwnerInput | Prisma.AcademyCreateOrConnectWithoutOwnerInput[]
+  upsert?: Prisma.AcademyUpsertWithWhereUniqueWithoutOwnerInput | Prisma.AcademyUpsertWithWhereUniqueWithoutOwnerInput[]
+  createMany?: Prisma.AcademyCreateManyOwnerInputEnvelope
+  set?: Prisma.AcademyWhereUniqueInput | Prisma.AcademyWhereUniqueInput[]
+  disconnect?: Prisma.AcademyWhereUniqueInput | Prisma.AcademyWhereUniqueInput[]
+  delete?: Prisma.AcademyWhereUniqueInput | Prisma.AcademyWhereUniqueInput[]
+  connect?: Prisma.AcademyWhereUniqueInput | Prisma.AcademyWhereUniqueInput[]
+  update?: Prisma.AcademyUpdateWithWhereUniqueWithoutOwnerInput | Prisma.AcademyUpdateWithWhereUniqueWithoutOwnerInput[]
+  updateMany?: Prisma.AcademyUpdateManyWithWhereWithoutOwnerInput | Prisma.AcademyUpdateManyWithWhereWithoutOwnerInput[]
+  deleteMany?: Prisma.AcademyScalarWhereInput | Prisma.AcademyScalarWhereInput[]
+}
+
+export type AcademyUncheckedUpdateManyWithoutOwnerNestedInput = {
+  create?: Prisma.XOR<Prisma.AcademyCreateWithoutOwnerInput, Prisma.AcademyUncheckedCreateWithoutOwnerInput> | Prisma.AcademyCreateWithoutOwnerInput[] | Prisma.AcademyUncheckedCreateWithoutOwnerInput[]
+  connectOrCreate?: Prisma.AcademyCreateOrConnectWithoutOwnerInput | Prisma.AcademyCreateOrConnectWithoutOwnerInput[]
+  upsert?: Prisma.AcademyUpsertWithWhereUniqueWithoutOwnerInput | Prisma.AcademyUpsertWithWhereUniqueWithoutOwnerInput[]
+  createMany?: Prisma.AcademyCreateManyOwnerInputEnvelope
+  set?: Prisma.AcademyWhereUniqueInput | Prisma.AcademyWhereUniqueInput[]
+  disconnect?: Prisma.AcademyWhereUniqueInput | Prisma.AcademyWhereUniqueInput[]
+  delete?: Prisma.AcademyWhereUniqueInput | Prisma.AcademyWhereUniqueInput[]
+  connect?: Prisma.AcademyWhereUniqueInput | Prisma.AcademyWhereUniqueInput[]
+  update?: Prisma.AcademyUpdateWithWhereUniqueWithoutOwnerInput | Prisma.AcademyUpdateWithWhereUniqueWithoutOwnerInput[]
+  updateMany?: Prisma.AcademyUpdateManyWithWhereWithoutOwnerInput | Prisma.AcademyUpdateManyWithWhereWithoutOwnerInput[]
+  deleteMany?: Prisma.AcademyScalarWhereInput | Prisma.AcademyScalarWhereInput[]
 }
 
 export type AcademyCreateNestedOneWithoutBranchesInput = {
@@ -353,22 +473,93 @@ export type AcademyUpdateOneRequiredWithoutBranchesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AcademyUpdateToOneWithWhereWithoutBranchesInput, Prisma.AcademyUpdateWithoutBranchesInput>, Prisma.AcademyUncheckedUpdateWithoutBranchesInput>
 }
 
-export type AcademyCreateWithoutBranchesInput = {
+export type AcademyCreateWithoutOwnerInput = {
   id?: string
   name: string
+  slug: string
   description?: string | null
+  logo?: string | null
   tel: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutAcademyInput
+}
+
+export type AcademyUncheckedCreateWithoutOwnerInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  logo?: string | null
+  tel: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutAcademyInput
+}
+
+export type AcademyCreateOrConnectWithoutOwnerInput = {
+  where: Prisma.AcademyWhereUniqueInput
+  create: Prisma.XOR<Prisma.AcademyCreateWithoutOwnerInput, Prisma.AcademyUncheckedCreateWithoutOwnerInput>
+}
+
+export type AcademyCreateManyOwnerInputEnvelope = {
+  data: Prisma.AcademyCreateManyOwnerInput | Prisma.AcademyCreateManyOwnerInput[]
+  skipDuplicates?: boolean
+}
+
+export type AcademyUpsertWithWhereUniqueWithoutOwnerInput = {
+  where: Prisma.AcademyWhereUniqueInput
+  update: Prisma.XOR<Prisma.AcademyUpdateWithoutOwnerInput, Prisma.AcademyUncheckedUpdateWithoutOwnerInput>
+  create: Prisma.XOR<Prisma.AcademyCreateWithoutOwnerInput, Prisma.AcademyUncheckedCreateWithoutOwnerInput>
+}
+
+export type AcademyUpdateWithWhereUniqueWithoutOwnerInput = {
+  where: Prisma.AcademyWhereUniqueInput
+  data: Prisma.XOR<Prisma.AcademyUpdateWithoutOwnerInput, Prisma.AcademyUncheckedUpdateWithoutOwnerInput>
+}
+
+export type AcademyUpdateManyWithWhereWithoutOwnerInput = {
+  where: Prisma.AcademyScalarWhereInput
+  data: Prisma.XOR<Prisma.AcademyUpdateManyMutationInput, Prisma.AcademyUncheckedUpdateManyWithoutOwnerInput>
+}
+
+export type AcademyScalarWhereInput = {
+  AND?: Prisma.AcademyScalarWhereInput | Prisma.AcademyScalarWhereInput[]
+  OR?: Prisma.AcademyScalarWhereInput[]
+  NOT?: Prisma.AcademyScalarWhereInput | Prisma.AcademyScalarWhereInput[]
+  id?: Prisma.StringFilter<"Academy"> | string
+  name?: Prisma.StringFilter<"Academy"> | string
+  slug?: Prisma.StringFilter<"Academy"> | string
+  description?: Prisma.StringNullableFilter<"Academy"> | string | null
+  logo?: Prisma.StringNullableFilter<"Academy"> | string | null
+  tel?: Prisma.StringFilter<"Academy"> | string
+  createdAt?: Prisma.DateTimeFilter<"Academy"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Academy"> | Date | string
+  userId?: Prisma.StringNullableFilter<"Academy"> | string | null
+}
+
+export type AcademyCreateWithoutBranchesInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  logo?: string | null
+  tel: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner?: Prisma.UserCreateNestedOneWithoutAcademiesInput
 }
 
 export type AcademyUncheckedCreateWithoutBranchesInput = {
   id?: string
   name: string
+  slug: string
   description?: string | null
+  logo?: string | null
   tel: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  userId?: string | null
 }
 
 export type AcademyCreateOrConnectWithoutBranchesInput = {
@@ -390,16 +581,68 @@ export type AcademyUpdateToOneWithWhereWithoutBranchesInput = {
 export type AcademyUpdateWithoutBranchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tel?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneWithoutAcademiesNestedInput
 }
 
 export type AcademyUncheckedUpdateWithoutBranchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tel?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type AcademyCreateManyOwnerInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  logo?: string | null
+  tel: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type AcademyUpdateWithoutOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tel?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutAcademyNestedInput
+}
+
+export type AcademyUncheckedUpdateWithoutOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tel?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutAcademyNestedInput
+}
+
+export type AcademyUncheckedUpdateManyWithoutOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tel?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -439,10 +682,14 @@ export type AcademyCountOutputTypeCountBranchesArgs<ExtArgs extends runtime.Type
 export type AcademySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  slug?: boolean
   description?: boolean
+  logo?: boolean
   tel?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  userId?: boolean
+  owner?: boolean | Prisma.Academy$ownerArgs<ExtArgs>
   branches?: boolean | Prisma.Academy$branchesArgs<ExtArgs>
   _count?: boolean | Prisma.AcademyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["academy"]>
@@ -450,50 +697,70 @@ export type AcademySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type AcademySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  slug?: boolean
   description?: boolean
+  logo?: boolean
   tel?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  userId?: boolean
+  owner?: boolean | Prisma.Academy$ownerArgs<ExtArgs>
 }, ExtArgs["result"]["academy"]>
 
 export type AcademySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  slug?: boolean
   description?: boolean
+  logo?: boolean
   tel?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  userId?: boolean
+  owner?: boolean | Prisma.Academy$ownerArgs<ExtArgs>
 }, ExtArgs["result"]["academy"]>
 
 export type AcademySelectScalar = {
   id?: boolean
   name?: boolean
+  slug?: boolean
   description?: boolean
+  logo?: boolean
   tel?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  userId?: boolean
 }
 
-export type AcademyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "tel" | "createdAt" | "updatedAt", ExtArgs["result"]["academy"]>
+export type AcademyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "logo" | "tel" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["academy"]>
 export type AcademyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  owner?: boolean | Prisma.Academy$ownerArgs<ExtArgs>
   branches?: boolean | Prisma.Academy$branchesArgs<ExtArgs>
   _count?: boolean | Prisma.AcademyCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type AcademyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type AcademyIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type AcademyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  owner?: boolean | Prisma.Academy$ownerArgs<ExtArgs>
+}
+export type AcademyIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  owner?: boolean | Prisma.Academy$ownerArgs<ExtArgs>
+}
 
 export type $AcademyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Academy"
   objects: {
+    owner: Prisma.$UserPayload<ExtArgs> | null
     branches: Prisma.$BranchPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    slug: string
     description: string | null
+    logo: string | null
     tel: string
     createdAt: Date
     updatedAt: Date
+    userId: string | null
   }, ExtArgs["result"]["academy"]>
   composites: {}
 }
@@ -888,6 +1155,7 @@ readonly fields: AcademyFieldRefs;
  */
 export interface Prisma__AcademyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  owner<T extends Prisma.Academy$ownerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Academy$ownerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   branches<T extends Prisma.Academy$branchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Academy$branchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -920,10 +1188,13 @@ export interface Prisma__AcademyClient<T, Null = never, ExtArgs extends runtime.
 export interface AcademyFieldRefs {
   readonly id: Prisma.FieldRef<"Academy", 'String'>
   readonly name: Prisma.FieldRef<"Academy", 'String'>
+  readonly slug: Prisma.FieldRef<"Academy", 'String'>
   readonly description: Prisma.FieldRef<"Academy", 'String'>
+  readonly logo: Prisma.FieldRef<"Academy", 'String'>
   readonly tel: Prisma.FieldRef<"Academy", 'String'>
   readonly createdAt: Prisma.FieldRef<"Academy", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Academy", 'DateTime'>
+  readonly userId: Prisma.FieldRef<"Academy", 'String'>
 }
     
 
@@ -1178,6 +1449,10 @@ export type AcademyCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    */
   data: Prisma.AcademyCreateManyInput | Prisma.AcademyCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AcademyIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1248,6 +1523,10 @@ export type AcademyUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many Academies to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AcademyIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1314,6 +1593,25 @@ export type AcademyDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Academies to delete.
    */
   limit?: number
+}
+
+/**
+ * Academy.owner
+ */
+export type Academy$ownerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

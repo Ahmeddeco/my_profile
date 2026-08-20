@@ -239,10 +239,13 @@ export type EnrollmentScalarFieldEnum = (typeof EnrollmentScalarFieldEnum)[keyof
 export const AcademyScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  slug: 'slug',
   description: 'description',
+  logo: 'logo',
   tel: 'tel',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type AcademyScalarFieldEnum = (typeof AcademyScalarFieldEnum)[keyof typeof AcademyScalarFieldEnum]

@@ -1,5 +1,5 @@
-import PaginationSection from "@/components/backend/Pagination"
-import ProjectCard from "@/components/pages/projects/ProjectCard"
+import PaginationSection from "@/components/server/Pagination"
+import ProjectCard from "@/components/frontend/projects/ProjectCard"
 import CategoryFilter from "@/components/shared/CategoryFilter"
 import { getAllProjectsByCategory } from "@/app/[locale]/server/projects/modules/project.data"
 import { ProductType } from "@/generated/prisma/enums"

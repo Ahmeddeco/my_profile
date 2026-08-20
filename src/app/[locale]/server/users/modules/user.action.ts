@@ -1,6 +1,6 @@
 'use server'
 
-import { DeleteActionState } from "@/components/backend/Settings"
+import { DeleteActionState } from "@/components/server/Settings"
 import prisma from "@/lib/prisma"
 import UserSchema from "@/app/[locale]/server/users/modules/user.schema"
 import { parseWithZod } from "@conform-to/zod"
