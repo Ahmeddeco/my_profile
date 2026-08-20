@@ -305,7 +305,7 @@ export type CourseWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Course"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Course"> | Date | string
   instructor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  batches?: Prisma.CourseBatchListRelationFilter
+  group?: Prisma.GroupListRelationFilter
 }
 
 export type CourseOrderByWithRelationInput = {
@@ -326,7 +326,7 @@ export type CourseOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   instructor?: Prisma.UserOrderByWithRelationInput
-  batches?: Prisma.CourseBatchOrderByRelationAggregateInput
+  group?: Prisma.GroupOrderByRelationAggregateInput
 }
 
 export type CourseWhereUniqueInput = Prisma.AtLeast<{
@@ -350,7 +350,7 @@ export type CourseWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Course"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Course"> | Date | string
   instructor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  batches?: Prisma.CourseBatchListRelationFilter
+  group?: Prisma.GroupListRelationFilter
 }, "id" | "slug">
 
 export type CourseOrderByWithAggregationInput = {
@@ -416,7 +416,7 @@ export type CourseCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   instructor: Prisma.UserCreateNestedOneWithoutCoursesInput
-  batches?: Prisma.CourseBatchCreateNestedManyWithoutCourseInput
+  group?: Prisma.GroupCreateNestedManyWithoutCourseInput
 }
 
 export type CourseUncheckedCreateInput = {
@@ -436,7 +436,7 @@ export type CourseUncheckedCreateInput = {
   instructorId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  batches?: Prisma.CourseBatchUncheckedCreateNestedManyWithoutCourseInput
+  group?: Prisma.GroupUncheckedCreateNestedManyWithoutCourseInput
 }
 
 export type CourseUpdateInput = {
@@ -456,7 +456,7 @@ export type CourseUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   instructor?: Prisma.UserUpdateOneRequiredWithoutCoursesNestedInput
-  batches?: Prisma.CourseBatchUpdateManyWithoutCourseNestedInput
+  group?: Prisma.GroupUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseUncheckedUpdateInput = {
@@ -476,7 +476,7 @@ export type CourseUncheckedUpdateInput = {
   instructorId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batches?: Prisma.CourseBatchUncheckedUpdateManyWithoutCourseNestedInput
+  group?: Prisma.GroupUncheckedUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseCreateManyInput = {
@@ -686,18 +686,18 @@ export type EnumFieldFieldUpdateOperationsInput = {
   set?: $Enums.Field
 }
 
-export type CourseCreateNestedOneWithoutBatchesInput = {
-  create?: Prisma.XOR<Prisma.CourseCreateWithoutBatchesInput, Prisma.CourseUncheckedCreateWithoutBatchesInput>
-  connectOrCreate?: Prisma.CourseCreateOrConnectWithoutBatchesInput
+export type CourseCreateNestedOneWithoutGroupInput = {
+  create?: Prisma.XOR<Prisma.CourseCreateWithoutGroupInput, Prisma.CourseUncheckedCreateWithoutGroupInput>
+  connectOrCreate?: Prisma.CourseCreateOrConnectWithoutGroupInput
   connect?: Prisma.CourseWhereUniqueInput
 }
 
-export type CourseUpdateOneRequiredWithoutBatchesNestedInput = {
-  create?: Prisma.XOR<Prisma.CourseCreateWithoutBatchesInput, Prisma.CourseUncheckedCreateWithoutBatchesInput>
-  connectOrCreate?: Prisma.CourseCreateOrConnectWithoutBatchesInput
-  upsert?: Prisma.CourseUpsertWithoutBatchesInput
+export type CourseUpdateOneRequiredWithoutGroupNestedInput = {
+  create?: Prisma.XOR<Prisma.CourseCreateWithoutGroupInput, Prisma.CourseUncheckedCreateWithoutGroupInput>
+  connectOrCreate?: Prisma.CourseCreateOrConnectWithoutGroupInput
+  upsert?: Prisma.CourseUpsertWithoutGroupInput
   connect?: Prisma.CourseWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CourseUpdateToOneWithWhereWithoutBatchesInput, Prisma.CourseUpdateWithoutBatchesInput>, Prisma.CourseUncheckedUpdateWithoutBatchesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CourseUpdateToOneWithWhereWithoutGroupInput, Prisma.CourseUpdateWithoutGroupInput>, Prisma.CourseUncheckedUpdateWithoutGroupInput>
 }
 
 export type CourseCreateWithoutInstructorInput = {
@@ -716,7 +716,7 @@ export type CourseCreateWithoutInstructorInput = {
   field: $Enums.Field
   createdAt?: Date | string
   updatedAt?: Date | string
-  batches?: Prisma.CourseBatchCreateNestedManyWithoutCourseInput
+  group?: Prisma.GroupCreateNestedManyWithoutCourseInput
 }
 
 export type CourseUncheckedCreateWithoutInstructorInput = {
@@ -735,7 +735,7 @@ export type CourseUncheckedCreateWithoutInstructorInput = {
   field: $Enums.Field
   createdAt?: Date | string
   updatedAt?: Date | string
-  batches?: Prisma.CourseBatchUncheckedCreateNestedManyWithoutCourseInput
+  group?: Prisma.GroupUncheckedCreateNestedManyWithoutCourseInput
 }
 
 export type CourseCreateOrConnectWithoutInstructorInput = {
@@ -786,7 +786,7 @@ export type CourseScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Course"> | Date | string
 }
 
-export type CourseCreateWithoutBatchesInput = {
+export type CourseCreateWithoutGroupInput = {
   id?: string
   titleAr: string
   titleEn: string
@@ -805,7 +805,7 @@ export type CourseCreateWithoutBatchesInput = {
   instructor: Prisma.UserCreateNestedOneWithoutCoursesInput
 }
 
-export type CourseUncheckedCreateWithoutBatchesInput = {
+export type CourseUncheckedCreateWithoutGroupInput = {
   id?: string
   titleAr: string
   titleEn: string
@@ -824,23 +824,23 @@ export type CourseUncheckedCreateWithoutBatchesInput = {
   updatedAt?: Date | string
 }
 
-export type CourseCreateOrConnectWithoutBatchesInput = {
+export type CourseCreateOrConnectWithoutGroupInput = {
   where: Prisma.CourseWhereUniqueInput
-  create: Prisma.XOR<Prisma.CourseCreateWithoutBatchesInput, Prisma.CourseUncheckedCreateWithoutBatchesInput>
+  create: Prisma.XOR<Prisma.CourseCreateWithoutGroupInput, Prisma.CourseUncheckedCreateWithoutGroupInput>
 }
 
-export type CourseUpsertWithoutBatchesInput = {
-  update: Prisma.XOR<Prisma.CourseUpdateWithoutBatchesInput, Prisma.CourseUncheckedUpdateWithoutBatchesInput>
-  create: Prisma.XOR<Prisma.CourseCreateWithoutBatchesInput, Prisma.CourseUncheckedCreateWithoutBatchesInput>
+export type CourseUpsertWithoutGroupInput = {
+  update: Prisma.XOR<Prisma.CourseUpdateWithoutGroupInput, Prisma.CourseUncheckedUpdateWithoutGroupInput>
+  create: Prisma.XOR<Prisma.CourseCreateWithoutGroupInput, Prisma.CourseUncheckedCreateWithoutGroupInput>
   where?: Prisma.CourseWhereInput
 }
 
-export type CourseUpdateToOneWithWhereWithoutBatchesInput = {
+export type CourseUpdateToOneWithWhereWithoutGroupInput = {
   where?: Prisma.CourseWhereInput
-  data: Prisma.XOR<Prisma.CourseUpdateWithoutBatchesInput, Prisma.CourseUncheckedUpdateWithoutBatchesInput>
+  data: Prisma.XOR<Prisma.CourseUpdateWithoutGroupInput, Prisma.CourseUncheckedUpdateWithoutGroupInput>
 }
 
-export type CourseUpdateWithoutBatchesInput = {
+export type CourseUpdateWithoutGroupInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titleAr?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
@@ -859,7 +859,7 @@ export type CourseUpdateWithoutBatchesInput = {
   instructor?: Prisma.UserUpdateOneRequiredWithoutCoursesNestedInput
 }
 
-export type CourseUncheckedUpdateWithoutBatchesInput = {
+export type CourseUncheckedUpdateWithoutGroupInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titleAr?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
@@ -912,7 +912,7 @@ export type CourseUpdateWithoutInstructorInput = {
   field?: Prisma.EnumFieldFieldUpdateOperationsInput | $Enums.Field
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batches?: Prisma.CourseBatchUpdateManyWithoutCourseNestedInput
+  group?: Prisma.GroupUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseUncheckedUpdateWithoutInstructorInput = {
@@ -931,7 +931,7 @@ export type CourseUncheckedUpdateWithoutInstructorInput = {
   field?: Prisma.EnumFieldFieldUpdateOperationsInput | $Enums.Field
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batches?: Prisma.CourseBatchUncheckedUpdateManyWithoutCourseNestedInput
+  group?: Prisma.GroupUncheckedUpdateManyWithoutCourseNestedInput
 }
 
 export type CourseUncheckedUpdateManyWithoutInstructorInput = {
@@ -958,11 +958,11 @@ export type CourseUncheckedUpdateManyWithoutInstructorInput = {
  */
 
 export type CourseCountOutputType = {
-  batches: number
+  group: number
 }
 
 export type CourseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  batches?: boolean | CourseCountOutputTypeCountBatchesArgs
+  group?: boolean | CourseCountOutputTypeCountGroupArgs
 }
 
 /**
@@ -978,8 +978,8 @@ export type CourseCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * CourseCountOutputType without action
  */
-export type CourseCountOutputTypeCountBatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CourseBatchWhereInput
+export type CourseCountOutputTypeCountGroupArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GroupWhereInput
 }
 
 
@@ -1001,7 +1001,7 @@ export type CourseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createdAt?: boolean
   updatedAt?: boolean
   instructor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  batches?: boolean | Prisma.Course$batchesArgs<ExtArgs>
+  group?: boolean | Prisma.Course$groupArgs<ExtArgs>
   _count?: boolean | Prisma.CourseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["course"]>
 
@@ -1067,7 +1067,7 @@ export type CourseSelectScalar = {
 export type CourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titleAr" | "titleEn" | "slug" | "descriptionAr" | "descriptionEn" | "detailsAr" | "detailsEn" | "price" | "discountAmount" | "mainImage" | "images" | "field" | "instructorId" | "createdAt" | "updatedAt", ExtArgs["result"]["course"]>
 export type CourseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   instructor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  batches?: boolean | Prisma.Course$batchesArgs<ExtArgs>
+  group?: boolean | Prisma.Course$groupArgs<ExtArgs>
   _count?: boolean | Prisma.CourseCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CourseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1081,7 +1081,7 @@ export type $CoursePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Course"
   objects: {
     instructor: Prisma.$UserPayload<ExtArgs>
-    batches: Prisma.$CourseBatchPayload<ExtArgs>[]
+    group: Prisma.$GroupPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1495,7 +1495,7 @@ readonly fields: CourseFieldRefs;
 export interface Prisma__CourseClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   instructor<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  batches<T extends Prisma.Course$batchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Course$batchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CourseBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  group<T extends Prisma.Course$groupArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Course$groupArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1942,27 +1942,27 @@ export type CourseDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Course.batches
+ * Course.group
  */
-export type Course$batchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Course$groupArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the CourseBatch
+   * Select specific fields to fetch from the Group
    */
-  select?: Prisma.CourseBatchSelect<ExtArgs> | null
+  select?: Prisma.GroupSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the CourseBatch
+   * Omit specific fields from the Group
    */
-  omit?: Prisma.CourseBatchOmit<ExtArgs> | null
+  omit?: Prisma.GroupOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.CourseBatchInclude<ExtArgs> | null
-  where?: Prisma.CourseBatchWhereInput
-  orderBy?: Prisma.CourseBatchOrderByWithRelationInput | Prisma.CourseBatchOrderByWithRelationInput[]
-  cursor?: Prisma.CourseBatchWhereUniqueInput
+  include?: Prisma.GroupInclude<ExtArgs> | null
+  where?: Prisma.GroupWhereInput
+  orderBy?: Prisma.GroupOrderByWithRelationInput | Prisma.GroupOrderByWithRelationInput[]
+  cursor?: Prisma.GroupWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.CourseBatchScalarFieldEnum | Prisma.CourseBatchScalarFieldEnum[]
+  distinct?: Prisma.GroupScalarFieldEnum | Prisma.GroupScalarFieldEnum[]
 }
 
 /**

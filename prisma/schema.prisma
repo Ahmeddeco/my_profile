@@ -163,99 +163,94 @@ model Article {
   @@map("article")
 }
 
-// ==========================================
-// 1. نموذج الكورس الأساسي (Course)
-// يحتوي على التفاصيل العامة والوصف والسعر الأساسي للدورة.
-// يربط بين المدرب (User) والدفعات الخاصة بالكورس (CourseBatch).
-// ==========================================
 model Course {
-  id             String        @id @default(cuid())
+  id             String   @id @default(cuid())
   titleAr        String
   titleEn        String
-  slug           String        @unique
-  descriptionAr  String        @db.Text
-  descriptionEn  String        @db.Text
-  detailsAr      String        @db.Text
-  detailsEn      String        @db.Text
+  slug           String   @unique
+  descriptionAr  String   @db.Text
+  descriptionEn  String   @db.Text
+  detailsAr      String   @db.Text
+  detailsEn      String   @db.Text
   price          Int
   discountAmount Int?
   mainImage      String
   images         String[]
   field          Field
   instructorId   String
-  instructor     User          @relation(fields: [instructorId], references: [id])
-  batches        CourseBatch[]
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  instructor     User     @relation(fields: [instructorId], references: [id])
+  group          Group[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   @@map("course")
 }
 
-// ==========================================
-// 2. نموذج دفعة الكورس / الموعد (CourseBatch)
-// يمثل الدورة المحددة بتاريخ وساعة ومكان معينين.
-// يرتبط بالكورس الرئيسي (Course) وبالموقع الجغرافي (Location)
-// ويحتوي على سجل التسجيلات الخاصة بالطبلة (Enrollment).
-// ==========================================
-model CourseBatch {
+model Group {
   id          String       @id @default(cuid())
   courseId    String
   course      Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  locationId  String
-  location    Location     @relation(fields: [locationId], references: [id])
+  branch      Branch       @relation(fields: [branchId], references: [id])
   startAt     DateTime
   endAt       DateTime?
   capacity    Int?
+  price       Int?
   status      BatchStatus  @default(UPCOMING)
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   enrollments Enrollment[]
+  branchId    String
 
   @@index([courseId])
-  @@index([locationId])
+  @@index([branchId])
   @@index([startAt])
-  @@map("course_batch")
+  @@map("batch")
 }
 
-// ==========================================
-// 3. نموذج عملية تسجيل الطالب (Enrollment)
-// جدول ربط يحدد انضمام طالب (User) إلى دفعة كورس معينة (CourseBatch).
-// يحفظ السعر المدفوع وقت التسجيل ويمنع تكرار تسجيل الطالب في نفس الدفعة.
-// ==========================================
 model Enrollment {
-  id        String      @id @default(cuid())
+  id        String           @id @default(cuid())
   userId    String
-  user      User        @relation(fields: [userId], references: [id])
-  batchId   String
-  batch     CourseBatch @relation(fields: [batchId], references: [id])
+  user      User             @relation(fields: [userId], references: [id])
+  groupId   String
+  group     Group            @relation(fields: [groupId], references: [id], onDelete: Restrict)
   price     Int
-  createdAt DateTime    @default(now())
+  status    EnrollmentStatus @default(CONFIRMED)
+  createdAt DateTime         @default(now())
 
-  @@unique([userId, batchId])
+  @@unique([userId, groupId])
   @@index([userId])
-  @@index([batchId])
+  @@index([groupId])
   @@map("enrollment")
 }
 
-// ==========================================
-// 4. نموذج موقع إقامة الكورس (Location)
-// يحفظ تفاصيل العنوان والإحداثيات الجغرافية لمقر إقامة الدفعة التدريبية.
-// ==========================================
-model Location {
-  id            String        @id @default(cuid())
-  nameAr        String
-  nameEn        String
-  country       String?
-  state         String?
-  city          String?
-  latitude      Float?
-  longitude     Float?
-  tel           String?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  courseBatches CourseBatch[]
+model Academy {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  tel         String
+  branches    Branch[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  @@map("location")
+  @@map("academy")
+}
+
+model Branch {
+  id        String   @id @default(cuid())
+  name      String
+  country   String?
+  state     String?
+  city      String?
+  latitude  Float?
+  longitude Float?
+  tel       String?
+  group     Group[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  academy   Academy  @relation(fields: [academyId], references: [id], onDelete: Cascade)
+  academyId String
+
+  @@map("branch")
 }
 
 enum Field {
@@ -274,4 +269,11 @@ enum BatchStatus {
   STARTED
   COMPLETED
   CANCELLED
+}
+
+enum EnrollmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  REFUNDED
 }

@@ -58,9 +58,10 @@ export const ModelName = {
   Project: 'Project',
   Article: 'Article',
   Course: 'Course',
-  CourseBatch: 'CourseBatch',
+  Group: 'Group',
   Enrollment: 'Enrollment',
-  Location: 'Location'
+  Academy: 'Academy',
+  Branch: 'Branch'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -207,36 +208,49 @@ export const CourseScalarFieldEnum = {
 export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
 
 
-export const CourseBatchScalarFieldEnum = {
+export const GroupScalarFieldEnum = {
   id: 'id',
   courseId: 'courseId',
-  locationId: 'locationId',
   startAt: 'startAt',
   endAt: 'endAt',
   capacity: 'capacity',
+  price: 'price',
   status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  branchId: 'branchId'
 } as const
 
-export type CourseBatchScalarFieldEnum = (typeof CourseBatchScalarFieldEnum)[keyof typeof CourseBatchScalarFieldEnum]
+export type GroupScalarFieldEnum = (typeof GroupScalarFieldEnum)[keyof typeof GroupScalarFieldEnum]
 
 
 export const EnrollmentScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  batchId: 'batchId',
+  groupId: 'groupId',
   price: 'price',
+  status: 'status',
   createdAt: 'createdAt'
 } as const
 
 export type EnrollmentScalarFieldEnum = (typeof EnrollmentScalarFieldEnum)[keyof typeof EnrollmentScalarFieldEnum]
 
 
-export const LocationScalarFieldEnum = {
+export const AcademyScalarFieldEnum = {
   id: 'id',
-  nameAr: 'nameAr',
-  nameEn: 'nameEn',
+  name: 'name',
+  description: 'description',
+  tel: 'tel',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AcademyScalarFieldEnum = (typeof AcademyScalarFieldEnum)[keyof typeof AcademyScalarFieldEnum]
+
+
+export const BranchScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
   country: 'country',
   state: 'state',
   city: 'city',
@@ -244,10 +258,11 @@ export const LocationScalarFieldEnum = {
   longitude: 'longitude',
   tel: 'tel',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  academyId: 'academyId'
 } as const
 
-export type LocationScalarFieldEnum = (typeof LocationScalarFieldEnum)[keyof typeof LocationScalarFieldEnum]
+export type BranchScalarFieldEnum = (typeof BranchScalarFieldEnum)[keyof typeof BranchScalarFieldEnum]
 
 
 export const SortOrder = {

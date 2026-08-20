@@ -50,3 +50,13 @@ export const BatchStatus = {
 } as const
 
 export type BatchStatus = (typeof BatchStatus)[keyof typeof BatchStatus]
+
+
+export const EnrollmentStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  CANCELLED: 'CANCELLED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type EnrollmentStatus = (typeof EnrollmentStatus)[keyof typeof EnrollmentStatus]

@@ -37,24 +37,27 @@ export type EnrollmentSumAggregateOutputType = {
 export type EnrollmentMinAggregateOutputType = {
   id: string | null
   userId: string | null
-  batchId: string | null
+  groupId: string | null
   price: number | null
+  status: $Enums.EnrollmentStatus | null
   createdAt: Date | null
 }
 
 export type EnrollmentMaxAggregateOutputType = {
   id: string | null
   userId: string | null
-  batchId: string | null
+  groupId: string | null
   price: number | null
+  status: $Enums.EnrollmentStatus | null
   createdAt: Date | null
 }
 
 export type EnrollmentCountAggregateOutputType = {
   id: number
   userId: number
-  batchId: number
+  groupId: number
   price: number
+  status: number
   createdAt: number
   _all: number
 }
@@ -71,24 +74,27 @@ export type EnrollmentSumAggregateInputType = {
 export type EnrollmentMinAggregateInputType = {
   id?: true
   userId?: true
-  batchId?: true
+  groupId?: true
   price?: true
+  status?: true
   createdAt?: true
 }
 
 export type EnrollmentMaxAggregateInputType = {
   id?: true
   userId?: true
-  batchId?: true
+  groupId?: true
   price?: true
+  status?: true
   createdAt?: true
 }
 
 export type EnrollmentCountAggregateInputType = {
   id?: true
   userId?: true
-  batchId?: true
+  groupId?: true
   price?: true
+  status?: true
   createdAt?: true
   _all?: true
 }
@@ -182,8 +188,9 @@ export type EnrollmentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type EnrollmentGroupByOutputType = {
   id: string
   userId: string
-  batchId: string
+  groupId: string
   price: number
+  status: $Enums.EnrollmentStatus
   createdAt: Date
   _count: EnrollmentCountAggregateOutputType | null
   _avg: EnrollmentAvgAggregateOutputType | null
@@ -213,42 +220,46 @@ export type EnrollmentWhereInput = {
   NOT?: Prisma.EnrollmentWhereInput | Prisma.EnrollmentWhereInput[]
   id?: Prisma.StringFilter<"Enrollment"> | string
   userId?: Prisma.StringFilter<"Enrollment"> | string
-  batchId?: Prisma.StringFilter<"Enrollment"> | string
+  groupId?: Prisma.StringFilter<"Enrollment"> | string
   price?: Prisma.IntFilter<"Enrollment"> | number
+  status?: Prisma.EnumEnrollmentStatusFilter<"Enrollment"> | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeFilter<"Enrollment"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  batch?: Prisma.XOR<Prisma.CourseBatchScalarRelationFilter, Prisma.CourseBatchWhereInput>
+  group?: Prisma.XOR<Prisma.GroupScalarRelationFilter, Prisma.GroupWhereInput>
 }
 
 export type EnrollmentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  batchId?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
-  batch?: Prisma.CourseBatchOrderByWithRelationInput
+  group?: Prisma.GroupOrderByWithRelationInput
 }
 
 export type EnrollmentWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  userId_batchId?: Prisma.EnrollmentUserIdBatchIdCompoundUniqueInput
+  userId_groupId?: Prisma.EnrollmentUserIdGroupIdCompoundUniqueInput
   AND?: Prisma.EnrollmentWhereInput | Prisma.EnrollmentWhereInput[]
   OR?: Prisma.EnrollmentWhereInput[]
   NOT?: Prisma.EnrollmentWhereInput | Prisma.EnrollmentWhereInput[]
   userId?: Prisma.StringFilter<"Enrollment"> | string
-  batchId?: Prisma.StringFilter<"Enrollment"> | string
+  groupId?: Prisma.StringFilter<"Enrollment"> | string
   price?: Prisma.IntFilter<"Enrollment"> | number
+  status?: Prisma.EnumEnrollmentStatusFilter<"Enrollment"> | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeFilter<"Enrollment"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  batch?: Prisma.XOR<Prisma.CourseBatchScalarRelationFilter, Prisma.CourseBatchWhereInput>
-}, "id" | "userId_batchId">
+  group?: Prisma.XOR<Prisma.GroupScalarRelationFilter, Prisma.GroupWhereInput>
+}, "id" | "userId_groupId">
 
 export type EnrollmentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  batchId?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.EnrollmentCountOrderByAggregateInput
   _avg?: Prisma.EnrollmentAvgOrderByAggregateInput
@@ -263,62 +274,70 @@ export type EnrollmentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.EnrollmentScalarWhereWithAggregatesInput | Prisma.EnrollmentScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Enrollment"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Enrollment"> | string
-  batchId?: Prisma.StringWithAggregatesFilter<"Enrollment"> | string
+  groupId?: Prisma.StringWithAggregatesFilter<"Enrollment"> | string
   price?: Prisma.IntWithAggregatesFilter<"Enrollment"> | number
+  status?: Prisma.EnumEnrollmentStatusWithAggregatesFilter<"Enrollment"> | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Enrollment"> | Date | string
 }
 
 export type EnrollmentCreateInput = {
   id?: string
   price: number
+  status?: $Enums.EnrollmentStatus
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutEnrollmentsInput
-  batch: Prisma.CourseBatchCreateNestedOneWithoutEnrollmentsInput
+  group: Prisma.GroupCreateNestedOneWithoutEnrollmentsInput
 }
 
 export type EnrollmentUncheckedCreateInput = {
   id?: string
   userId: string
-  batchId: string
+  groupId: string
   price: number
+  status?: $Enums.EnrollmentStatus
   createdAt?: Date | string
 }
 
 export type EnrollmentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumEnrollmentStatusFieldUpdateOperationsInput | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutEnrollmentsNestedInput
-  batch?: Prisma.CourseBatchUpdateOneRequiredWithoutEnrollmentsNestedInput
+  group?: Prisma.GroupUpdateOneRequiredWithoutEnrollmentsNestedInput
 }
 
 export type EnrollmentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumEnrollmentStatusFieldUpdateOperationsInput | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EnrollmentCreateManyInput = {
   id?: string
   userId: string
-  batchId: string
+  groupId: string
   price: number
+  status?: $Enums.EnrollmentStatus
   createdAt?: Date | string
 }
 
 export type EnrollmentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumEnrollmentStatusFieldUpdateOperationsInput | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EnrollmentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumEnrollmentStatusFieldUpdateOperationsInput | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -332,16 +351,17 @@ export type EnrollmentOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type EnrollmentUserIdBatchIdCompoundUniqueInput = {
+export type EnrollmentUserIdGroupIdCompoundUniqueInput = {
   userId: string
-  batchId: string
+  groupId: string
 }
 
 export type EnrollmentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  batchId?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -352,16 +372,18 @@ export type EnrollmentAvgOrderByAggregateInput = {
 export type EnrollmentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  batchId?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type EnrollmentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  batchId?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -411,59 +433,65 @@ export type EnrollmentUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.EnrollmentScalarWhereInput | Prisma.EnrollmentScalarWhereInput[]
 }
 
-export type EnrollmentCreateNestedManyWithoutBatchInput = {
-  create?: Prisma.XOR<Prisma.EnrollmentCreateWithoutBatchInput, Prisma.EnrollmentUncheckedCreateWithoutBatchInput> | Prisma.EnrollmentCreateWithoutBatchInput[] | Prisma.EnrollmentUncheckedCreateWithoutBatchInput[]
-  connectOrCreate?: Prisma.EnrollmentCreateOrConnectWithoutBatchInput | Prisma.EnrollmentCreateOrConnectWithoutBatchInput[]
-  createMany?: Prisma.EnrollmentCreateManyBatchInputEnvelope
+export type EnrollmentCreateNestedManyWithoutGroupInput = {
+  create?: Prisma.XOR<Prisma.EnrollmentCreateWithoutGroupInput, Prisma.EnrollmentUncheckedCreateWithoutGroupInput> | Prisma.EnrollmentCreateWithoutGroupInput[] | Prisma.EnrollmentUncheckedCreateWithoutGroupInput[]
+  connectOrCreate?: Prisma.EnrollmentCreateOrConnectWithoutGroupInput | Prisma.EnrollmentCreateOrConnectWithoutGroupInput[]
+  createMany?: Prisma.EnrollmentCreateManyGroupInputEnvelope
   connect?: Prisma.EnrollmentWhereUniqueInput | Prisma.EnrollmentWhereUniqueInput[]
 }
 
-export type EnrollmentUncheckedCreateNestedManyWithoutBatchInput = {
-  create?: Prisma.XOR<Prisma.EnrollmentCreateWithoutBatchInput, Prisma.EnrollmentUncheckedCreateWithoutBatchInput> | Prisma.EnrollmentCreateWithoutBatchInput[] | Prisma.EnrollmentUncheckedCreateWithoutBatchInput[]
-  connectOrCreate?: Prisma.EnrollmentCreateOrConnectWithoutBatchInput | Prisma.EnrollmentCreateOrConnectWithoutBatchInput[]
-  createMany?: Prisma.EnrollmentCreateManyBatchInputEnvelope
+export type EnrollmentUncheckedCreateNestedManyWithoutGroupInput = {
+  create?: Prisma.XOR<Prisma.EnrollmentCreateWithoutGroupInput, Prisma.EnrollmentUncheckedCreateWithoutGroupInput> | Prisma.EnrollmentCreateWithoutGroupInput[] | Prisma.EnrollmentUncheckedCreateWithoutGroupInput[]
+  connectOrCreate?: Prisma.EnrollmentCreateOrConnectWithoutGroupInput | Prisma.EnrollmentCreateOrConnectWithoutGroupInput[]
+  createMany?: Prisma.EnrollmentCreateManyGroupInputEnvelope
   connect?: Prisma.EnrollmentWhereUniqueInput | Prisma.EnrollmentWhereUniqueInput[]
 }
 
-export type EnrollmentUpdateManyWithoutBatchNestedInput = {
-  create?: Prisma.XOR<Prisma.EnrollmentCreateWithoutBatchInput, Prisma.EnrollmentUncheckedCreateWithoutBatchInput> | Prisma.EnrollmentCreateWithoutBatchInput[] | Prisma.EnrollmentUncheckedCreateWithoutBatchInput[]
-  connectOrCreate?: Prisma.EnrollmentCreateOrConnectWithoutBatchInput | Prisma.EnrollmentCreateOrConnectWithoutBatchInput[]
-  upsert?: Prisma.EnrollmentUpsertWithWhereUniqueWithoutBatchInput | Prisma.EnrollmentUpsertWithWhereUniqueWithoutBatchInput[]
-  createMany?: Prisma.EnrollmentCreateManyBatchInputEnvelope
+export type EnrollmentUpdateManyWithoutGroupNestedInput = {
+  create?: Prisma.XOR<Prisma.EnrollmentCreateWithoutGroupInput, Prisma.EnrollmentUncheckedCreateWithoutGroupInput> | Prisma.EnrollmentCreateWithoutGroupInput[] | Prisma.EnrollmentUncheckedCreateWithoutGroupInput[]
+  connectOrCreate?: Prisma.EnrollmentCreateOrConnectWithoutGroupInput | Prisma.EnrollmentCreateOrConnectWithoutGroupInput[]
+  upsert?: Prisma.EnrollmentUpsertWithWhereUniqueWithoutGroupInput | Prisma.EnrollmentUpsertWithWhereUniqueWithoutGroupInput[]
+  createMany?: Prisma.EnrollmentCreateManyGroupInputEnvelope
   set?: Prisma.EnrollmentWhereUniqueInput | Prisma.EnrollmentWhereUniqueInput[]
   disconnect?: Prisma.EnrollmentWhereUniqueInput | Prisma.EnrollmentWhereUniqueInput[]
   delete?: Prisma.EnrollmentWhereUniqueInput | Prisma.EnrollmentWhereUniqueInput[]
   connect?: Prisma.EnrollmentWhereUniqueInput | Prisma.EnrollmentWhereUniqueInput[]
-  update?: Prisma.EnrollmentUpdateWithWhereUniqueWithoutBatchInput | Prisma.EnrollmentUpdateWithWhereUniqueWithoutBatchInput[]
-  updateMany?: Prisma.EnrollmentUpdateManyWithWhereWithoutBatchInput | Prisma.EnrollmentUpdateManyWithWhereWithoutBatchInput[]
+  update?: Prisma.EnrollmentUpdateWithWhereUniqueWithoutGroupInput | Prisma.EnrollmentUpdateWithWhereUniqueWithoutGroupInput[]
+  updateMany?: Prisma.EnrollmentUpdateManyWithWhereWithoutGroupInput | Prisma.EnrollmentUpdateManyWithWhereWithoutGroupInput[]
   deleteMany?: Prisma.EnrollmentScalarWhereInput | Prisma.EnrollmentScalarWhereInput[]
 }
 
-export type EnrollmentUncheckedUpdateManyWithoutBatchNestedInput = {
-  create?: Prisma.XOR<Prisma.EnrollmentCreateWithoutBatchInput, Prisma.EnrollmentUncheckedCreateWithoutBatchInput> | Prisma.EnrollmentCreateWithoutBatchInput[] | Prisma.EnrollmentUncheckedCreateWithoutBatchInput[]
-  connectOrCreate?: Prisma.EnrollmentCreateOrConnectWithoutBatchInput | Prisma.EnrollmentCreateOrConnectWithoutBatchInput[]
-  upsert?: Prisma.EnrollmentUpsertWithWhereUniqueWithoutBatchInput | Prisma.EnrollmentUpsertWithWhereUniqueWithoutBatchInput[]
-  createMany?: Prisma.EnrollmentCreateManyBatchInputEnvelope
+export type EnrollmentUncheckedUpdateManyWithoutGroupNestedInput = {
+  create?: Prisma.XOR<Prisma.EnrollmentCreateWithoutGroupInput, Prisma.EnrollmentUncheckedCreateWithoutGroupInput> | Prisma.EnrollmentCreateWithoutGroupInput[] | Prisma.EnrollmentUncheckedCreateWithoutGroupInput[]
+  connectOrCreate?: Prisma.EnrollmentCreateOrConnectWithoutGroupInput | Prisma.EnrollmentCreateOrConnectWithoutGroupInput[]
+  upsert?: Prisma.EnrollmentUpsertWithWhereUniqueWithoutGroupInput | Prisma.EnrollmentUpsertWithWhereUniqueWithoutGroupInput[]
+  createMany?: Prisma.EnrollmentCreateManyGroupInputEnvelope
   set?: Prisma.EnrollmentWhereUniqueInput | Prisma.EnrollmentWhereUniqueInput[]
   disconnect?: Prisma.EnrollmentWhereUniqueInput | Prisma.EnrollmentWhereUniqueInput[]
   delete?: Prisma.EnrollmentWhereUniqueInput | Prisma.EnrollmentWhereUniqueInput[]
   connect?: Prisma.EnrollmentWhereUniqueInput | Prisma.EnrollmentWhereUniqueInput[]
-  update?: Prisma.EnrollmentUpdateWithWhereUniqueWithoutBatchInput | Prisma.EnrollmentUpdateWithWhereUniqueWithoutBatchInput[]
-  updateMany?: Prisma.EnrollmentUpdateManyWithWhereWithoutBatchInput | Prisma.EnrollmentUpdateManyWithWhereWithoutBatchInput[]
+  update?: Prisma.EnrollmentUpdateWithWhereUniqueWithoutGroupInput | Prisma.EnrollmentUpdateWithWhereUniqueWithoutGroupInput[]
+  updateMany?: Prisma.EnrollmentUpdateManyWithWhereWithoutGroupInput | Prisma.EnrollmentUpdateManyWithWhereWithoutGroupInput[]
   deleteMany?: Prisma.EnrollmentScalarWhereInput | Prisma.EnrollmentScalarWhereInput[]
+}
+
+export type EnumEnrollmentStatusFieldUpdateOperationsInput = {
+  set?: $Enums.EnrollmentStatus
 }
 
 export type EnrollmentCreateWithoutUserInput = {
   id?: string
   price: number
+  status?: $Enums.EnrollmentStatus
   createdAt?: Date | string
-  batch: Prisma.CourseBatchCreateNestedOneWithoutEnrollmentsInput
+  group: Prisma.GroupCreateNestedOneWithoutEnrollmentsInput
 }
 
 export type EnrollmentUncheckedCreateWithoutUserInput = {
   id?: string
-  batchId: string
+  groupId: string
   price: number
+  status?: $Enums.EnrollmentStatus
   createdAt?: Date | string
 }
 
@@ -499,104 +527,115 @@ export type EnrollmentScalarWhereInput = {
   NOT?: Prisma.EnrollmentScalarWhereInput | Prisma.EnrollmentScalarWhereInput[]
   id?: Prisma.StringFilter<"Enrollment"> | string
   userId?: Prisma.StringFilter<"Enrollment"> | string
-  batchId?: Prisma.StringFilter<"Enrollment"> | string
+  groupId?: Prisma.StringFilter<"Enrollment"> | string
   price?: Prisma.IntFilter<"Enrollment"> | number
+  status?: Prisma.EnumEnrollmentStatusFilter<"Enrollment"> | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeFilter<"Enrollment"> | Date | string
 }
 
-export type EnrollmentCreateWithoutBatchInput = {
+export type EnrollmentCreateWithoutGroupInput = {
   id?: string
   price: number
+  status?: $Enums.EnrollmentStatus
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutEnrollmentsInput
 }
 
-export type EnrollmentUncheckedCreateWithoutBatchInput = {
+export type EnrollmentUncheckedCreateWithoutGroupInput = {
   id?: string
   userId: string
   price: number
+  status?: $Enums.EnrollmentStatus
   createdAt?: Date | string
 }
 
-export type EnrollmentCreateOrConnectWithoutBatchInput = {
+export type EnrollmentCreateOrConnectWithoutGroupInput = {
   where: Prisma.EnrollmentWhereUniqueInput
-  create: Prisma.XOR<Prisma.EnrollmentCreateWithoutBatchInput, Prisma.EnrollmentUncheckedCreateWithoutBatchInput>
+  create: Prisma.XOR<Prisma.EnrollmentCreateWithoutGroupInput, Prisma.EnrollmentUncheckedCreateWithoutGroupInput>
 }
 
-export type EnrollmentCreateManyBatchInputEnvelope = {
-  data: Prisma.EnrollmentCreateManyBatchInput | Prisma.EnrollmentCreateManyBatchInput[]
+export type EnrollmentCreateManyGroupInputEnvelope = {
+  data: Prisma.EnrollmentCreateManyGroupInput | Prisma.EnrollmentCreateManyGroupInput[]
   skipDuplicates?: boolean
 }
 
-export type EnrollmentUpsertWithWhereUniqueWithoutBatchInput = {
+export type EnrollmentUpsertWithWhereUniqueWithoutGroupInput = {
   where: Prisma.EnrollmentWhereUniqueInput
-  update: Prisma.XOR<Prisma.EnrollmentUpdateWithoutBatchInput, Prisma.EnrollmentUncheckedUpdateWithoutBatchInput>
-  create: Prisma.XOR<Prisma.EnrollmentCreateWithoutBatchInput, Prisma.EnrollmentUncheckedCreateWithoutBatchInput>
+  update: Prisma.XOR<Prisma.EnrollmentUpdateWithoutGroupInput, Prisma.EnrollmentUncheckedUpdateWithoutGroupInput>
+  create: Prisma.XOR<Prisma.EnrollmentCreateWithoutGroupInput, Prisma.EnrollmentUncheckedCreateWithoutGroupInput>
 }
 
-export type EnrollmentUpdateWithWhereUniqueWithoutBatchInput = {
+export type EnrollmentUpdateWithWhereUniqueWithoutGroupInput = {
   where: Prisma.EnrollmentWhereUniqueInput
-  data: Prisma.XOR<Prisma.EnrollmentUpdateWithoutBatchInput, Prisma.EnrollmentUncheckedUpdateWithoutBatchInput>
+  data: Prisma.XOR<Prisma.EnrollmentUpdateWithoutGroupInput, Prisma.EnrollmentUncheckedUpdateWithoutGroupInput>
 }
 
-export type EnrollmentUpdateManyWithWhereWithoutBatchInput = {
+export type EnrollmentUpdateManyWithWhereWithoutGroupInput = {
   where: Prisma.EnrollmentScalarWhereInput
-  data: Prisma.XOR<Prisma.EnrollmentUpdateManyMutationInput, Prisma.EnrollmentUncheckedUpdateManyWithoutBatchInput>
+  data: Prisma.XOR<Prisma.EnrollmentUpdateManyMutationInput, Prisma.EnrollmentUncheckedUpdateManyWithoutGroupInput>
 }
 
 export type EnrollmentCreateManyUserInput = {
   id?: string
-  batchId: string
+  groupId: string
   price: number
+  status?: $Enums.EnrollmentStatus
   createdAt?: Date | string
 }
 
 export type EnrollmentUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumEnrollmentStatusFieldUpdateOperationsInput | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.CourseBatchUpdateOneRequiredWithoutEnrollmentsNestedInput
+  group?: Prisma.GroupUpdateOneRequiredWithoutEnrollmentsNestedInput
 }
 
 export type EnrollmentUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumEnrollmentStatusFieldUpdateOperationsInput | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EnrollmentUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumEnrollmentStatusFieldUpdateOperationsInput | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type EnrollmentCreateManyBatchInput = {
+export type EnrollmentCreateManyGroupInput = {
   id?: string
   userId: string
   price: number
+  status?: $Enums.EnrollmentStatus
   createdAt?: Date | string
 }
 
-export type EnrollmentUpdateWithoutBatchInput = {
+export type EnrollmentUpdateWithoutGroupInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumEnrollmentStatusFieldUpdateOperationsInput | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutEnrollmentsNestedInput
 }
 
-export type EnrollmentUncheckedUpdateWithoutBatchInput = {
+export type EnrollmentUncheckedUpdateWithoutGroupInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumEnrollmentStatusFieldUpdateOperationsInput | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type EnrollmentUncheckedUpdateManyWithoutBatchInput = {
+export type EnrollmentUncheckedUpdateManyWithoutGroupInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumEnrollmentStatusFieldUpdateOperationsInput | $Enums.EnrollmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -605,66 +644,71 @@ export type EnrollmentUncheckedUpdateManyWithoutBatchInput = {
 export type EnrollmentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  batchId?: boolean
+  groupId?: boolean
   price?: boolean
+  status?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  batch?: boolean | Prisma.CourseBatchDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["enrollment"]>
 
 export type EnrollmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  batchId?: boolean
+  groupId?: boolean
   price?: boolean
+  status?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  batch?: boolean | Prisma.CourseBatchDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["enrollment"]>
 
 export type EnrollmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  batchId?: boolean
+  groupId?: boolean
   price?: boolean
+  status?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  batch?: boolean | Prisma.CourseBatchDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["enrollment"]>
 
 export type EnrollmentSelectScalar = {
   id?: boolean
   userId?: boolean
-  batchId?: boolean
+  groupId?: boolean
   price?: boolean
+  status?: boolean
   createdAt?: boolean
 }
 
-export type EnrollmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "batchId" | "price" | "createdAt", ExtArgs["result"]["enrollment"]>
+export type EnrollmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "groupId" | "price" | "status" | "createdAt", ExtArgs["result"]["enrollment"]>
 export type EnrollmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  batch?: boolean | Prisma.CourseBatchDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
 }
 export type EnrollmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  batch?: boolean | Prisma.CourseBatchDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
 }
 export type EnrollmentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  batch?: boolean | Prisma.CourseBatchDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
 }
 
 export type $EnrollmentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Enrollment"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
-    batch: Prisma.$CourseBatchPayload<ExtArgs>
+    group: Prisma.$GroupPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
-    batchId: string
+    groupId: string
     price: number
+    status: $Enums.EnrollmentStatus
     createdAt: Date
   }, ExtArgs["result"]["enrollment"]>
   composites: {}
@@ -1061,7 +1105,7 @@ readonly fields: EnrollmentFieldRefs;
 export interface Prisma__EnrollmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  batch<T extends Prisma.CourseBatchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CourseBatchDefaultArgs<ExtArgs>>): Prisma.Prisma__CourseBatchClient<runtime.Types.Result.GetResult<Prisma.$CourseBatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  group<T extends Prisma.GroupDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GroupDefaultArgs<ExtArgs>>): Prisma.Prisma__GroupClient<runtime.Types.Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1093,8 +1137,9 @@ export interface Prisma__EnrollmentClient<T, Null = never, ExtArgs extends runti
 export interface EnrollmentFieldRefs {
   readonly id: Prisma.FieldRef<"Enrollment", 'String'>
   readonly userId: Prisma.FieldRef<"Enrollment", 'String'>
-  readonly batchId: Prisma.FieldRef<"Enrollment", 'String'>
+  readonly groupId: Prisma.FieldRef<"Enrollment", 'String'>
   readonly price: Prisma.FieldRef<"Enrollment", 'Int'>
+  readonly status: Prisma.FieldRef<"Enrollment", 'EnrollmentStatus'>
   readonly createdAt: Prisma.FieldRef<"Enrollment", 'DateTime'>
 }
     

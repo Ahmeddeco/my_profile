@@ -77,17 +77,22 @@ export type Article = Prisma.ArticleModel
  */
 export type Course = Prisma.CourseModel
 /**
- * Model CourseBatch
+ * Model Group
  * 
  */
-export type CourseBatch = Prisma.CourseBatchModel
+export type Group = Prisma.GroupModel
 /**
  * Model Enrollment
  * 
  */
 export type Enrollment = Prisma.EnrollmentModel
 /**
- * Model Location
+ * Model Academy
  * 
  */
-export type Location = Prisma.LocationModel
+export type Academy = Prisma.AcademyModel
+/**
+ * Model Branch
+ * 
+ */
+export type Branch = Prisma.BranchModel

@@ -7,7 +7,7 @@ import { cacheLife, cacheTag } from "next/cache"
 /* ----------------------------- getAllUsers ---------------------------- */
 export const getAllUsers = async (size: number, page: number) => {
   cacheLife("hours")
-  cacheTag('allUsers')
+  cacheTag('users')
   try {
     const totalColors = await prisma.user.count()
     const totalPages = Math.ceil(totalColors / size)
@@ -27,7 +27,7 @@ export const getAllUsers = async (size: number, page: number) => {
 /* ---------------------------- getOneUser ------------------------------ */
 export const getOneUser = async (id: string) => {
   cacheLife("hours")
-  cacheTag(`users-${id}`)
+  cacheTag(`users`)
   try {
     return await prisma.user.findUnique({
       where: { id }
@@ -55,7 +55,7 @@ export const getAllUsersForFactoriesPage = async () => {
 /* ------------------------------ getAllClients ----------------------------- */
 export const getAllClients = async () => {
   cacheLife("hours")
-  cacheTag('clients')
+  cacheTag('users')
 
   try {
     return await prisma.user.findMany({ where: { role: Role.client }, select: { id: true, name: true }, orderBy: { name: "asc" } })
@@ -67,7 +67,7 @@ export const getAllClients = async () => {
 /* ------------------------------ getAllAdmins ----------------------------- */
 export const getAllAdmins = async () => {
   cacheLife("hours")
-  cacheTag('admins')
+  cacheTag('users')
 
   try {
     return await prisma.user.findMany({

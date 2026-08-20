@@ -1,6 +1,7 @@
 import { ChartNoAxesCombined, Newspaper, Server, Users } from "lucide-react"
-import { GrProjects } from "react-icons/gr"
+import { GrGroup, GrLocation, GrProjects } from "react-icons/gr"
 import { FaChalkboardTeacher } from "react-icons/fa"
+import { HiOutlineAcademicCap } from "react-icons/hi"
 
 export const serverNav = [
   {
@@ -19,9 +20,24 @@ export const serverNav = [
     icon: GrProjects
   },
   {
+    title: { ar: "الأكاديميات", en: "academies" },
+    href: "/server/courses/academies",
+    icon: HiOutlineAcademicCap
+  },
+  {
+    title: { ar: "الفروع", en: "branches" },
+    href: "/server/courses/branches",
+    icon: GrLocation
+  },
+  {
     title: { ar: "الكورسات", en: "courses" },
     href: "/server/courses",
     icon: FaChalkboardTeacher
+  },
+  {
+    title: { ar: "الدفعة", en: "group" },
+    href: "/server/courses/groups",
+    icon: GrGroup
   },
   {
     title: { ar: "مقالاتنا", en: "articles" },

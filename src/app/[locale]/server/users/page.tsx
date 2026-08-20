@@ -1,4 +1,4 @@
-import { ImageOff, PlusCircle } from "lucide-react"
+import { PlusCircle } from "lucide-react"
 import ServerPageCard from "@/components/backend/ServerPageCard"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -48,17 +48,13 @@ export default async function StylesPage({ searchParams }: { searchParams: Promi
 						{users.data.map(({ id, mobile, name, role, city, country, state, image }) => (
 							<TableRow key={id}>
 								<TableCell>
-									{image ? (
-										<Image
-											src={image}
-											alt={name ?? "user"}
-											width={48}
-											height={48}
-											className="rounded-lg object-cover aspect-square"
-										/>
-									) : (
-										<ImageOff size={48} />
-									)}
+									<Image
+										src={image ?? "/icons/image-off.png"}
+										alt={name ?? "user"}
+										width={48}
+										height={48}
+										className="rounded-lg object-cover aspect-square"
+									/>
 								</TableCell>
 								<TableCell className="capitalize ">{name}</TableCell>
 								<TableCell className="capitalize ">{role}</TableCell>
