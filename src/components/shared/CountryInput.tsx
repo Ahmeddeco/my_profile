@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client"
 
 import { useState } from "react"
@@ -5,7 +7,6 @@ import { CitySelect, CountrySelect, StateSelect } from "react-country-state-city
 import "react-country-state-city/dist/react-country-state-city.css"
 import { Input } from "@/components/ui/input"
 import { Field, FieldLabel } from "@/components/ui/field"
-import { City, Country, State } from "@/types/address.type"
 
 type CountryProps = {
 	userCountry?: string
@@ -18,6 +19,49 @@ type CountryProps = {
 	stateName?: string
 	cityName?: string
 }
+
+export type Country =
+	| {
+			capital: string
+			currency: string
+			currency_name: string
+			currency_symbol: string
+			emoji: string
+			hasStates: true
+			id: 1
+			iso2: string
+			iso3: string
+			latitude: string
+			longitude: string
+			name: string
+			native: string
+			numeric_code: string
+			phone_code: string
+			region: string
+			subregion: string
+			tld: string
+	  }
+	| any
+
+export type State =
+	| {
+			hasCities: boolean
+			id: number
+			latitude: string
+			longitude: string
+			name: string
+			state_code: string
+	  }
+	| any
+
+export type City =
+	| {
+			id: number
+			latitude: string
+			longitude: string
+			name: string
+	  }
+	| any
 
 export default function CountryInput({
 	userCity,

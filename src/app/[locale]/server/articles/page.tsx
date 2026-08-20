@@ -9,9 +9,9 @@ import { dateFormate } from "@/logic/dateFormate"
 import ServerPageCard from "@/components/backend/ServerPageCard"
 import Settings from "@/components/backend/Settings"
 import PaginationSection from "@/components/backend/Pagination"
-import { deleteArticlesAction } from "@/actions/article.action"
-import { getAllArticlesForArticlesPageType } from "@/types/article.type"
-import { getAllArticlesForArticlesPage } from "@/dl/article.data"
+import { deleteArticlesAction } from "@/app/[locale]/server/articles/modules/article.action"
+import { getAllArticlesForArticlesPageType } from "@/app/[locale]/server/articles/modules/article.type"
+import { getAllArticlesForArticlesPage } from "@/app/[locale]/server/articles/modules/article.data"
 import { connection } from "next/server"
 
 export default async function ArticlesPage({

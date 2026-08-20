@@ -1,11 +1,11 @@
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import ServerPageCard from "@/components/backend/ServerPageCard"
-import { getOneArticle } from "@/dl/article.data"
-import { getAllAdmins } from "@/dl/users.data"
-import EditArticle from "@/forms/EditArticle"
+import { getOneArticle } from "@/app/[locale]/server/articles/modules/article.data"
+import { getAllAdmins } from "@/app/[locale]/server/users/modules/users.data"
+import EditArticle from "@/app/[locale]/server/articles/modules/forms/EditArticle"
 import { Role } from "@/generated/prisma/enums"
-import { getOneArticleType } from "@/types/article.type"
-import { getAllAdminsType } from "@/types/user.type"
+import { getOneArticleType } from "@/app/[locale]/server/articles/modules/article.type"
+import { getAllAdminsType } from "@/app/[locale]/server/users/modules/user.type"
 import { connection } from "next/server"
 
 type Props = {

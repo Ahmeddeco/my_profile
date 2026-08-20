@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { dateFormate } from "@/logic/dateFormate"
-import { singleProductPageType } from "@/types/project.type"
+import { singleProductPageType } from "@/app/[locale]/server/projects/modules/project.type"
 import { Calendar1, ExternalLink, Eye, ImageOff, User2 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"

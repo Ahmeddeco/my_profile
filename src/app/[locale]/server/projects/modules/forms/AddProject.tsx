@@ -8,15 +8,15 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import SubmitButton from "@/components/shared/SubmitButton"
 import { Textarea } from "@/components/ui/textarea"
-import { addProjectAction } from "@/actions/project.action"
-import ProjectSchema from "@/schemas/ProjectSchema"
+import { addProjectAction } from "@/app/[locale]/server/projects/modules/project.action"
+import ProjectSchema from "@/app/[locale]/server/projects/modules/project.schema"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import DatePicker from "@/components/shared/DatePicker"
-import { getAllClientsType } from "@/types/user.type"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { ProductType } from "@/generated/prisma/enums"
 import slugify from "slugify"
 import dynamic from "next/dynamic"
+import { getAllClientsType } from "@/app/[locale]/server/projects/modules/project.type"
 
 const TiptapEditor = dynamic(() => import("@/components/shared/TiptapEditor"), { ssr: false })
 const UploadManyImagesDropZone = dynamic(

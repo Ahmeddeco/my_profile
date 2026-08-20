@@ -1,8 +1,8 @@
 import ImageSlider from "@/components/shared/ImageSlider"
 import { Badge } from "@/components/ui/badge"
-import { getOneArticleBySlug } from "@/dl/article.data"
+import { getOneArticleBySlug } from "@/app/[locale]/server/articles/modules/article.data"
 import { dateFormate } from "@/logic/dateFormate"
-import { getOneArticleBySlugType } from "@/types/article.type"
+import { getOneArticleBySlugType } from "@/app/[locale]/server/articles/modules/article.type"
 import { Calendar1, Pen } from "lucide-react"
 
 type Props = {

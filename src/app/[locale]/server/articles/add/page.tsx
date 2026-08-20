@@ -1,9 +1,9 @@
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import ServerPageCard from "@/components/backend/ServerPageCard"
-import { getAllAdmins } from "@/dl/users.data"
-import AddArticle from "@/forms/AddArticle"
+import { getAllAdmins } from "@/app/[locale]/server/users/modules/users.data"
+import AddArticle from "@/app/[locale]/server/articles/modules/forms/AddArticle"
 import { Role } from "@/generated/prisma/enums"
-import { getAllAdminsType } from "@/types/user.type"
+import { getAllAdminsType } from "@/app/[locale]/server/users/modules/user.type"
 import { connection } from "next/server"
 
 export default async function AddArticlePage() {

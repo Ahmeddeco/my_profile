@@ -1,11 +1,9 @@
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import ServerPageCard from "@/components/backend/ServerPageCard"
-import { getOneProject } from "@/dl/project.data"
-import { getAllClients } from "@/dl/users.data"
-import EditProject from "@/forms/EditProject"
+import { getAllClients, getOneProject } from "@/app/[locale]/server/projects/modules/project.data"
+import EditProject from "@/app/[locale]/server/projects/modules/forms/EditProject"
 import { Role } from "@/generated/prisma/enums"
-import { getOneProjectType } from "@/types/project.type"
-import { getAllClientsType } from "@/types/user.type"
+import { getAllClientsType, getOneProjectType } from "@/app/[locale]/server/projects/modules/project.type"
 import { connection } from "next/server"
 
 type Props = {

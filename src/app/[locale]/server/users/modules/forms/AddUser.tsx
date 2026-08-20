@@ -10,18 +10,13 @@ import SubmitButton from "@/components/shared/SubmitButton"
 import { UploadOneImagesDropZone } from "@/components/shared/UploadImagesDropZone"
 import Phone from "@/components/shared/Phone"
 import CountryInput from "@/components/shared/CountryInput"
-import { editUserAction } from "@/actions/user.action"
+import UserSchema from "@/app/[locale]/server/users/modules/user.schema"
 import { Select, SelectContent, SelectTrigger, SelectValue, SelectItem } from "@/components/ui/select"
 import { Role } from "@/generated/prisma/enums"
-import { User } from "@/generated/prisma/client"
-import UserSchema from "@/schemas/UserSchema"
+import { addUserAction } from "@/app/[locale]/server/users/modules/user.action"
 
-type Props = {
-	user: User
-}
-
-export default function EditUser({ user }: Props) {
-	const [lastResult, action] = useActionState(editUserAction, undefined)
+export default function AddUser() {
+	const [lastResult, action] = useActionState(addUserAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
 		onValidate({ formData }) {
@@ -32,7 +27,6 @@ export default function EditUser({ user }: Props) {
 	})
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
-			<Input type="hidden" value={user.id} name="id" />
 			{/* ---------------------------------- name --------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.name.name}>{fields.name.name}</FieldLabel>
@@ -40,7 +34,7 @@ export default function EditUser({ user }: Props) {
 					type="text"
 					key={fields.name.key}
 					name={fields.name.name}
-					defaultValue={user.name ?? ""}
+					defaultValue={fields.name.initialValue}
 					placeholder="Ahmed"
 				/>
 				<FieldError>{fields.name.errors}</FieldError>
@@ -53,19 +47,19 @@ export default function EditUser({ user }: Props) {
 					type="email"
 					key={fields.email.key}
 					name={fields.email.name}
-					defaultValue={user.email}
+					defaultValue={fields.email.initialValue}
 					placeholder="someone@email.com"
 				/>
 				<FieldError>{fields.email.errors}</FieldError>
 			</Field>
 
 			{/* --------------------------------- mobile --------------------------------- */}
-			<Phone name={fields.mobile.name} defaultValue={user.mobile ?? ""} errors={fields.mobile.errors} />
+			<Phone name={fields.mobile.name} defaultValue={fields.mobile.initialValue!} errors={fields.mobile.errors} />
 
 			{/* ---------------------------------- role ---------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.role.name}>{fields.role.name}</FieldLabel>
-				<Select key={fields.role.key} name={fields.role.name} defaultValue={user.role ?? Role.user}>
+				<Select key={fields.role.key} name={fields.role.name} defaultValue={Role.user}>
 					<SelectTrigger>
 						<SelectValue />
 					</SelectTrigger>
@@ -81,25 +75,13 @@ export default function EditUser({ user }: Props) {
 			</Field>
 
 			{/* --------------------------------- address -------------------------------- */}
-			<CountryInput
-				cityName={fields.city.name}
-				countryName={fields.country.name}
-				stateName={fields.state.name}
-				userCountry={user.country ?? ""}
-				userState={user.state ?? ""}
-				userCity={user.city ?? ""}
-			/>
+			<CountryInput cityName={fields.city.name} countryName={fields.country.name} stateName={fields.state.name} />
 
 			{/* ---------------------------------- image --------------------------------- */}
-			<UploadOneImagesDropZone
-				imageName={fields.image.name}
-				imageKey={fields.image.key}
-				errors={fields.image.errors}
-				dbImage={user.image ?? ""}
-			/>
+			<UploadOneImagesDropZone imageName={fields.image.name} imageKey={fields.image.key} errors={fields.image.errors} />
 
 			{/* ----------------------------- SubmitButton ---------------------------- */}
-			<SubmitButton text={"edit user"} />
+			<SubmitButton text={"add user"} />
 		</Form>
 	)
 }

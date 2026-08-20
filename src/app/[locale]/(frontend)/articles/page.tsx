@@ -1,8 +1,8 @@
 import PaginationSection from "@/components/backend/Pagination"
 import ArticleCard from "@/components/pages/articles/ArticleCard"
-import { getAllArticlesForArticlesPage } from "@/dl/article.data"
+import { getAllArticlesForArticlesPage } from "@/app/[locale]/server/articles/modules/article.data"
 import { getDictionary } from "@/locales/dictionaries"
-import { getAllArticlesForArticlesPageType } from "@/types/article.type"
+import { getAllArticlesForArticlesPageType } from "@/app/[locale]/server/articles/modules/article.type"
 
 type Props = {
 	params: Promise<{ locale: "en" | "ar" }>

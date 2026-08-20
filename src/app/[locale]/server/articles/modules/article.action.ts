@@ -5,7 +5,7 @@ import { splittedItems } from "@/logic/splittedItems"
 import { parseWithZod } from "@conform-to/zod"
 import { redirect } from "next/navigation"
 import { refresh, updateTag } from "next/cache"
-import ArticleSchema from "@/schemas/ArticleSchema"
+import ArticleSchema from "@/app/[locale]/server/articles/modules/article.schema"
 import { DeleteActionState } from "@/components/backend/Settings"
 
 /* ----------------------------- addArticleAction ----------------------------- */

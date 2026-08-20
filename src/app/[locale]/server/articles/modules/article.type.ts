@@ -1,4 +1,4 @@
-import { getAllArticlesForArticlesPage, getOneArticle, getOneArticleBySlug, } from "@/dl/article.data"
+import { getAllArticlesForArticlesPage, getOneArticle, getOneArticleBySlug, } from "@/app/[locale]/server/articles/modules/article.data"
 
 export type getAllArticlesForArticlesPageType = Awaited<ReturnType<typeof getAllArticlesForArticlesPage>>
 export type getOneArticleType = Awaited<ReturnType<typeof getOneArticle>>

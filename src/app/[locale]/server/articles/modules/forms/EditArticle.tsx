@@ -10,10 +10,11 @@ import SubmitButton from "@/components/shared/SubmitButton"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import DatePicker from "@/components/shared/DatePicker"
 import slugify from "slugify"
-import { addArticleAction } from "@/actions/article.action"
-import ArticleSchema from "@/schemas/ArticleSchema"
+import { editArticleAction } from "@/app/[locale]/server/articles/modules/article.action"
+import ArticleSchema from "@/app/[locale]/server/articles/modules/article.schema"
 import { Textarea } from "@/components/ui/textarea"
-import { getAllAdminsType } from "@/types/user.type"
+import { getOneArticleType } from "@/app/[locale]/server/articles/modules/article.type"
+import { getAllAdminsType } from "@/app/[locale]/server/users/modules/user.type"
 import dynamic from "next/dynamic"
 
 const TiptapEditor = dynamic(() => import("@/components/shared/TiptapEditor"), { ssr: false })
@@ -28,13 +29,14 @@ const UploadOneImagesDropZone = dynamic(
 
 type Props = {
 	authors: getAllAdminsType
+	article: getOneArticleType
 }
 
-export default function AddArticle({ authors }: Props) {
-	const [slug, setSlug] = useState("")
+export default function EditArticle({ authors, article }: Props) {
+	const [slug, setSlug] = useState(article?.slug ?? "")
 	const slugTitle = slugify(slug, { lower: true, strict: true })
 
-	const [lastResult, action] = useActionState(addArticleAction, undefined)
+	const [lastResult, action] = useActionState(editArticleAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
 		onValidate({ formData }) {
@@ -46,17 +48,13 @@ export default function AddArticle({ authors }: Props) {
 
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
+			<Input type="hidden" name="id" value={article?.id} />
 			{/* ---------------------------- title  ---------------------------- */}
 			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
 				{/* ---------------------------------- titleAr --------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.titleAr.name}>{fields.titleAr.name}</FieldLabel>
-					<Input
-						type="text"
-						key={fields.titleAr.key}
-						name={fields.titleAr.name}
-						defaultValue={fields.titleAr.initialValue}
-					/>
+					<Input type="text" key={fields.titleAr.key} name={fields.titleAr.name} defaultValue={article?.titleAr} />
 					<FieldError>{fields.titleAr.errors}</FieldError>
 				</Field>
 
@@ -67,7 +65,7 @@ export default function AddArticle({ authors }: Props) {
 						type="text"
 						key={fields.titleEn.key}
 						name={fields.titleEn.name}
-						defaultValue={fields.titleEn.initialValue}
+						defaultValue={article?.titleEn}
 						onChange={(e) => setSlug(e.target.value)}
 					/>
 					<FieldError>{fields.titleEn.errors}</FieldError>
@@ -85,7 +83,7 @@ export default function AddArticle({ authors }: Props) {
 				{/* --------------------------------- authors -------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.userId.name}>{"author"}</FieldLabel>
-					<Select key={fields.userId.key} name={fields.userId.name} defaultValue={fields.userId.initialValue}>
+					<Select key={fields.userId.key} name={fields.userId.name} defaultValue={article?.author.id}>
 						<SelectTrigger>
 							<SelectValue />
 						</SelectTrigger>
@@ -103,7 +101,7 @@ export default function AddArticle({ authors }: Props) {
 				{/* -------------------------------- createdAt ------------------------------- */}
 				<DatePicker
 					name={fields.createdAt.name}
-					defaultValue={fields.createdAt.initialValue}
+					defaultValue={article?.createdAt ? article.createdAt.toISOString() : undefined}
 					errors={fields.createdAt.errors}
 					dateKey={fields.createdAt.key}
 				/>
@@ -117,7 +115,7 @@ export default function AddArticle({ authors }: Props) {
 					<Textarea
 						key={fields.descriptionAr.key}
 						name={fields.descriptionAr.name}
-						defaultValue={fields.descriptionAr.initialValue}
+						defaultValue={article?.descriptionAr}
 					/>
 					<FieldError>{fields.descriptionAr.errors}</FieldError>
 				</Field>
@@ -128,7 +126,7 @@ export default function AddArticle({ authors }: Props) {
 					<Textarea
 						key={fields.descriptionEn.key}
 						name={fields.descriptionEn.name}
-						defaultValue={fields.descriptionEn.initialValue}
+						defaultValue={article?.descriptionEn}
 					/>
 					<FieldError>{fields.descriptionEn.errors}</FieldError>
 				</Field>
@@ -139,7 +137,7 @@ export default function AddArticle({ authors }: Props) {
 				name={fields.topicAr.name}
 				label={fields.topicAr.name}
 				editorKey={fields.topicAr.key ?? ""}
-				defaultValue={fields.topicAr.initialValue ?? ""}
+				defaultValue={article?.topicAr ?? ""}
 				errors={fields.topicAr.errors ?? []}
 			/>
 
@@ -148,7 +146,7 @@ export default function AddArticle({ authors }: Props) {
 				name={fields.topicEn.name}
 				label={fields.topicEn.name}
 				editorKey={fields.topicEn.key ?? ""}
-				defaultValue={fields.topicEn.initialValue ?? ""}
+				defaultValue={article?.topicEn ?? ""}
 				errors={fields.topicEn.errors ?? []}
 			/>
 
@@ -157,6 +155,7 @@ export default function AddArticle({ authors }: Props) {
 				imageName={fields.mainImage.name}
 				errors={fields.mainImage.errors}
 				label={fields.mainImage.name}
+				dbImage={article?.mainImage}
 			/>
 
 			{/* --------------------------------- images --------------------------------- */}
@@ -164,10 +163,11 @@ export default function AddArticle({ authors }: Props) {
 				imageName={fields.images.name}
 				errors={fields.images.errors}
 				label={fields.images.name}
+				dbImages={article?.images}
 			/>
 
 			{/* ----------------------------- SubmitButton ---------------------------- */}
-			<SubmitButton text={"add article"} />
+			<SubmitButton text={"edit article"} />
 		</Form>
 	)
 }

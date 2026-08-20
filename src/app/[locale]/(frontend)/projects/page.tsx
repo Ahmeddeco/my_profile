@@ -1,10 +1,10 @@
 import PaginationSection from "@/components/backend/Pagination"
 import ProjectCard from "@/components/pages/projects/ProjectCard"
 import CategoryFilter from "@/components/shared/CategoryFilter"
-import { getAllProjectsByCategory } from "@/dl/project.data"
+import { getAllProjectsByCategory } from "@/app/[locale]/server/projects/modules/project.data"
 import { ProductType } from "@/generated/prisma/enums"
 import { getDictionary } from "@/locales/dictionaries"
-import { getAllProjectsByCategoryType } from "@/types/project.type"
+import { getAllProjectsByCategoryType } from "@/app/[locale]/server/projects/modules/project.type"
 
 type Props = {
 	params: Promise<{ locale: "en" | "ar" }>

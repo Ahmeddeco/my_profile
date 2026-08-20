@@ -3,7 +3,7 @@
 import { DeleteActionState } from "@/components/backend/Settings"
 import prisma from "@/lib/prisma"
 import { splittedImages } from "@/logic/splittedImages"
-import ProjectSchema from "@/schemas/ProjectSchema"
+import ProjectSchema from "@/app/[locale]/server/projects/modules/project.schema"
 import { parseWithZod } from "@conform-to/zod"
 import { refresh, updateTag } from "next/cache"
 import { redirect } from "next/navigation"

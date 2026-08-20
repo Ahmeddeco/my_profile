@@ -1,6 +1,6 @@
 "use cache"
 
-import { ProductType } from "@/generated/prisma/enums"
+import { ProductType, Role } from "@/generated/prisma/enums"
 import prisma from "@/lib/prisma"
 import { cacheLife, cacheTag } from "next/cache"
 
@@ -75,3 +75,14 @@ export const getOneProjectBySlug = async (slug: string) => {
   }
 }
 
+/* ------------------------------ getAllClients ----------------------------- */
+export const getAllClients = async () => {
+  cacheLife("hours")
+  cacheTag('clients')
+
+  try {
+    return await prisma.user.findMany({ where: { role: Role.client }, select: { id: true, name: true }, orderBy: { name: "asc" } })
+  } catch (error) {
+    console.error(error)
+  }
+}

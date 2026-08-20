@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge"
 import { dateFormate } from "@/logic/dateFormate"
-import { singleArticlePageType } from "@/types/article.type"
+import { singleArticlePageType } from "@/app/[locale]/server/articles/modules/article.type"
 import { Calendar1, ImageOff, Pen } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"

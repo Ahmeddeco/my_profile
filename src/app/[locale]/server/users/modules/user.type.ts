@@ -1,4 +1,4 @@
-import { getAllAdmins, getAllClients, getOneUser } from "@/dl/users.data"
+import { getAllAdmins, getAllClients, getOneUser } from "@/app/[locale]/server/users/modules/users.data"
 
 export type getAllClientsType = Awaited<ReturnType<typeof getAllClients>>
 export type getOneUserType = Awaited<ReturnType<typeof getOneUser>>

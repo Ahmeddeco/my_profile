@@ -1,10 +1,10 @@
 import { CircleChevronLeft } from "lucide-react"
 import ServerPageCard from "@/components/backend/ServerPageCard"
 import EmptyCard from "@/components/shared/EmptyCard"
-import EditUser from "@/forms/EditUser"
+import EditUser from "@/app/[locale]/server/users/modules/forms/EditUser"
 import { Role } from "@/generated/prisma/enums"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
-import { getOneUser } from "@/dl/users.data"
+import { getOneUser } from "@/app/[locale]/server/users/modules/users.data"
 import { connection } from "next/server"
 
 export default async function EditClassPage({ params }: { params: Promise<{ id: string }> }) {

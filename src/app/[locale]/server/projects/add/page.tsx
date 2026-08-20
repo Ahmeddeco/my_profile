@@ -1,10 +1,10 @@
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import ServerPageCard from "@/components/backend/ServerPageCard"
-import { getAllClients } from "@/dl/users.data"
-import AddProject from "@/forms/AddProject"
+import AddProject from "@/app/[locale]/server/projects/modules/forms/AddProject"
 import { Role } from "@/generated/prisma/enums"
-import { getAllClientsType } from "@/types/user.type"
 import { connection } from "next/server"
+import { getAllClientsType } from "@/app/[locale]/server/projects/modules/project.type"
+import { getAllClients } from "@/app/[locale]/server/projects/modules/project.data"
 
 export default async function AddProjectPage() {
 	await connection()

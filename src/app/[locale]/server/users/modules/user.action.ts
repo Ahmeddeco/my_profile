@@ -2,7 +2,7 @@
 
 import { DeleteActionState } from "@/components/backend/Settings"
 import prisma from "@/lib/prisma"
-import UserSchema from "@/schemas/UserSchema"
+import UserSchema from "@/app/[locale]/server/users/modules/user.schema"
 import { parseWithZod } from "@conform-to/zod"
 import { refresh, updateTag } from "next/cache"
 import { redirect } from "next/navigation"
