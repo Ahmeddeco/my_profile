@@ -190,6 +190,9 @@ model Course {
 
 model Group {
   id          String       @id @default(cuid())
+  code        String       @default(nanoid())
+  slug        String?      @unique
+  title       String
   courseId    String
   course      Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
   branch      Branch       @relation(fields: [branchId], references: [id])
@@ -206,6 +209,9 @@ model Group {
   @@index([courseId])
   @@index([branchId])
   @@index([startAt])
+  @@index([code])
+  @@index([slug])
+  @@index([createdAt])
   @@map("group")
 }
 

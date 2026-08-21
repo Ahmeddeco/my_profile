@@ -1,109 +1,106 @@
-import { ImageOff, PlusCircle } from "lucide-react"
+import { CalendarOff, PlusCircle } from "lucide-react"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import Image from "next/image"
 import { Role } from "@/generated/prisma/enums"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import { Badge } from "@/components/ui/badge"
 import { Item, ItemContent, ItemMedia, ItemTitle } from "@/components/ui/item"
-import { dateFormate } from "@/helpers/dateFormate"
 import ServerPageCard from "@/components/server/ServerPageCard"
 import Settings from "@/components/server/Settings"
 import PaginationSection from "@/components/server/Pagination"
 import { connection } from "next/server"
-import { getAllCoursesForPageType } from "@/app/[locale]/server/courses/(courses)/modules/course.type"
-import { getAllCoursesForPage } from "@/app/[locale]/server/courses/(courses)/modules/course.data"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { deleteCourseAction } from "@/app/[locale]/server/courses/(courses)/modules/course.action"
+import { getAllGroupsForPage } from "@/app/[locale]/server/courses/groups/modules/group.data"
+import { getAllGroupsForPageType } from "@/app/[locale]/server/courses/groups/modules/group.type"
+import { deleteGroupAction } from "@/app/[locale]/server/courses/groups/modules/group.action"
+import { fnsDateFormat } from "@/helpers/fnsDateFormat"
+import { Currency } from "@/helpers/currency"
 
-export default async function CoursesPage({
-	searchParams,
-	params,
-}: {
-	searchParams: Promise<{ page: string; size: string }>
-	params: Promise<{ locale: "en" | "ar" }>
-}) {
+export default async function CoursesPage({ searchParams }: { searchParams: Promise<{ page: string; size: string }> }) {
 	await connection()
 	await isAllowedRoles([Role.admin, Role.instructor])
 
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 10
-	const courses: getAllCoursesForPageType = await getAllCoursesForPage(pageSize, pageNumber)
-	const locale = (await params).locale
+	const groups: getAllGroupsForPageType = await getAllGroupsForPage(pageSize, pageNumber)
 
 	return (
 		<ServerPageCard
-			btnTitle="add course"
+			btnTitle="add group"
 			icon={PlusCircle}
-			title={"all courses"}
-			description={"All courses in the database."}
-			href={"/server/courses/add"}
+			title={"all groups"}
+			description={"All groups in the database."}
+			href={"/server/courses/groups/add"}
 		>
-			{!courses?.data.length ? (
-				<EmptyCard href={"/server/courses/add"} linkTitle={"add course"} />
+			{!groups?.data.length ? (
+				<EmptyCard href={"/server/courses/groups/add"} linkTitle={"add group"} />
 			) : (
 				<Table>
 					{/* ---------------------------- TableHeader ---------------------------- */}
 					<TableHeader>
 						<TableRow>
-							<TableHead>Image</TableHead>
-							<TableHead>title</TableHead>
-							<TableHead>field</TableHead>
-							<TableHead>instructor</TableHead>
-							<TableHead>created At</TableHead>
+							<TableHead>course</TableHead>
+							<TableHead>branch</TableHead>
+							<TableHead>code</TableHead>
+							<TableHead>capacity</TableHead>
+							<TableHead>start At</TableHead>
+							<TableHead>end At</TableHead>
+							<TableHead>price</TableHead>
 							<TableHead className="text-end">settings</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{courses.data.map(({ createdAt, field, id, instructor, mainImage, titleAr, titleEn }) => (
+						{groups.data.map(({ branch, capacity, code, course, endAt, id, price, startAt }) => (
 							<TableRow key={id}>
 								<TableCell>
-									{mainImage ? (
-										<Image
-											src={mainImage}
-											alt={titleAr}
-											width={48}
-											height={48}
-											className=" object-cover aspect-square rounded-lg"
-										/>
-									) : (
-										<ImageOff size={48} />
-									)}
-								</TableCell>
-								<TableCell>{locale === "en" ? titleEn : titleAr}</TableCell>
-								<TableCell>
-									<Badge>{field}</Badge>
+									<Item size={"default"} className="px-0">
+										<ItemMedia variant={"image"}>
+											<Avatar size="lg">
+												<AvatarImage src={course.mainImage ?? ""} />
+												<AvatarFallback>{course.titleEn[0]}</AvatarFallback>
+											</Avatar>
+										</ItemMedia>
+										<ItemContent>
+											<ItemTitle>{course.titleEn}</ItemTitle>
+										</ItemContent>
+									</Item>
 								</TableCell>
 								<TableCell>
 									<Item size={"xs"} className="px-0">
 										<ItemMedia variant={"icon"}>
-											<Avatar>
-												<AvatarImage src={instructor.image ?? ""} />
-												<AvatarFallback>{instructor.name[0]}</AvatarFallback>
+											<Avatar size="sm">
+												<AvatarImage src={branch.academy.logo ?? ""} />
+												<AvatarFallback>{branch.academy.name[0]}</AvatarFallback>
 											</Avatar>
 										</ItemMedia>
 										<ItemContent>
-											<ItemTitle>{instructor.name}</ItemTitle>
+											<ItemTitle>{branch.name}</ItemTitle>
 										</ItemContent>
 									</Item>
 								</TableCell>
-								<TableCell>{dateFormate(createdAt)}</TableCell>
+								<TableCell>
+									<Badge>{code}</Badge>
+								</TableCell>
+								<TableCell>{capacity}</TableCell>
+								<TableCell>{fnsDateFormat(startAt)}</TableCell>
+								<TableCell>{endAt ? fnsDateFormat(endAt) : <CalendarOff />}</TableCell>
+								<TableCell>{Currency(price ?? course.price, "en")}</TableCell>
 
 								{/* -------------------------------- settings -------------------------------- */}
 								<Settings
 									id={id}
-									deleteAction={deleteCourseAction}
-									editLink={`/server/courses/edit/${id}`}
-									deleteName={"Course"}
+									deleteAction={deleteGroupAction}
+									editLink={`/server/courses/groups/edit/${id}`}
+									deleteName={"group"}
 								/>
 							</TableRow>
 						))}
 					</TableBody>
 					{/* ---------------------------- Pagination ---------------------------- */}
 					<TableCaption>
-						<PaginationSection pageNumber={pageNumber} pageSize={pageSize} totalPages={courses.totalPages} />
+						<PaginationSection pageNumber={pageNumber} pageSize={pageSize} totalPages={groups.totalPages} />
 					</TableCaption>
 				</Table>
 			)}

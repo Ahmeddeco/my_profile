@@ -8,6 +8,9 @@ import { BatchStatusSchema } from '../inputTypeSchemas/BatchStatusSchema'
 export const GroupSchema = z.object({
   status: BatchStatusSchema,
   id: z.string(),
+  code: z.string(),
+  slug: z.string().nullish(),
+  title: z.string(),
   courseId: z.string(),
   startAt: z.date(),
   endAt: z.date().nullish(),

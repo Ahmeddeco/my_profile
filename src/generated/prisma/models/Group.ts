@@ -38,6 +38,9 @@ export type GroupSumAggregateOutputType = {
 
 export type GroupMinAggregateOutputType = {
   id: string | null
+  code: string | null
+  slug: string | null
+  title: string | null
   courseId: string | null
   startAt: Date | null
   endAt: Date | null
@@ -51,6 +54,9 @@ export type GroupMinAggregateOutputType = {
 
 export type GroupMaxAggregateOutputType = {
   id: string | null
+  code: string | null
+  slug: string | null
+  title: string | null
   courseId: string | null
   startAt: Date | null
   endAt: Date | null
@@ -64,6 +70,9 @@ export type GroupMaxAggregateOutputType = {
 
 export type GroupCountAggregateOutputType = {
   id: number
+  code: number
+  slug: number
+  title: number
   courseId: number
   startAt: number
   endAt: number
@@ -89,6 +98,9 @@ export type GroupSumAggregateInputType = {
 
 export type GroupMinAggregateInputType = {
   id?: true
+  code?: true
+  slug?: true
+  title?: true
   courseId?: true
   startAt?: true
   endAt?: true
@@ -102,6 +114,9 @@ export type GroupMinAggregateInputType = {
 
 export type GroupMaxAggregateInputType = {
   id?: true
+  code?: true
+  slug?: true
+  title?: true
   courseId?: true
   startAt?: true
   endAt?: true
@@ -115,6 +130,9 @@ export type GroupMaxAggregateInputType = {
 
 export type GroupCountAggregateInputType = {
   id?: true
+  code?: true
+  slug?: true
+  title?: true
   courseId?: true
   startAt?: true
   endAt?: true
@@ -215,6 +233,9 @@ export type GroupGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type GroupGroupByOutputType = {
   id: string
+  code: string
+  slug: string | null
+  title: string
   courseId: string
   startAt: Date
   endAt: Date | null
@@ -251,6 +272,9 @@ export type GroupWhereInput = {
   OR?: Prisma.GroupWhereInput[]
   NOT?: Prisma.GroupWhereInput | Prisma.GroupWhereInput[]
   id?: Prisma.StringFilter<"Group"> | string
+  code?: Prisma.StringFilter<"Group"> | string
+  slug?: Prisma.StringNullableFilter<"Group"> | string | null
+  title?: Prisma.StringFilter<"Group"> | string
   courseId?: Prisma.StringFilter<"Group"> | string
   startAt?: Prisma.DateTimeFilter<"Group"> | Date | string
   endAt?: Prisma.DateTimeNullableFilter<"Group"> | Date | string | null
@@ -267,6 +291,9 @@ export type GroupWhereInput = {
 
 export type GroupOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
+  title?: Prisma.SortOrder
   courseId?: Prisma.SortOrder
   startAt?: Prisma.SortOrder
   endAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -283,9 +310,12 @@ export type GroupOrderByWithRelationInput = {
 
 export type GroupWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  slug?: string
   AND?: Prisma.GroupWhereInput | Prisma.GroupWhereInput[]
   OR?: Prisma.GroupWhereInput[]
   NOT?: Prisma.GroupWhereInput | Prisma.GroupWhereInput[]
+  code?: Prisma.StringFilter<"Group"> | string
+  title?: Prisma.StringFilter<"Group"> | string
   courseId?: Prisma.StringFilter<"Group"> | string
   startAt?: Prisma.DateTimeFilter<"Group"> | Date | string
   endAt?: Prisma.DateTimeNullableFilter<"Group"> | Date | string | null
@@ -298,10 +328,13 @@ export type GroupWhereUniqueInput = Prisma.AtLeast<{
   course?: Prisma.XOR<Prisma.CourseScalarRelationFilter, Prisma.CourseWhereInput>
   branch?: Prisma.XOR<Prisma.BranchScalarRelationFilter, Prisma.BranchWhereInput>
   enrollments?: Prisma.EnrollmentListRelationFilter
-}, "id">
+}, "id" | "slug">
 
 export type GroupOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
+  title?: Prisma.SortOrder
   courseId?: Prisma.SortOrder
   startAt?: Prisma.SortOrder
   endAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -323,6 +356,9 @@ export type GroupScalarWhereWithAggregatesInput = {
   OR?: Prisma.GroupScalarWhereWithAggregatesInput[]
   NOT?: Prisma.GroupScalarWhereWithAggregatesInput | Prisma.GroupScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Group"> | string
+  code?: Prisma.StringWithAggregatesFilter<"Group"> | string
+  slug?: Prisma.StringNullableWithAggregatesFilter<"Group"> | string | null
+  title?: Prisma.StringWithAggregatesFilter<"Group"> | string
   courseId?: Prisma.StringWithAggregatesFilter<"Group"> | string
   startAt?: Prisma.DateTimeWithAggregatesFilter<"Group"> | Date | string
   endAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Group"> | Date | string | null
@@ -336,6 +372,9 @@ export type GroupScalarWhereWithAggregatesInput = {
 
 export type GroupCreateInput = {
   id?: string
+  code?: string
+  slug?: string | null
+  title: string
   startAt: Date | string
   endAt?: Date | string | null
   capacity?: number | null
@@ -350,6 +389,9 @@ export type GroupCreateInput = {
 
 export type GroupUncheckedCreateInput = {
   id?: string
+  code?: string
+  slug?: string | null
+  title: string
   courseId: string
   startAt: Date | string
   endAt?: Date | string | null
@@ -364,6 +406,9 @@ export type GroupUncheckedCreateInput = {
 
 export type GroupUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
   startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -378,6 +423,9 @@ export type GroupUpdateInput = {
 
 export type GroupUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
   courseId?: Prisma.StringFieldUpdateOperationsInput | string
   startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -392,6 +440,9 @@ export type GroupUncheckedUpdateInput = {
 
 export type GroupCreateManyInput = {
   id?: string
+  code?: string
+  slug?: string | null
+  title: string
   courseId: string
   startAt: Date | string
   endAt?: Date | string | null
@@ -405,6 +456,9 @@ export type GroupCreateManyInput = {
 
 export type GroupUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
   startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -416,6 +470,9 @@ export type GroupUpdateManyMutationInput = {
 
 export type GroupUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
   courseId?: Prisma.StringFieldUpdateOperationsInput | string
   startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -439,6 +496,9 @@ export type GroupOrderByRelationAggregateInput = {
 
 export type GroupCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   courseId?: Prisma.SortOrder
   startAt?: Prisma.SortOrder
   endAt?: Prisma.SortOrder
@@ -457,6 +517,9 @@ export type GroupAvgOrderByAggregateInput = {
 
 export type GroupMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   courseId?: Prisma.SortOrder
   startAt?: Prisma.SortOrder
   endAt?: Prisma.SortOrder
@@ -470,6 +533,9 @@ export type GroupMaxOrderByAggregateInput = {
 
 export type GroupMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   courseId?: Prisma.SortOrder
   startAt?: Prisma.SortOrder
   endAt?: Prisma.SortOrder
@@ -595,6 +661,9 @@ export type GroupUncheckedUpdateManyWithoutBranchNestedInput = {
 
 export type GroupCreateWithoutCourseInput = {
   id?: string
+  code?: string
+  slug?: string | null
+  title: string
   startAt: Date | string
   endAt?: Date | string | null
   capacity?: number | null
@@ -608,6 +677,9 @@ export type GroupCreateWithoutCourseInput = {
 
 export type GroupUncheckedCreateWithoutCourseInput = {
   id?: string
+  code?: string
+  slug?: string | null
+  title: string
   startAt: Date | string
   endAt?: Date | string | null
   capacity?: number | null
@@ -650,6 +722,9 @@ export type GroupScalarWhereInput = {
   OR?: Prisma.GroupScalarWhereInput[]
   NOT?: Prisma.GroupScalarWhereInput | Prisma.GroupScalarWhereInput[]
   id?: Prisma.StringFilter<"Group"> | string
+  code?: Prisma.StringFilter<"Group"> | string
+  slug?: Prisma.StringNullableFilter<"Group"> | string | null
+  title?: Prisma.StringFilter<"Group"> | string
   courseId?: Prisma.StringFilter<"Group"> | string
   startAt?: Prisma.DateTimeFilter<"Group"> | Date | string
   endAt?: Prisma.DateTimeNullableFilter<"Group"> | Date | string | null
@@ -663,6 +738,9 @@ export type GroupScalarWhereInput = {
 
 export type GroupCreateWithoutEnrollmentsInput = {
   id?: string
+  code?: string
+  slug?: string | null
+  title: string
   startAt: Date | string
   endAt?: Date | string | null
   capacity?: number | null
@@ -676,6 +754,9 @@ export type GroupCreateWithoutEnrollmentsInput = {
 
 export type GroupUncheckedCreateWithoutEnrollmentsInput = {
   id?: string
+  code?: string
+  slug?: string | null
+  title: string
   courseId: string
   startAt: Date | string
   endAt?: Date | string | null
@@ -705,6 +786,9 @@ export type GroupUpdateToOneWithWhereWithoutEnrollmentsInput = {
 
 export type GroupUpdateWithoutEnrollmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
   startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -718,6 +802,9 @@ export type GroupUpdateWithoutEnrollmentsInput = {
 
 export type GroupUncheckedUpdateWithoutEnrollmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
   courseId?: Prisma.StringFieldUpdateOperationsInput | string
   startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -731,6 +818,9 @@ export type GroupUncheckedUpdateWithoutEnrollmentsInput = {
 
 export type GroupCreateWithoutBranchInput = {
   id?: string
+  code?: string
+  slug?: string | null
+  title: string
   startAt: Date | string
   endAt?: Date | string | null
   capacity?: number | null
@@ -744,6 +834,9 @@ export type GroupCreateWithoutBranchInput = {
 
 export type GroupUncheckedCreateWithoutBranchInput = {
   id?: string
+  code?: string
+  slug?: string | null
+  title: string
   courseId: string
   startAt: Date | string
   endAt?: Date | string | null
@@ -783,6 +876,9 @@ export type GroupUpdateManyWithWhereWithoutBranchInput = {
 
 export type GroupCreateManyCourseInput = {
   id?: string
+  code?: string
+  slug?: string | null
+  title: string
   startAt: Date | string
   endAt?: Date | string | null
   capacity?: number | null
@@ -795,6 +891,9 @@ export type GroupCreateManyCourseInput = {
 
 export type GroupUpdateWithoutCourseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
   startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -808,6 +907,9 @@ export type GroupUpdateWithoutCourseInput = {
 
 export type GroupUncheckedUpdateWithoutCourseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
   startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -821,6 +923,9 @@ export type GroupUncheckedUpdateWithoutCourseInput = {
 
 export type GroupUncheckedUpdateManyWithoutCourseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
   startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -833,6 +938,9 @@ export type GroupUncheckedUpdateManyWithoutCourseInput = {
 
 export type GroupCreateManyBranchInput = {
   id?: string
+  code?: string
+  slug?: string | null
+  title: string
   courseId: string
   startAt: Date | string
   endAt?: Date | string | null
@@ -845,6 +953,9 @@ export type GroupCreateManyBranchInput = {
 
 export type GroupUpdateWithoutBranchInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
   startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -858,6 +969,9 @@ export type GroupUpdateWithoutBranchInput = {
 
 export type GroupUncheckedUpdateWithoutBranchInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
   courseId?: Prisma.StringFieldUpdateOperationsInput | string
   startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -871,6 +985,9 @@ export type GroupUncheckedUpdateWithoutBranchInput = {
 
 export type GroupUncheckedUpdateManyWithoutBranchInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
   courseId?: Prisma.StringFieldUpdateOperationsInput | string
   startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -914,6 +1031,9 @@ export type GroupCountOutputTypeCountEnrollmentsArgs<ExtArgs extends runtime.Typ
 
 export type GroupSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  code?: boolean
+  slug?: boolean
+  title?: boolean
   courseId?: boolean
   startAt?: boolean
   endAt?: boolean
@@ -931,6 +1051,9 @@ export type GroupSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 
 export type GroupSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  code?: boolean
+  slug?: boolean
+  title?: boolean
   courseId?: boolean
   startAt?: boolean
   endAt?: boolean
@@ -946,6 +1069,9 @@ export type GroupSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 
 export type GroupSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  code?: boolean
+  slug?: boolean
+  title?: boolean
   courseId?: boolean
   startAt?: boolean
   endAt?: boolean
@@ -961,6 +1087,9 @@ export type GroupSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 
 export type GroupSelectScalar = {
   id?: boolean
+  code?: boolean
+  slug?: boolean
+  title?: boolean
   courseId?: boolean
   startAt?: boolean
   endAt?: boolean
@@ -972,7 +1101,7 @@ export type GroupSelectScalar = {
   branchId?: boolean
 }
 
-export type GroupOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "courseId" | "startAt" | "endAt" | "capacity" | "price" | "status" | "createdAt" | "updatedAt" | "branchId", ExtArgs["result"]["group"]>
+export type GroupOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "slug" | "title" | "courseId" | "startAt" | "endAt" | "capacity" | "price" | "status" | "createdAt" | "updatedAt" | "branchId", ExtArgs["result"]["group"]>
 export type GroupInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   course?: boolean | Prisma.CourseDefaultArgs<ExtArgs>
   branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
@@ -997,6 +1126,9 @@ export type $GroupPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    code: string
+    slug: string | null
+    title: string
     courseId: string
     startAt: Date
     endAt: Date | null
@@ -1433,6 +1565,9 @@ export interface Prisma__GroupClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface GroupFieldRefs {
   readonly id: Prisma.FieldRef<"Group", 'String'>
+  readonly code: Prisma.FieldRef<"Group", 'String'>
+  readonly slug: Prisma.FieldRef<"Group", 'String'>
+  readonly title: Prisma.FieldRef<"Group", 'String'>
   readonly courseId: Prisma.FieldRef<"Group", 'String'>
   readonly startAt: Prisma.FieldRef<"Group", 'DateTime'>
   readonly endAt: Prisma.FieldRef<"Group", 'DateTime'>

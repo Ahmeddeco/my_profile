@@ -7,6 +7,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Input } from "../ui/input"
 import { Field, FieldError, FieldLabel } from "../ui/field"
 import { useState } from "react"
+import { format } from "date-fns"
 
 type Props = {
 	name: string | undefined
@@ -25,7 +26,7 @@ export default function DatePicker({ defaultValue, dateKey, name, errors }: Prop
 
 	const formatDateString = (d: Date | undefined) => {
 		if (!d) return ""
-		return d.toISOString().split("T")[0]
+		return format(d, "yyyy-MM-dd")
 	}
 
 	return (

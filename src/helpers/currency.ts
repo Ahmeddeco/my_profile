@@ -2,8 +2,8 @@ export const Currency = (price: number, locale: "ar" | "en") => {
     return price?.toLocaleString(locale === "ar" ? "ar-EG" : "en-EG", {
         style: 'currency',
         currency: 'EGP',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
     })
 }
 
@@ -15,7 +15,7 @@ export const finalPrice = (price: number, discount: number, locale: "ar" | "en")
     return (validatedPrice - (validatedPrice * (validatedDiscount / 100))).toLocaleString(locale === "ar" ? "ar-EG" : "en-EG", {
         style: 'currency',
         currency: 'EGP',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
     })
 }
