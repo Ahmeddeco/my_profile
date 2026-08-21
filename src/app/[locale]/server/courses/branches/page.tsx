@@ -1,109 +1,88 @@
-import { ImageOff, PlusCircle } from "lucide-react"
+import { MapPin, PhoneOff, PlusCircle } from "lucide-react"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import Image from "next/image"
 import { Role } from "@/generated/prisma/enums"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import { Badge } from "@/components/ui/badge"
 import { Item, ItemContent, ItemMedia, ItemTitle } from "@/components/ui/item"
-import { dateFormate } from "@/helpers/dateFormate"
 import ServerPageCard from "@/components/server/ServerPageCard"
 import Settings from "@/components/server/Settings"
 import PaginationSection from "@/components/server/Pagination"
 import { connection } from "next/server"
-import { getAllCoursesForPageType } from "@/app/[locale]/server/courses/(courses)/modules/course.type"
-import { getAllCoursesForPage } from "@/app/[locale]/server/courses/(courses)/modules/course.data"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { deleteCourseAction } from "@/app/[locale]/server/courses/(courses)/modules/course.action"
+import { getAllBranchesForPageType } from "@/app/[locale]/server/courses/branches/modules/branch.type"
+import { getAllBranchesForPage } from "@/app/[locale]/server/courses/branches/modules/branch.data"
+import { deleteBranchAction } from "@/app/[locale]/server/courses/branches/modules/branch.action"
 
-export default async function CoursesPage({
-	searchParams,
-	params,
-}: {
-	searchParams: Promise<{ page: string; size: string }>
-	params: Promise<{ locale: "en" | "ar" }>
-}) {
+export default async function CoursesPage({ searchParams }: { searchParams: Promise<{ page: string; size: string }> }) {
 	await connection()
 	await isAllowedRoles([Role.admin, Role.instructor])
 
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 10
-	const courses: getAllCoursesForPageType = await getAllCoursesForPage(pageSize, pageNumber)
-	const locale = (await params).locale
+	const branches: getAllBranchesForPageType = await getAllBranchesForPage(pageSize, pageNumber)
 
 	return (
 		<ServerPageCard
-			btnTitle="add course"
+			btnTitle="add branch"
 			icon={PlusCircle}
-			title={"all courses"}
-			description={"All courses in the database."}
-			href={"/server/courses/add"}
+			title={"all branches"}
+			description={"All branches in the database."}
+			href={"/server/courses/branches/add"}
 		>
-			{!courses?.data.length ? (
-				<EmptyCard href={"/server/courses/add"} linkTitle={"add course"} />
+			{!branches?.data.length ? (
+				<EmptyCard href={"/server/courses/branches/add"} linkTitle={"add branch"} />
 			) : (
 				<Table>
 					{/* ---------------------------- TableHeader ---------------------------- */}
 					<TableHeader>
 						<TableRow>
-							<TableHead>Image</TableHead>
-							<TableHead>title</TableHead>
-							<TableHead>field</TableHead>
-							<TableHead>instructor</TableHead>
-							<TableHead>created At</TableHead>
+							<TableHead>academy</TableHead>
+							<TableHead>branch name</TableHead>
+							<TableHead>branch address</TableHead>
+							<TableHead>tel</TableHead>
 							<TableHead className="text-end">settings</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{courses.data.map(({ createdAt, field, id, instructor, mainImage, titleAr, titleEn }) => (
+						{branches.data.map(({ academy, city, country, id, name, state, tel }) => (
 							<TableRow key={id}>
-								<TableCell>
-									{mainImage ? (
-										<Image
-											src={mainImage}
-											alt={titleAr}
-											width={48}
-											height={48}
-											className=" object-cover aspect-square rounded-lg"
-										/>
-									) : (
-										<ImageOff size={48} />
-									)}
-								</TableCell>
-								<TableCell>{locale === "en" ? titleEn : titleAr}</TableCell>
-								<TableCell>
-									<Badge>{field}</Badge>
-								</TableCell>
 								<TableCell>
 									<Item size={"xs"} className="px-0">
 										<ItemMedia variant={"icon"}>
 											<Avatar>
-												<AvatarImage src={instructor.image ?? ""} />
-												<AvatarFallback>{instructor.name[0]}</AvatarFallback>
+												<AvatarImage src={academy.logo ?? ""} />
+												<AvatarFallback>{academy.name[0]}</AvatarFallback>
 											</Avatar>
 										</ItemMedia>
 										<ItemContent>
-											<ItemTitle>{instructor.name}</ItemTitle>
+											<ItemTitle>{academy.name}</ItemTitle>
 										</ItemContent>
 									</Item>
 								</TableCell>
-								<TableCell>{dateFormate(createdAt)}</TableCell>
+								<TableCell>{name}</TableCell>
+								<TableCell>
+									<Badge>
+										<MapPin /> {country} - {state} - {city}
+									</Badge>
+								</TableCell>
+								<TableCell>{tel ?? <PhoneOff />}</TableCell>
 
 								{/* -------------------------------- settings -------------------------------- */}
 								<Settings
 									id={id}
-									deleteAction={deleteCourseAction}
-									editLink={`/server/courses/edit/${id}`}
-									deleteName={"Course"}
+									deleteAction={deleteBranchAction}
+									editLink={`/server/courses/branches/edit/${id}`}
+									deleteName={"Branch"}
 								/>
 							</TableRow>
 						))}
 					</TableBody>
 					{/* ---------------------------- Pagination ---------------------------- */}
 					<TableCaption>
-						<PaginationSection pageNumber={pageNumber} pageSize={pageSize} totalPages={courses.totalPages} />
+						<PaginationSection pageNumber={pageNumber} pageSize={pageSize} totalPages={branches.totalPages} />
 					</TableCaption>
 				</Table>
 			)}

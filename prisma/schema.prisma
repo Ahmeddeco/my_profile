@@ -238,17 +238,19 @@ model Academy {
   updatedAt   DateTime @updatedAt
   userId      String?
 
+  @@index([name])
   @@map("academy")
 }
 
 model Branch {
   id        String   @id @default(cuid())
   name      String
+  slug      String   @unique
   country   String?
   state     String?
   city      String?
-  latitude  Float?
-  longitude Float?
+  lat       Float?
+  lng       Float?
   tel       String?
   group     Group[]
   createdAt DateTime @default(now())
@@ -256,6 +258,7 @@ model Branch {
   academy   Academy  @relation(fields: [academyId], references: [id], onDelete: Cascade)
   academyId String
 
+  @@index([name])
   @@map("branch")
 }
 

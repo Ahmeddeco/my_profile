@@ -27,23 +27,24 @@ export type AggregateBranch = {
 }
 
 export type BranchAvgAggregateOutputType = {
-  latitude: number | null
-  longitude: number | null
+  lat: number | null
+  lng: number | null
 }
 
 export type BranchSumAggregateOutputType = {
-  latitude: number | null
-  longitude: number | null
+  lat: number | null
+  lng: number | null
 }
 
 export type BranchMinAggregateOutputType = {
   id: string | null
   name: string | null
+  slug: string | null
   country: string | null
   state: string | null
   city: string | null
-  latitude: number | null
-  longitude: number | null
+  lat: number | null
+  lng: number | null
   tel: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -53,11 +54,12 @@ export type BranchMinAggregateOutputType = {
 export type BranchMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  slug: string | null
   country: string | null
   state: string | null
   city: string | null
-  latitude: number | null
-  longitude: number | null
+  lat: number | null
+  lng: number | null
   tel: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -67,11 +69,12 @@ export type BranchMaxAggregateOutputType = {
 export type BranchCountAggregateOutputType = {
   id: number
   name: number
+  slug: number
   country: number
   state: number
   city: number
-  latitude: number
-  longitude: number
+  lat: number
+  lng: number
   tel: number
   createdAt: number
   updatedAt: number
@@ -81,23 +84,24 @@ export type BranchCountAggregateOutputType = {
 
 
 export type BranchAvgAggregateInputType = {
-  latitude?: true
-  longitude?: true
+  lat?: true
+  lng?: true
 }
 
 export type BranchSumAggregateInputType = {
-  latitude?: true
-  longitude?: true
+  lat?: true
+  lng?: true
 }
 
 export type BranchMinAggregateInputType = {
   id?: true
   name?: true
+  slug?: true
   country?: true
   state?: true
   city?: true
-  latitude?: true
-  longitude?: true
+  lat?: true
+  lng?: true
   tel?: true
   createdAt?: true
   updatedAt?: true
@@ -107,11 +111,12 @@ export type BranchMinAggregateInputType = {
 export type BranchMaxAggregateInputType = {
   id?: true
   name?: true
+  slug?: true
   country?: true
   state?: true
   city?: true
-  latitude?: true
-  longitude?: true
+  lat?: true
+  lng?: true
   tel?: true
   createdAt?: true
   updatedAt?: true
@@ -121,11 +126,12 @@ export type BranchMaxAggregateInputType = {
 export type BranchCountAggregateInputType = {
   id?: true
   name?: true
+  slug?: true
   country?: true
   state?: true
   city?: true
-  latitude?: true
-  longitude?: true
+  lat?: true
+  lng?: true
   tel?: true
   createdAt?: true
   updatedAt?: true
@@ -222,11 +228,12 @@ export type BranchGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 export type BranchGroupByOutputType = {
   id: string
   name: string
+  slug: string
   country: string | null
   state: string | null
   city: string | null
-  latitude: number | null
-  longitude: number | null
+  lat: number | null
+  lng: number | null
   tel: string | null
   createdAt: Date
   updatedAt: Date
@@ -259,11 +266,12 @@ export type BranchWhereInput = {
   NOT?: Prisma.BranchWhereInput | Prisma.BranchWhereInput[]
   id?: Prisma.StringFilter<"Branch"> | string
   name?: Prisma.StringFilter<"Branch"> | string
+  slug?: Prisma.StringFilter<"Branch"> | string
   country?: Prisma.StringNullableFilter<"Branch"> | string | null
   state?: Prisma.StringNullableFilter<"Branch"> | string | null
   city?: Prisma.StringNullableFilter<"Branch"> | string | null
-  latitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
-  longitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  lat?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  lng?: Prisma.FloatNullableFilter<"Branch"> | number | null
   tel?: Prisma.StringNullableFilter<"Branch"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
@@ -275,11 +283,12 @@ export type BranchWhereInput = {
 export type BranchOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   country?: Prisma.SortOrderInput | Prisma.SortOrder
   state?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
-  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
-  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  lat?: Prisma.SortOrderInput | Prisma.SortOrder
+  lng?: Prisma.SortOrderInput | Prisma.SortOrder
   tel?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -290,6 +299,7 @@ export type BranchOrderByWithRelationInput = {
 
 export type BranchWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  slug?: string
   AND?: Prisma.BranchWhereInput | Prisma.BranchWhereInput[]
   OR?: Prisma.BranchWhereInput[]
   NOT?: Prisma.BranchWhereInput | Prisma.BranchWhereInput[]
@@ -297,24 +307,25 @@ export type BranchWhereUniqueInput = Prisma.AtLeast<{
   country?: Prisma.StringNullableFilter<"Branch"> | string | null
   state?: Prisma.StringNullableFilter<"Branch"> | string | null
   city?: Prisma.StringNullableFilter<"Branch"> | string | null
-  latitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
-  longitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  lat?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  lng?: Prisma.FloatNullableFilter<"Branch"> | number | null
   tel?: Prisma.StringNullableFilter<"Branch"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   academyId?: Prisma.StringFilter<"Branch"> | string
   group?: Prisma.GroupListRelationFilter
   academy?: Prisma.XOR<Prisma.AcademyScalarRelationFilter, Prisma.AcademyWhereInput>
-}, "id">
+}, "id" | "slug">
 
 export type BranchOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   country?: Prisma.SortOrderInput | Prisma.SortOrder
   state?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
-  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
-  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  lat?: Prisma.SortOrderInput | Prisma.SortOrder
+  lng?: Prisma.SortOrderInput | Prisma.SortOrder
   tel?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -332,11 +343,12 @@ export type BranchScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BranchScalarWhereWithAggregatesInput | Prisma.BranchScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Branch"> | string
   name?: Prisma.StringWithAggregatesFilter<"Branch"> | string
+  slug?: Prisma.StringWithAggregatesFilter<"Branch"> | string
   country?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   state?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   city?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
-  latitude?: Prisma.FloatNullableWithAggregatesFilter<"Branch"> | number | null
-  longitude?: Prisma.FloatNullableWithAggregatesFilter<"Branch"> | number | null
+  lat?: Prisma.FloatNullableWithAggregatesFilter<"Branch"> | number | null
+  lng?: Prisma.FloatNullableWithAggregatesFilter<"Branch"> | number | null
   tel?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Branch"> | Date | string
@@ -346,11 +358,12 @@ export type BranchScalarWhereWithAggregatesInput = {
 export type BranchCreateInput = {
   id?: string
   name: string
+  slug: string
   country?: string | null
   state?: string | null
   city?: string | null
-  latitude?: number | null
-  longitude?: number | null
+  lat?: number | null
+  lng?: number | null
   tel?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -361,11 +374,12 @@ export type BranchCreateInput = {
 export type BranchUncheckedCreateInput = {
   id?: string
   name: string
+  slug: string
   country?: string | null
   state?: string | null
   city?: string | null
-  latitude?: number | null
-  longitude?: number | null
+  lat?: number | null
+  lng?: number | null
   tel?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -376,11 +390,12 @@ export type BranchUncheckedCreateInput = {
 export type BranchUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -391,11 +406,12 @@ export type BranchUpdateInput = {
 export type BranchUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -406,11 +422,12 @@ export type BranchUncheckedUpdateInput = {
 export type BranchCreateManyInput = {
   id?: string
   name: string
+  slug: string
   country?: string | null
   state?: string | null
   city?: string | null
-  latitude?: number | null
-  longitude?: number | null
+  lat?: number | null
+  lng?: number | null
   tel?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -420,11 +437,12 @@ export type BranchCreateManyInput = {
 export type BranchUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -433,11 +451,12 @@ export type BranchUpdateManyMutationInput = {
 export type BranchUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -462,11 +481,12 @@ export type BranchOrderByRelationAggregateInput = {
 export type BranchCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   country?: Prisma.SortOrder
   state?: Prisma.SortOrder
   city?: Prisma.SortOrder
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
+  lat?: Prisma.SortOrder
+  lng?: Prisma.SortOrder
   tel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -474,18 +494,19 @@ export type BranchCountOrderByAggregateInput = {
 }
 
 export type BranchAvgOrderByAggregateInput = {
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
+  lat?: Prisma.SortOrder
+  lng?: Prisma.SortOrder
 }
 
 export type BranchMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   country?: Prisma.SortOrder
   state?: Prisma.SortOrder
   city?: Prisma.SortOrder
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
+  lat?: Prisma.SortOrder
+  lng?: Prisma.SortOrder
   tel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -495,11 +516,12 @@ export type BranchMaxOrderByAggregateInput = {
 export type BranchMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   country?: Prisma.SortOrder
   state?: Prisma.SortOrder
   city?: Prisma.SortOrder
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
+  lat?: Prisma.SortOrder
+  lng?: Prisma.SortOrder
   tel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -507,8 +529,8 @@ export type BranchMinOrderByAggregateInput = {
 }
 
 export type BranchSumOrderByAggregateInput = {
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
+  lat?: Prisma.SortOrder
+  lng?: Prisma.SortOrder
 }
 
 export type BranchCreateNestedOneWithoutGroupInput = {
@@ -578,11 +600,12 @@ export type NullableFloatFieldUpdateOperationsInput = {
 export type BranchCreateWithoutGroupInput = {
   id?: string
   name: string
+  slug: string
   country?: string | null
   state?: string | null
   city?: string | null
-  latitude?: number | null
-  longitude?: number | null
+  lat?: number | null
+  lng?: number | null
   tel?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -592,11 +615,12 @@ export type BranchCreateWithoutGroupInput = {
 export type BranchUncheckedCreateWithoutGroupInput = {
   id?: string
   name: string
+  slug: string
   country?: string | null
   state?: string | null
   city?: string | null
-  latitude?: number | null
-  longitude?: number | null
+  lat?: number | null
+  lng?: number | null
   tel?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -622,11 +646,12 @@ export type BranchUpdateToOneWithWhereWithoutGroupInput = {
 export type BranchUpdateWithoutGroupInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -636,11 +661,12 @@ export type BranchUpdateWithoutGroupInput = {
 export type BranchUncheckedUpdateWithoutGroupInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -650,11 +676,12 @@ export type BranchUncheckedUpdateWithoutGroupInput = {
 export type BranchCreateWithoutAcademyInput = {
   id?: string
   name: string
+  slug: string
   country?: string | null
   state?: string | null
   city?: string | null
-  latitude?: number | null
-  longitude?: number | null
+  lat?: number | null
+  lng?: number | null
   tel?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -664,11 +691,12 @@ export type BranchCreateWithoutAcademyInput = {
 export type BranchUncheckedCreateWithoutAcademyInput = {
   id?: string
   name: string
+  slug: string
   country?: string | null
   state?: string | null
   city?: string | null
-  latitude?: number | null
-  longitude?: number | null
+  lat?: number | null
+  lng?: number | null
   tel?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -707,11 +735,12 @@ export type BranchScalarWhereInput = {
   NOT?: Prisma.BranchScalarWhereInput | Prisma.BranchScalarWhereInput[]
   id?: Prisma.StringFilter<"Branch"> | string
   name?: Prisma.StringFilter<"Branch"> | string
+  slug?: Prisma.StringFilter<"Branch"> | string
   country?: Prisma.StringNullableFilter<"Branch"> | string | null
   state?: Prisma.StringNullableFilter<"Branch"> | string | null
   city?: Prisma.StringNullableFilter<"Branch"> | string | null
-  latitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
-  longitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  lat?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  lng?: Prisma.FloatNullableFilter<"Branch"> | number | null
   tel?: Prisma.StringNullableFilter<"Branch"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
@@ -721,11 +750,12 @@ export type BranchScalarWhereInput = {
 export type BranchCreateManyAcademyInput = {
   id?: string
   name: string
+  slug: string
   country?: string | null
   state?: string | null
   city?: string | null
-  latitude?: number | null
-  longitude?: number | null
+  lat?: number | null
+  lng?: number | null
   tel?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -734,11 +764,12 @@ export type BranchCreateManyAcademyInput = {
 export type BranchUpdateWithoutAcademyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -748,11 +779,12 @@ export type BranchUpdateWithoutAcademyInput = {
 export type BranchUncheckedUpdateWithoutAcademyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -762,11 +794,12 @@ export type BranchUncheckedUpdateWithoutAcademyInput = {
 export type BranchUncheckedUpdateManyWithoutAcademyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   tel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -806,11 +839,12 @@ export type BranchCountOutputTypeCountGroupArgs<ExtArgs extends runtime.Types.Ex
 export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  slug?: boolean
   country?: boolean
   state?: boolean
   city?: boolean
-  latitude?: boolean
-  longitude?: boolean
+  lat?: boolean
+  lng?: boolean
   tel?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -823,11 +857,12 @@ export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type BranchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  slug?: boolean
   country?: boolean
   state?: boolean
   city?: boolean
-  latitude?: boolean
-  longitude?: boolean
+  lat?: boolean
+  lng?: boolean
   tel?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -838,11 +873,12 @@ export type BranchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type BranchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  slug?: boolean
   country?: boolean
   state?: boolean
   city?: boolean
-  latitude?: boolean
-  longitude?: boolean
+  lat?: boolean
+  lng?: boolean
   tel?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -853,18 +889,19 @@ export type BranchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type BranchSelectScalar = {
   id?: boolean
   name?: boolean
+  slug?: boolean
   country?: boolean
   state?: boolean
   city?: boolean
-  latitude?: boolean
-  longitude?: boolean
+  lat?: boolean
+  lng?: boolean
   tel?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   academyId?: boolean
 }
 
-export type BranchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "country" | "state" | "city" | "latitude" | "longitude" | "tel" | "createdAt" | "updatedAt" | "academyId", ExtArgs["result"]["branch"]>
+export type BranchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "country" | "state" | "city" | "lat" | "lng" | "tel" | "createdAt" | "updatedAt" | "academyId", ExtArgs["result"]["branch"]>
 export type BranchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   group?: boolean | Prisma.Branch$groupArgs<ExtArgs>
   academy?: boolean | Prisma.AcademyDefaultArgs<ExtArgs>
@@ -886,11 +923,12 @@ export type $BranchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    slug: string
     country: string | null
     state: string | null
     city: string | null
-    latitude: number | null
-    longitude: number | null
+    lat: number | null
+    lng: number | null
     tel: string | null
     createdAt: Date
     updatedAt: Date
@@ -1322,11 +1360,12 @@ export interface Prisma__BranchClient<T, Null = never, ExtArgs extends runtime.T
 export interface BranchFieldRefs {
   readonly id: Prisma.FieldRef<"Branch", 'String'>
   readonly name: Prisma.FieldRef<"Branch", 'String'>
+  readonly slug: Prisma.FieldRef<"Branch", 'String'>
   readonly country: Prisma.FieldRef<"Branch", 'String'>
   readonly state: Prisma.FieldRef<"Branch", 'String'>
   readonly city: Prisma.FieldRef<"Branch", 'String'>
-  readonly latitude: Prisma.FieldRef<"Branch", 'Float'>
-  readonly longitude: Prisma.FieldRef<"Branch", 'Float'>
+  readonly lat: Prisma.FieldRef<"Branch", 'Float'>
+  readonly lng: Prisma.FieldRef<"Branch", 'Float'>
   readonly tel: Prisma.FieldRef<"Branch", 'String'>
   readonly createdAt: Prisma.FieldRef<"Branch", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Branch", 'DateTime'>

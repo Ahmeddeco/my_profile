@@ -14,6 +14,7 @@ import ServerPageCard from "@/components/server/ServerPageCard"
 import Settings from "@/components/server/Settings"
 import PaginationSection from "@/components/server/Pagination"
 import { connection } from "next/server"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default async function ProjectsPage({
 	searchParams,
@@ -73,16 +74,15 @@ export default async function ProjectsPage({
 								</TableCell>
 								<TableCell>{locale === "en" ? titleEn : titleAr}</TableCell>
 								<TableCell>
-									<Badge>{type}</Badge>
+									<Badge variant={"outline"}>{type}</Badge>
 								</TableCell>
 								<TableCell>
 									<Item size={"xs"} className="px-0">
-										<ItemMedia variant="image">
-											{client.image ? (
-												<Image src={client.image} alt={client.name} width={48} height={48} />
-											) : (
-												<ImageOff />
-											)}
+										<ItemMedia variant={"icon"}>
+											<Avatar>
+												<AvatarImage src={client.image ?? ""} />
+												<AvatarFallback>{client.name[0]}</AvatarFallback>
+											</Avatar>
 										</ItemMedia>
 										<ItemContent>
 											<ItemTitle>{client.name}</ItemTitle>

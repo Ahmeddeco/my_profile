@@ -13,6 +13,7 @@ import { deleteArticlesAction } from "@/app/[locale]/server/articles/modules/art
 import { getAllArticlesForArticlesPageType } from "@/app/[locale]/server/articles/modules/article.type"
 import { getAllArticlesForArticlesPage } from "@/app/[locale]/server/articles/modules/article.data"
 import { connection } from "next/server"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default async function ArticlesPage({
 	searchParams,
@@ -72,12 +73,11 @@ export default async function ArticlesPage({
 								<TableCell>{locale === "en" ? titleEn : titleAr}</TableCell>
 								<TableCell>
 									<Item size={"xs"} className="px-0">
-										<ItemMedia variant="image">
-											{author.image ? (
-												<Image src={author.image} alt={author.name} width={48} height={48} />
-											) : (
-												<ImageOff />
-											)}
+										<ItemMedia variant={"icon"}>
+											<Avatar>
+												<AvatarImage src={author.image ?? ""} />
+												<AvatarFallback>{author.name[0]}</AvatarFallback>
+											</Avatar>
 										</ItemMedia>
 										<ItemContent>
 											<ItemTitle>{author.name}</ItemTitle>

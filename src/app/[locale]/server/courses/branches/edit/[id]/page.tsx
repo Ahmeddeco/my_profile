@@ -1,9 +1,9 @@
-import { getAllInstructorsForSelect, getOneCourse } from "@/app/[locale]/server/courses/(courses)/modules/course.data"
+import { getAllAcademiesForSelect, getOneBranch } from "@/app/[locale]/server/courses/branches/modules/branch.data"
 import {
-	getAllInstructorsForSelectType,
-	getOneCourseType,
-} from "@/app/[locale]/server/courses/(courses)/modules/course.type"
-import EditCourseForm from "@/app/[locale]/server/courses/(courses)/modules/forms/EditCourseForm"
+	getAllAcademiesForSelectType,
+	getOneBranchType,
+} from "@/app/[locale]/server/courses/branches/modules/branch.type"
+import EditBranch from "@/app/[locale]/server/courses/branches/modules/forms/EditBranch"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import ServerPageCard from "@/components/server/ServerPageCard"
 import { Role } from "@/generated/prisma/enums"
@@ -17,12 +17,16 @@ export default async function EditProjectPage({ params }: Props) {
 	await connection()
 	await isAllowedRoles([Role.admin, Role.instructor])
 	const id = (await params).id
-	const allInstructors: getAllInstructorsForSelectType = await getAllInstructorsForSelect()
-	const course: getOneCourseType = await getOneCourse(id)
+	const academies: getAllAcademiesForSelectType = await getAllAcademiesForSelect()
+	const branch: getOneBranchType = await getOneBranch(id)
 
 	return (
-		<ServerPageCard title={"edit project"} description={"edit project in the database."} href={"/server/courses"}>
-			<EditCourseForm allInstructors={allInstructors} course={course} />
+		<ServerPageCard
+			title={"edit branch"}
+			description={"edit branch to the database."}
+			href={"/server/courses/branches"}
+		>
+			<EditBranch academies={academies} branch={branch} />
 		</ServerPageCard>
 	)
 }
