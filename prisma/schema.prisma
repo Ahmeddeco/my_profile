@@ -190,7 +190,7 @@ model Course {
 
 model Group {
   id          String       @id @default(cuid())
-  code        String       @default(nanoid())
+  code        String       @default(nanoid(10))
   slug        String?      @unique
   title       String
   courseId    String

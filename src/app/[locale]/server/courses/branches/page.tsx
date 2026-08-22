@@ -50,9 +50,9 @@ export default async function CoursesPage({ searchParams }: { searchParams: Prom
 						{branches.data.map(({ academy, city, country, id, name, state, tel }) => (
 							<TableRow key={id}>
 								<TableCell>
-									<Item size={"xs"} className="px-0">
+									<Item size={"default"} className="px-0">
 										<ItemMedia variant={"icon"}>
-											<Avatar>
+											<Avatar size="lg">
 												<AvatarImage src={academy.logo ?? ""} />
 												<AvatarFallback>{academy.name[0]}</AvatarFallback>
 											</Avatar>

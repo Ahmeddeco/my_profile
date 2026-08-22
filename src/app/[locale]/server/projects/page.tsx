@@ -1,7 +1,6 @@
-import { ImageOff, PlusCircle } from "lucide-react"
+import { PlusCircle } from "lucide-react"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import Image from "next/image"
 import { Role } from "@/generated/prisma/enums"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import { getAllProjectsForServerPageType } from "@/app/[locale]/server/projects/modules/project.type"
@@ -47,10 +46,9 @@ export default async function ProjectsPage({
 					{/* ---------------------------- TableHeader ---------------------------- */}
 					<TableHeader>
 						<TableRow>
-							<TableHead>Image</TableHead>
 							<TableHead>title</TableHead>
-							<TableHead>type</TableHead>
 							<TableHead>client</TableHead>
+							<TableHead>type</TableHead>
 							<TableHead>created At</TableHead>
 							<TableHead className="text-end">settings</TableHead>
 						</TableRow>
@@ -60,26 +58,22 @@ export default async function ProjectsPage({
 						{projects.data.map(({ id, mainImage, titleAr, client, createdAt, titleEn, type }) => (
 							<TableRow key={id}>
 								<TableCell>
-									{mainImage ? (
-										<Image
-											src={mainImage}
-											alt={titleAr}
-											width={48}
-											height={48}
-											className=" object-cover aspect-square rounded-lg"
-										/>
-									) : (
-										<ImageOff size={48} />
-									)}
-								</TableCell>
-								<TableCell>{locale === "en" ? titleEn : titleAr}</TableCell>
-								<TableCell>
-									<Badge variant={"outline"}>{type}</Badge>
-								</TableCell>
-								<TableCell>
-									<Item size={"xs"} className="px-0">
+									<Item size={"default"} className="px-0">
 										<ItemMedia variant={"icon"}>
-											<Avatar>
+											<Avatar size="lg">
+												<AvatarImage src={mainImage ?? ""} />
+												<AvatarFallback>{titleEn[0]}</AvatarFallback>
+											</Avatar>
+										</ItemMedia>
+										<ItemContent>
+											<ItemTitle>{locale === "en" ? titleEn : titleAr}</ItemTitle>
+										</ItemContent>
+									</Item>
+								</TableCell>
+								<TableCell>
+									<Item size={"default"} className="px-0">
+										<ItemMedia variant={"icon"}>
+											<Avatar size="lg">
 												<AvatarImage src={client.image ?? ""} />
 												<AvatarFallback>{client.name[0]}</AvatarFallback>
 											</Avatar>
@@ -88,6 +82,9 @@ export default async function ProjectsPage({
 											<ItemTitle>{client.name}</ItemTitle>
 										</ItemContent>
 									</Item>
+								</TableCell>
+								<TableCell>
+									<Badge>{type}</Badge>
 								</TableCell>
 								<TableCell>{dateFormate(createdAt)}</TableCell>
 

@@ -40,9 +40,11 @@ export default async function CoursesPage({ searchParams }: { searchParams: Prom
 					{/* ---------------------------- TableHeader ---------------------------- */}
 					<TableHeader>
 						<TableRow>
+							<TableHead>group name</TableHead>
 							<TableHead>course</TableHead>
 							<TableHead>branch</TableHead>
 							<TableHead>code</TableHead>
+							<TableHead>status</TableHead>
 							<TableHead>capacity</TableHead>
 							<TableHead>start At</TableHead>
 							<TableHead>end At</TableHead>
@@ -52,8 +54,9 @@ export default async function CoursesPage({ searchParams }: { searchParams: Prom
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{groups.data.map(({ branch, capacity, code, course, endAt, id, price, startAt }) => (
+						{groups.data.map(({ branch, capacity, code, course, endAt, id, price, startAt, status, title }) => (
 							<TableRow key={id}>
+								<TableCell>{title}</TableCell>
 								<TableCell>
 									<Item size={"default"} className="px-0">
 										<ItemMedia variant={"image"}>
@@ -81,7 +84,10 @@ export default async function CoursesPage({ searchParams }: { searchParams: Prom
 									</Item>
 								</TableCell>
 								<TableCell>
-									<Badge>{code}</Badge>
+									<Badge variant={"outline"}>{code}</Badge>
+								</TableCell>
+								<TableCell>
+									<Badge variant={"outline"}>{status}</Badge>
 								</TableCell>
 								<TableCell>{capacity}</TableCell>
 								<TableCell>{fnsDateFormat(startAt)}</TableCell>

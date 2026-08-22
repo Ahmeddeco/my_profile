@@ -1,7 +1,6 @@
-import { ImageOff, PlusCircle } from "lucide-react"
+import { PlusCircle } from "lucide-react"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import Image from "next/image"
 import { Role } from "@/generated/prisma/enums"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import { Badge } from "@/components/ui/badge"
@@ -47,10 +46,9 @@ export default async function CoursesPage({
 					{/* ---------------------------- TableHeader ---------------------------- */}
 					<TableHeader>
 						<TableRow>
-							<TableHead>Image</TableHead>
-							<TableHead>title</TableHead>
-							<TableHead>field</TableHead>
+							<TableHead>course</TableHead>
 							<TableHead>instructor</TableHead>
+							<TableHead>field</TableHead>
 							<TableHead>created At</TableHead>
 							<TableHead className="text-end">settings</TableHead>
 						</TableRow>
@@ -60,26 +58,23 @@ export default async function CoursesPage({
 						{courses.data.map(({ createdAt, field, id, instructor, mainImage, titleAr, titleEn }) => (
 							<TableRow key={id}>
 								<TableCell>
-									{mainImage ? (
-										<Image
-											src={mainImage}
-											alt={titleAr}
-											width={48}
-											height={48}
-											className=" object-cover aspect-square rounded-lg"
-										/>
-									) : (
-										<ImageOff size={48} />
-									)}
-								</TableCell>
-								<TableCell>{locale === "en" ? titleEn : titleAr}</TableCell>
-								<TableCell>
-									<Badge>{field}</Badge>
-								</TableCell>
-								<TableCell>
-									<Item size={"xs"} className="px-0">
+									<Item size={"default"} className="px-0">
 										<ItemMedia variant={"icon"}>
-											<Avatar>
+											<Avatar size="lg">
+												<AvatarImage src={mainImage ?? ""} />
+												<AvatarFallback>{titleEn[0]}</AvatarFallback>
+											</Avatar>
+										</ItemMedia>
+										<ItemContent>
+											<ItemTitle>{locale === "en" ? titleEn : titleAr}</ItemTitle>
+										</ItemContent>
+									</Item>
+								</TableCell>
+
+								<TableCell>
+									<Item size={"default"} className="px-0">
+										<ItemMedia variant={"icon"}>
+											<Avatar size="lg">
 												<AvatarImage src={instructor.image ?? ""} />
 												<AvatarFallback>{instructor.name[0]}</AvatarFallback>
 											</Avatar>
@@ -88,6 +83,9 @@ export default async function CoursesPage({
 											<ItemTitle>{instructor.name}</ItemTitle>
 										</ItemContent>
 									</Item>
+								</TableCell>
+								<TableCell>
+									<Badge>{field}</Badge>
 								</TableCell>
 								<TableCell>{dateFormate(createdAt)}</TableCell>
 

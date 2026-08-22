@@ -1,7 +1,6 @@
-import { ImageOff, PlusCircle } from "lucide-react"
+import { PlusCircle } from "lucide-react"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import Image from "next/image"
 import { Role } from "@/generated/prisma/enums"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import { Badge } from "@/components/ui/badge"
@@ -40,8 +39,7 @@ export default async function CoursesPage({ searchParams }: { searchParams: Prom
 					{/* ---------------------------- TableHeader ---------------------------- */}
 					<TableHeader>
 						<TableRow>
-							<TableHead>Image</TableHead>
-							<TableHead>name</TableHead>
+							<TableHead>academy name</TableHead>
 							<TableHead>owner</TableHead>
 							<TableHead>tel</TableHead>
 							<TableHead>created At</TableHead>
@@ -53,24 +51,23 @@ export default async function CoursesPage({ searchParams }: { searchParams: Prom
 						{academies.data.map(({ createdAt, id, logo, name, owner, tel }) => (
 							<TableRow key={id}>
 								<TableCell>
-									{logo ? (
-										<Image
-											src={logo}
-											alt={"logo"}
-											width={48}
-											height={48}
-											className=" object-cover aspect-square rounded-lg"
-										/>
-									) : (
-										<ImageOff size={48} />
-									)}
+									<Item size={"default"} className="px-0">
+										<ItemMedia variant={"icon"}>
+											<Avatar size="lg">
+												<AvatarImage src={logo ?? ""} />
+												<AvatarFallback>{name[0]}</AvatarFallback>
+											</Avatar>
+										</ItemMedia>
+										<ItemContent>
+											<ItemTitle>{name}</ItemTitle>
+										</ItemContent>
+									</Item>
 								</TableCell>
-								<TableCell>{name}</TableCell>
 
 								<TableCell>
 									<Item size={"xs"} className="px-0">
 										<ItemMedia variant={"icon"}>
-											<Avatar>
+											<Avatar size="lg">
 												<AvatarImage src={owner?.image ?? ""} />
 												<AvatarFallback>{owner?.name[0]}</AvatarFallback>
 											</Avatar>

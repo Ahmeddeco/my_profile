@@ -41,7 +41,7 @@ export const getAllGroupsForPage = async (size: number, page: number) => {
       take: size,
       orderBy: { createdAt: "desc" },
       select: {
-        id: true, code: true, capacity: true, price: true, startAt: true, endAt: true,
+        id: true, title: true, status: true, code: true, capacity: true, price: true, startAt: true, endAt: true,
         course: { select: { id: true, mainImage: true, titleAr: true, titleEn: true, price: true } },
         branch: { select: { id: true, name: true, academy: { select: { id: true, name: true, logo: true } } } }
       }

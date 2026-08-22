@@ -21,6 +21,16 @@ export const serverNav = [
     icon: GrProjects
   },
   {
+    title: { ar: "مقالاتنا", en: "articles" },
+    href: "/server/articles",
+    icon: Newspaper
+  },
+  {
+    title: { ar: "الكورسات", en: "courses" },
+    href: "/server/courses",
+    icon: FaChalkboardTeacher
+  },
+  {
     title: { ar: "الأكاديميات", en: "academies" },
     href: "/server/courses/academies",
     icon: HiOutlineAcademicCap
@@ -31,19 +41,9 @@ export const serverNav = [
     icon: CiLocationOn
   },
   {
-    title: { ar: "الكورسات", en: "courses" },
-    href: "/server/courses",
-    icon: FaChalkboardTeacher
-  },
-  {
     title: { ar: "الدفعة", en: "groups" },
     href: "/server/courses/groups",
     icon: GrGroup
-  },
-  {
-    title: { ar: "مقالاتنا", en: "articles" },
-    href: "/server/articles",
-    icon: Newspaper
   },
   {
     title: { ar: "الإحصائيات", en: "charts" },

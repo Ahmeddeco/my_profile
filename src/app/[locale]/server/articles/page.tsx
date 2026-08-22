@@ -1,7 +1,6 @@
-import { ImageOff, PlusCircle } from "lucide-react"
+import { PlusCircle } from "lucide-react"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import Image from "next/image"
 import { Role } from "@/generated/prisma/enums"
 import { isAllowedRoles } from "@/components/auth/isAllowedRoles"
 import { Item, ItemContent, ItemMedia, ItemTitle } from "@/components/ui/item"
@@ -46,7 +45,6 @@ export default async function ArticlesPage({
 					{/* ---------------------------- TableHeader ---------------------------- */}
 					<TableHeader>
 						<TableRow>
-							<TableHead>Image</TableHead>
 							<TableHead>title</TableHead>
 							<TableHead>author</TableHead>
 							<TableHead>created At</TableHead>
@@ -58,23 +56,22 @@ export default async function ArticlesPage({
 						{articles.data.map(({ id, mainImage, titleAr, createdAt, titleEn, author }) => (
 							<TableRow key={id}>
 								<TableCell>
-									{mainImage ? (
-										<Image
-											src={mainImage}
-											alt={titleAr}
-											width={48}
-											height={48}
-											className=" object-cover aspect-square rounded-lg"
-										/>
-									) : (
-										<ImageOff size={48} />
-									)}
+									<Item size={"default"} className="px-0">
+										<ItemMedia variant={"image"}>
+											<Avatar size="lg">
+												<AvatarImage src={mainImage ?? ""} />
+												<AvatarFallback>{titleEn[0]}</AvatarFallback>
+											</Avatar>
+										</ItemMedia>
+										<ItemContent>
+											<ItemTitle>{locale === "en" ? titleEn : titleAr}</ItemTitle>
+										</ItemContent>
+									</Item>
 								</TableCell>
-								<TableCell>{locale === "en" ? titleEn : titleAr}</TableCell>
 								<TableCell>
-									<Item size={"xs"} className="px-0">
+									<Item size={"default"} className="px-0">
 										<ItemMedia variant={"icon"}>
-											<Avatar>
+											<Avatar size="lg">
 												<AvatarImage src={author.image ?? ""} />
 												<AvatarFallback>{author.name[0]}</AvatarFallback>
 											</Avatar>

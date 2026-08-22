@@ -1,224 +1,240 @@
-import { ProductType, Role } from "@/generated/prisma/enums"
+import { BatchStatus, EnrollmentStatus, Field, ProductType, Role } from "@/generated/prisma/enums"
 import prisma from "@/lib/prisma"
-import { faker } from '@faker-js/faker'
-
 
 async function main() {
-  console.log('⏳ Starting database seeding...')
-  // 2. Create Admin User
-  console.log('👤 Creating admin user...')
-  const admin = await prisma.user.create({
+  console.log('Starting database seeding...')
+
+  // 1. Clean existing data
+  console.log('Cleaning up existing database records...')
+  await prisma.enrollment.deleteMany()
+  await prisma.group.deleteMany()
+  await prisma.course.deleteMany()
+  await prisma.article.deleteMany()
+  await prisma.project.deleteMany()
+  await prisma.branch.deleteMany()
+  await prisma.academy.deleteMany()
+  await prisma.session.deleteMany()
+  await prisma.account.deleteMany()
+  await prisma.user.deleteMany()
+
+  // 2. Create Users
+  console.log('Seeding users...')
+  const usersData = [
+    { name: 'Ahmed Mansour', email: 'ahmed.admin@example.com', mobile: '+201000000001', role: Role.admin },
+    { name: 'Sarah Hassan', email: 'sarah.owner@example.com', mobile: '+201000000002', role: Role.owner },
+    { name: 'Omar Khaled', email: 'omar.instructor@example.com', mobile: '+201000000003', role: Role.instructor },
+    { name: 'Mona Elsayed', email: 'mona.instructor@example.com', mobile: '+201000000004', role: Role.instructor },
+    { name: 'Tarek Ibrahim', email: 'tarek.client@example.com', mobile: '+201000000005', role: Role.client },
+    { name: 'Youssef Ali', email: 'youssef.student@example.com', mobile: '+201000000006', role: Role.user },
+    { name: 'Nour Mahmoud', email: 'nour.student@example.com', mobile: '+201000000007', role: Role.user },
+    { name: 'Laila Hany', email: 'laila.student@example.com', mobile: '+201000000008', role: Role.user },
+  ]
+
+  const createdUsers = await Promise.all(
+    usersData.map((user) => prisma.user.create({ data: user }))
+  )
+
+  const [admin, owner, instructor1, instructor2, client, student1, student2, student3] = createdUsers
+
+  // 3. Create Academies & Branches
+  console.log('Seeding academies and branches...')
+  const academy1 = await prisma.academy.create({
     data: {
-      name: 'Admin User',
-      email: 'admin@flux-agency.com',
-      emailVerified: true,
-      role: Role.admin,
-      mobile: '+201000000000',
-      city: 'Sadat City',
-      state: 'Menofia',
-      country: 'Egypt',
+      name: 'Tech Code Academy',
+      slug: 'tech-code-academy',
+      tel: '+20222334455',
+      description: 'Leading academy for software development and modern technologies',
+      userId: owner.id,
+      branches: {
+        create: [
+          {
+            name: 'Cairo Main Branch',
+            slug: 'cairo-main-branch',
+            city: 'Cairo',
+            country: 'Egypt',
+            lat: 30.0444,
+            lng: 31.2357,
+            tel: '+20222334456',
+          },
+          {
+            name: 'Alexandria Branch',
+            slug: 'alexandria-branch',
+            city: 'Alexandria',
+            country: 'Egypt',
+            lat: 31.2001,
+            lng: 29.9187,
+            tel: '+20333445566',
+          },
+        ],
+      },
+    },
+    include: { branches: true },
+  })
+
+  // 4. Create Courses
+  console.log('Seeding courses...')
+  const course1 = await prisma.course.create({
+    data: {
+      titleAr: 'تطوير تطبيقات الويب الكاملة باستخدام Next.js',
+      titleEn: 'Fullstack Web Development with Next.js',
+      slug: 'fullstack-nextjs-dev',
+      descriptionAr: 'دورة شاملة لبناء تطبيقات ويب حديثة ومتكاملة من البداية إلى الاحتراف.',
+      descriptionEn: 'Comprehensive course to build modern fullstack web applications from scratch.',
+      detailsAr: 'تتضمن الدورة: React, Next.js, TypeScript, Prisma, و PostgreSQL.',
+      detailsEn: 'Includes: React, Next.js, TypeScript, Prisma, and PostgreSQL.',
+      price: 2500,
+      discountAmount: 300,
+      mainImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c',
+      images: ['https://images.unsplash.com/photo-1517694712202-14dd9538aa97'],
+      field: Field.web,
+      instructorId: instructor1.id,
     },
   })
-  console.log(`✅ Admin created with ID: ${admin.id}`)
 
-  // 3. Create Clients and their Projects
-  console.log('👥 Creating clients and projects...')
-  const clientRoles = [Role.client, Role.user]
-
-  for (let i = 0; i < 5; i++) {
-    // Generate fake client details
-    const clientName = faker.person.fullName()
-    const client = await prisma.user.create({
-      data: {
-        name: clientName,
-        email: faker.internet.email(),
-        emailVerified: faker.datatype.boolean(),
-        role: faker.helpers.arrayElement(clientRoles),
-        mobile: faker.phone.number({ style: 'international' }),
-        city: faker.location.city(),
-        state: faker.location.state(),
-        country: faker.location.country(),
-      },
-    })
-
-    console.log(`   └─ Created User: ${client.name} (${client.role})`)
-
-    // Create 2-3 projects for each client
-    const projectCount = faker.number.int({ min: 2, max: 3 })
-    for (let j = 0; j < projectCount; j++) {
-      const projectTitleEn = faker.commerce.productName() + ' Platform'
-      const projectSlug = faker.helpers.slugify(projectTitleEn).toLowerCase() + '-' + faker.string.alphanumeric(5)
-
-      const project = await prisma.project.create({
-        data: {
-          slug: projectSlug,
-          titleEn: projectTitleEn,
-          titleAr: `منصة ${faker.commerce.productName()}`, // Fallback Arabic title
-          miniDescriptionEn: faker.company.catchPhrase(),
-          miniDescriptionAr: 'وصف مصغر باللغة العربية يوضح طبيعة هذا المشروع الإبداعي.',
-          descriptionEn: faker.lorem.paragraphs(2),
-          descriptionAr: 'تفاصيل المشروع بالكامل باللغة العربية تشمل كل المميزات والخصائص البرمجية التي تم بناؤها.',
-          url: faker.internet.url(),
-          mainImage: faker.image.url(),
-          images: [
-            faker.image.url(),
-            faker.image.url(),
-          ],
-          type: faker.helpers.arrayElement([ProductType.web, ProductType.mobile, ProductType.ai]),
-          userId: client.id,
-        },
-      })
-
-      console.log(`      ├── Project Created: ${project.titleEn} [Type: ${project.type}]`)
-    }
-  }
-
-  console.log('🎉 Database seeding completed successfully!')
-}
-
-
-const author = await prisma.user.upsert({
-  where: {
-    email: "ahmed@example.com" // الإيميل المحدد للكاتب
-  },
-  update: {}, // لا داعي لتحديث أي بيانات إذا كان موجوداً
-  create: {
-    name: "أحمد محمد",
-    email: "ahmed@example.com",
-    role: "admin",
-  },
-})
-
-console.log(`سيتم إسناد المقالات للمستخدم: ${author.name} (ID: ${author.id})`)
-
-// 2. قائمة المقالات المعرفة وفقاً للـ Schema
-const articles = [
-  {
-    userId: author.id,
-    slug: "building-ai-agents-with-nextjs-and-mastra",
-    titleAr: "بناء وكلاء الذكاء الاصطناعي (AI Agents) باستخدام Next.js و Mastra",
-    titleEn: "Building Autonomous AI Agents with Next.js and Mastra",
-    descriptionAr: "دليل شامل لبناء وإنشاء وكلاء ذكاء اصطناعي موجهين بالمهام وتكاملهم بسلاسة داخل تطبيقات Next.js باستخدام إطار العمل Mastra.",
-    descriptionEn: "A comprehensive guide on building task-driven AI agents and seamlessly integrating them into Next.js applications using Mastra framework.",
-    topicAr: `
-        <h2>مقدمة في بناء وكلاء الذكاء الاصطناعي</h2>
-        <p>تعتبر إطارات عمل الذكاء الاصطناعي الحديثة مثل <strong>Mastra</strong> نقلة نوعية في كيفية تطوير تطبيقات الويب المعززة بالذكاء الاصطناعي. عند دمج Mastra مع <strong>Next.js 15/16</strong>، يمكنك بناء وكلاء يتفاعلون مع الأدوات الخارجية (Tools) وينفذون مهاماً معقدة مثل استدعاء API ومعالجة البيانات بشكل مستقل.</p>
-        
-        <h3>لماذا نستخدم Mastra مع Next.js؟</h3>
-        <ul>
-          <li><strong>الأداء العالي:</strong> Mastra مصمم خصيصاً لبيئات TypeScript و Server Actions في Next.js.</li>
-          <li><strong>دعم كامل للأدوات (Tools & Workflows):</strong> يسهل تعريف الأدوات وتمريرها للوكيل.</li>
-          <li><strong>التكامل مع النماذج المختلفة:</strong> يمكنك استخدام Google GenAI أو OpenAI بسلاسة.</li>
-        </ul>
-
-        <h3>كيفية البدء</h3>
-        <p>قم بإنشاء وكيل Mastra بسيط واستدعائه داخل Route Handler أو Server Action في Next.js لإرجاع إجابات منظمة ومحدثة لحظياً.</p>
-      `,
-    topicEn: `
-        <h2>Introduction to Building AI Agents</h2>
-        <p>Modern AI frameworks like <strong>Mastra</strong> represent a paradigm shift in how we build AI-enhanced web applications. When integrating Mastra with <strong>Next.js 15/16</strong>, you can construct agents that interact with external tools and execute complex workflows independently.</p>
-        
-        <h3>Why Use Mastra with Next.js?</h3>
-        <ul>
-          <li><strong>Type Safety & Performance:</strong> Built natively for TypeScript and Next.js Server Actions.</li>
-          <li><strong>Robust Workflows & Tools:</strong> Easily define tools and chains for your agents.</li>
-          <li><strong>Model Agnostic:</strong> Effortlessly switch between Google GenAI, OpenAI, and other LLMs.</li>
-        </ul>
-
-        <h3>Getting Started</h3>
-        <p>Create a basic Mastra agent and invoke it inside a Next.js Route Handler or Server Action to handle streaming and structured responses.</p>
-      `,
-    mainImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200",
-    images: [
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200",
-      "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200"
-    ]
-  },
-  {
-    userId: author.id,
-    slug: "streamline-rag-workflows-using-mastra-and-nextjs",
-    titleAr: "تحسين أنظمة الـ RAG وتوليد النصوص بالذكاء الاصطناعي في Next.js بواسطة Mastra",
-    titleEn: "Streamlining RAG Workflows in Next.js using Mastra Engine",
-    descriptionAr: "تعلم كيفية إعداد مسارات RAG (Retrieval-Augmented Generation) المتقدمة لربط بياناتك الخاصة بنماذج الذكاء الاصطناعي بكل سهولة.",
-    descriptionEn: "Learn how to build advanced Retrieval-Augmented Generation (RAG) workflows connecting your custom datasets with AI LLMs using Mastra and Next.js.",
-    topicAr: `
-        <h2>ما هو الـ RAG وكيف يغير تطوير الويب؟</h2>
-        <p>يتيح تقنية <strong>Retrieval-Augmented Generation (RAG)</strong> لنماذج الذكاء الاصطناعي الوصول إلى قواعد بيانات مخصصة ومستندات خاصة للحصول على إجابات دقيقة دون الحاجة لإعادة تدريب النموذج.</p>
-
-        <h3>دور Mastra في إدارة الـ RAG Workflows</h3>
-        <p>تساعدك Mastra في تقسيم النصوص إلى Vector Embeddings وحفظها واسترجاعها بسهولة عند استعلام المستخدم في تطبيق Next.js.</p>
-
-        <h3>خطوات التنفيذ الأساسية:</h3>
-        <ol>
-          <li>تجميع البيانات وتجهيز المجموعات (Chunks).</li>
-          <li>توليد الـ Embeddings واستخدام قاعدة بيانات موجهة (Vector DB).</li>
-          <li>استدعاء Mastra Agent داخل مكونات Next.js لإظهار الإجابات المحدثة.</li>
-        </ol>
-      `,
-    topicEn: `
-        <h2>What is RAG and Why Is It Essential?</h2>
-        <p><strong>Retrieval-Augmented Generation (RAG)</strong> empowers AI models to query external databases and custom private documents, returning accurate context-aware responses without retraining.</p>
-
-        <h3>Mastra's Role in Managing RAG Workflows</h3>
-        <p>Mastra provides seamless abstractions for chunking text, generating embeddings, and retrieving contextually relevant data within Next.js apps.</p>
-
-        <h3>Core Implementation Steps:</h3>
-        <ol>
-          <li>Data ingestion and chunking strategy.</li>
-          <li>Generating Embeddings & storing them in a Vector DB.</li>
-          <li>Invoking Mastra agents inside Next.js components to serve real-time user queries.</li>
-        </ol>
-      `,
-    mainImage: "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200",
-    images: [
-      "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200",
-      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200"
-    ]
-  },
-  {
-    userId: author.id,
-    slug: "testing-and-evaluating-ai-workflows-with-vitest-and-mastra",
-    titleAr: "اختبار وتقييم سير عمل الذكاء الاصطناعي باستخدام Vitest و Mastra",
-    titleEn: "Testing and Evaluating AI Workflows using Vitest and Mastra",
-    descriptionAr: "استكشف أساليب اختبار استجابات وكلاء الذكاء الاصطناعي والتأكد من جودتها وموثوقيتها في تطبيقات Next.js باستعمال Vitest.",
-    descriptionEn: "Explore strategies to test AI agent responses and ensure reliability in Next.js applications using Vitest and Mastra evaluations.",
-    topicAr: `
-        <h2>أهمية اختبار التطبيقات الذكية</h2>
-        <p>على عكس البرامج التقليدية، تتميز مخرجات نماذج الذكاء الاصطناعي بعدم التحديد الكامل (Non-deterministic). لذا يصبح اختبار الوكلاء مسألة حيوية لضمان جودة النظام.</p>
-
-        <h3>استخدام Vitest مع Mastra</h3>
-        <p>يمكنك كتابة اختبارات وحدة (Unit Tests) باستخدام <strong>Vitest</strong> للتحقق من المخرجات المتوقعة واستدعاءات الأدوات (Tool Calls) التي ينفذها الوكيل قبل النشر إلى البيئة الحية (Production).</p>
-      `,
-    topicEn: `
-        <h2>The Importance of Testing AI Systems</h2>
-        <p>Unlike traditional software, AI LLM outputs can be non-deterministic. Thus, testing and evaluating AI agents becomes critical to ensuring accuracy and system reliability.</p>
-
-        <h3>Leveraging Vitest with Mastra</h3>
-        <p>By integrating <strong>Vitest</strong>, you can write automated unit tests to validate tool executions and agent outputs before deploying your Next.js application to production.</p>
-      `,
-    mainImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200",
-    images: [
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200"
-    ]
-  }
-]
-
-// 3. إضافة أو تحديث المقالات
-for (const article of articles) {
-  await prisma.article.upsert({
-    where: { slug: article.slug },
-    update: article,
-    create: article,
+  const course2 = await prisma.course.create({
+    data: {
+      titleAr: 'تطوير تطبيقات الهواتف باستخدام Flutter',
+      titleEn: 'Mobile App Development with Flutter',
+      slug: 'mobile-app-flutter',
+      descriptionAr: 'تعلم بناء تطبيقات تعمل على iOS و Android باستعمال كود واحد.',
+      descriptionEn: 'Learn to build cross-platform apps for iOS and Android with a single codebase.',
+      detailsAr: 'تغطي الدورة لغة Dart و State Management و REST APIs.',
+      detailsEn: 'Covers Dart language, State Management, and REST APIs.',
+      price: 2000,
+      discountAmount: 200,
+      mainImage: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c',
+      images: ['https://images.unsplash.com/photo-1551650975-87deedd944c3'],
+      field: Field.mobile,
+      instructorId: instructor2.id,
+    },
   })
+
+  const course3 = await prisma.course.create({
+    data: {
+      titleAr: 'أساسيات الذكاء الاصطناعي وتعلم الآلة',
+      titleEn: 'AI & Machine Learning Fundamentals',
+      slug: 'ai-ml-fundamentals',
+      descriptionAr: 'دورة مدخلية إلى عالم الذكاء الاصطناعي واستخدام مكتبات بايثون.',
+      descriptionEn: 'Introductory course to AI using Python libraries.',
+      detailsAr: 'تتضمن: Python, NumPy, Pandas, Scikit-Learn.',
+      detailsEn: 'Includes: Python, NumPy, Pandas, Scikit-Learn.',
+      price: 3000,
+      discountAmount: null,
+      mainImage: 'https://images.unsplash.com/photo-1677442136019-21780efad99a',
+      images: [],
+      field: Field.ai,
+      instructorId: instructor1.id,
+    },
+  })
+
+  // 5. Create Groups
+  console.log('Seeding groups...')
+  const group1 = await prisma.group.create({
+    data: {
+      title: 'Group Web-01 (Fall 2026)',
+      slug: 'group-web-01-fall-2026',
+      courseId: course1.id,
+      branchId: academy1.branches[0].id,
+      startAt: new Date('2026-09-15T16:00:00Z'),
+      endAt: new Date('2026-12-15T18:00:00Z'),
+      capacity: 15,
+      price: 2200,
+      status: BatchStatus.OPEN,
+    },
+  })
+
+  const group2 = await prisma.group.create({
+    data: {
+      title: 'Group Mobile-01 (Alex)',
+      slug: 'group-mobile-01-alex',
+      courseId: course2.id,
+      branchId: academy1.branches[1].id,
+      startAt: new Date('2026-10-01T14:00:00Z'),
+      endAt: new Date('2026-12-01T16:00:00Z'),
+      capacity: 12,
+      price: 1800,
+      status: BatchStatus.UPCOMING,
+    },
+  })
+
+  // 6. Create Enrollments
+  console.log('Seeding enrollments...')
+  await prisma.enrollment.createMany({
+    data: [
+      { userId: student1.id, groupId: group1.id, price: 2200, status: EnrollmentStatus.CONFIRMED },
+      { userId: student2.id, groupId: group1.id, price: 2200, status: EnrollmentStatus.CONFIRMED },
+      { userId: student3.id, groupId: group2.id, price: 1800, status: EnrollmentStatus.PENDING },
+    ],
+  })
+
+  // 7. Create Articles
+  console.log('Seeding articles...')
+  await prisma.article.createMany({
+    data: [
+      {
+        titleAr: 'مستقبل تطوير الويب في عام 2026',
+        titleEn: 'The Future of Web Development in 2026',
+        slug: 'future-of-web-dev-2026',
+        descriptionAr: 'استعراض لأهم التقنيات والاتجاهات الحديثة في عالم الويب.',
+        descriptionEn: 'Overview of the latest technologies and web trends.',
+        topicAr: 'محتوى تفصيلي يشرح Server Actions ودور AI في كتابة الكود...',
+        topicEn: 'Detailed content covering Server Actions and AI assistance...',
+        mainImage: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6',
+        userId: instructor1.id,
+      },
+      {
+        titleAr: 'لماذا يجب أن تتعلم Flutter اليوم؟',
+        titleEn: 'Why You Should Learn Flutter Today?',
+        slug: 'why-learn-flutter-today',
+        descriptionAr: 'مقارنة بين Flutter والإطارات الأخرى لتطوير الهواتف.',
+        descriptionEn: 'Comparison between Flutter and other mobile frameworks.',
+        topicAr: 'محتوى يشرح الأداء الممتاز لـ Flutter والمجتمع النشط...',
+        topicEn: 'Content explaining Flutter performance and community...',
+        mainImage: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
+        userId: instructor2.id,
+      },
+    ],
+  })
+
+  // 8. Create Projects
+  console.log('Seeding projects...')
+  await prisma.project.createMany({
+    data: [
+      {
+        titleAr: 'تطبيق إدارة المهام الذكي',
+        titleEn: 'Smart Task Manager',
+        slug: 'smart-task-manager',
+        miniDescriptionAr: 'تطبيق ويب لتنظيم المهام باستخدام الذكاء الاصطناعي.',
+        miniDescriptionEn: 'Web app for task management using AI.',
+        descriptionAr: 'مشروع ختامي يتضمن نظام مصادقة، تنبيهات، وإدارة فريق.',
+        descriptionEn: 'Final project with auth, notifications, and team features.',
+        url: 'https://smart-tasks.demo.com',
+        mainImage: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b',
+        type: ProductType.web,
+        userId: client.id,
+      },
+      {
+        titleAr: 'تطبيق متجر للتجارة الإلكترونية',
+        titleEn: 'E-Commerce Mobile App',
+        slug: 'ecommerce-mobile-app',
+        miniDescriptionAr: 'تطبيق متجر إلكتروني متكامل للهواتف.',
+        miniDescriptionEn: 'Full-featured mobile e-commerce application.',
+        descriptionAr: 'يدعم بوابة دفع إلكترونية وتتبع الشحنات.',
+        descriptionEn: 'Supports payment gateway and order tracking.',
+        url: 'https://shop-mobile.demo.com',
+        mainImage: 'https://images.unsplash.com/photo-1556742049-0a674685c700',
+        type: ProductType.mobile,
+        userId: student1.id,
+      },
+    ],
+  })
+
+  console.log('✅ Database seeding completed successfully!')
 }
-
-console.log("تم إضافة المقالات وربطها بالمستخدم بنجاح!")
-
 
 main()
   .catch((e) => {
-    console.error('❌ Seeding error encountered:')
-    console.error(e)
+    console.error('❌ Error during database seeding:', e)
     process.exit(1)
   })
   .finally(async () => {
